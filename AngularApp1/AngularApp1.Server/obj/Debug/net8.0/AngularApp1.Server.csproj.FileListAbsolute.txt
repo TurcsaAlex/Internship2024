@@ -277,3 +277,4 @@ C:\Internship\AngularApp1\AngularApp1.Server\obj\Debug\net8.0\refint\AngularApp1
 C:\Internship\AngularApp1\AngularApp1.Server\obj\Debug\net8.0\AngularApp1.Server.pdb
 C:\Internship\AngularApp1\AngularApp1.Server\obj\Debug\net8.0\AngularApp1.Server.genruntimeconfig.cache
 C:\Internship\AngularApp1\AngularApp1.Server\obj\Debug\net8.0\ref\AngularApp1.Server.dll
+C:\Internship\AngularApp1\AngularApp1.Server\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
