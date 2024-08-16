@@ -1,6 +1,8 @@
 ﻿using AngularApp1.Server.Context;
 using AngularApp1.Server.Helpers;
 using AngularApp1.Server.Models;
+using AngularApp1.Server.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -15,12 +17,11 @@ namespace AngularApp1.Server.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly UserDbContext _authContext;
-        private IConfiguration _config;
-        public UserController(UserDbContext userDbContext, IConfiguration config)
+
+        private readonly UserService _userService;
+        public UserController(UserService userService)
         {
-            _authContext = userDbContext;
-            _config = config;
+            _userService = userService;
         }
 
         [HttpGet("test")]
@@ -35,16 +36,18 @@ namespace AngularApp1.Server.Controllers
         {
             if (userObj == null)
                 return BadRequest();
-            var user = await _authContext.Users.FirstOrDefaultAsync( x => x.UserName == userObj.UserName);
-            if (user == null)
-                return NotFound(new { Message = "User not found" });
-            
-            if(!PasswordHasher.VerifyPassword(userObj.Password,user.Password))
-                return BadRequest(new {Message="Incorrect password"});
-
-            var token=GenerateJSONWebToken(user);
-
-            return Ok(new { Message = "Login Success!", Token = token });
+            var authResp= await _userService.Authenticate(userObj);
+            switch (authResp.Code)
+            {
+                case 200:
+                    return Ok(new { Message = "Login Success!", Token =authResp.Token });
+                case 404:
+                    return NotFound(new { Message = "User not found" });
+                case 500:
+                    return BadRequest(new { Message = "Incorrect password" });
+                default:
+                    return Problem();
+            }
         }
 
         [HttpPost("register")]
@@ -52,31 +55,8 @@ namespace AngularApp1.Server.Controllers
         {
             if(userObj== null) { return BadRequest();}
             if (string.IsNullOrEmpty(userObj.UserName) || string.IsNullOrEmpty(userObj.Password)) { return BadRequest(); }
-            userObj.Password = PasswordHasher.HashPassword(userObj.Password);
-            userObj.Role = "User";
-            userObj.Token = "";
-            await _authContext.Users.AddAsync(userObj);
-            await _authContext.SaveChangesAsync();
+            await _userService.RegisterUser(userObj);
             return Ok(new { Message = "User registered!" });
-        }
-        private string GenerateJSONWebToken(User userInfo)
-        {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
-            var claims = new[]
-            {
-                new Claim("username",userInfo.UserName),
-                new Claim (ClaimTypes.Role,userInfo.Role),
-            };
-
-            var token = new JwtSecurityToken(_config["Jwt:Issuer"],
-              _config["Jwt:Issuer"],
-              claims,
-              expires: DateTime.Now.AddMinutes(120),
-              signingCredentials: credentials);
-
-            return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }
 }

@@ -1,4 +1,5 @@
 using AngularApp1.Server.Context;
+using AngularApp1.Server.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -49,6 +50,7 @@ builder.Services.AddCors(option =>
         AllowAnyHeader();
     });
 });
+builder.Services.AddScoped<UserService>();
 builder.Services.AddDbContext<UserDbContext>(option =>
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerConnStr"));
