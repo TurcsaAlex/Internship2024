@@ -1,0 +1,6 @@
+@TorqueAndTread.Server_HostAddress = http://localhost:5114
+
+GET {{TorqueAndTread.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

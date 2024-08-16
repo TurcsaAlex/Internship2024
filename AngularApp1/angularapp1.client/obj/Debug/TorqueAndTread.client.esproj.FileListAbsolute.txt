@@ -1,0 +1,1 @@
+C:\Internship\AngularApp1\angularapp1.client\obj\Debug\TorqueAndTread.client.esproj.CoreCompileInputs.cache
