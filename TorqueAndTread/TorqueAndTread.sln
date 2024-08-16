@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35122.118
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TorqueAndTread.Server", "TorqueAndTread.Server\TorqueAndTread.Server.csproj", "{BC438D87-BC25-4995-B578-0F17191517A4}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "torqueandtread.client", "torqueandtread.client\torqueandtread.client.esproj", "{ADE5887C-7727-4D40-A482-8A62E04A5871}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BC438D87-BC25-4995-B578-0F17191517A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC438D87-BC25-4995-B578-0F17191517A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC438D87-BC25-4995-B578-0F17191517A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC438D87-BC25-4995-B578-0F17191517A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADE5887C-7727-4D40-A482-8A62E04A5871}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADE5887C-7727-4D40-A482-8A62E04A5871}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADE5887C-7727-4D40-A482-8A62E04A5871}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{ADE5887C-7727-4D40-A482-8A62E04A5871}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADE5887C-7727-4D40-A482-8A62E04A5871}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADE5887C-7727-4D40-A482-8A62E04A5871}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F3AA62DF-C510-4E0A-8777-B10BB3CB47B1}
+	EndGlobalSection
+EndGlobal

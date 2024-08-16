@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35122.118
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TorqueAndTread.Server", "AngularApp1.Server\TorqueAndTread.Server.csproj", "{849101D5-DDD9-43B0-A423-42AC9FFB5D60}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "TorqueAndTread.client", "angularapp1.client\TorqueAndTread.client.esproj", "{BA19F71B-04BE-49CD-AE3C-282F6AC841AF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{849101D5-DDD9-43B0-A423-42AC9FFB5D60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{849101D5-DDD9-43B0-A423-42AC9FFB5D60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{849101D5-DDD9-43B0-A423-42AC9FFB5D60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{849101D5-DDD9-43B0-A423-42AC9FFB5D60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA19F71B-04BE-49CD-AE3C-282F6AC841AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA19F71B-04BE-49CD-AE3C-282F6AC841AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA19F71B-04BE-49CD-AE3C-282F6AC841AF}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{BA19F71B-04BE-49CD-AE3C-282F6AC841AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA19F71B-04BE-49CD-AE3C-282F6AC841AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA19F71B-04BE-49CD-AE3C-282F6AC841AF}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {24E5A373-AC07-4D47-9E7F-FFBA623E003D}
+	EndGlobalSection
+EndGlobal

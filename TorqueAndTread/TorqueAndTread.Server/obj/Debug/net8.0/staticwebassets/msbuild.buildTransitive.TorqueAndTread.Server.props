@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\TorqueAndTread.Server.props" />
+</Project>
