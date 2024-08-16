@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "XQxANUqpZD0=",
+  "dgSpecHash": "3LIBmzeOLfI=",
   "success": true,
-  "projectFilePath": "C:\\Internship\\AngularApp1\\AngularApp1.Server\\AngularApp1.Server.csproj",
+  "projectFilePath": "C:\\Internship\\AngularApp1\\AngularApp1.Server\\TorqueAndTread.Server.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\alexandru.a.turcsa\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\alexandru.a.turcsa\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.33\\microsoft.aspnetcore.authentication.jwtbearer.6.0.33.nupkg.sha512",

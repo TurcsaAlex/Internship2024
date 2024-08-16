@@ -2848,9 +2848,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Internship\\AngularApp1\\AngularApp1.Server\\AngularApp1.Server.csproj",
-      "projectName": "AngularApp1.Server",
-      "projectPath": "C:\\Internship\\AngularApp1\\AngularApp1.Server\\AngularApp1.Server.csproj",
+      "projectUniqueName": "C:\\Internship\\AngularApp1\\AngularApp1.Server\\TorqueAndTread.Server.csproj",
+      "projectName": "TorqueAndTread.Server",
+      "projectPath": "C:\\Internship\\AngularApp1\\AngularApp1.Server\\TorqueAndTread.Server.csproj",
       "packagesPath": "C:\\Users\\alexandru.a.turcsa\\.nuget\\packages\\",
       "outputPath": "C:\\Internship\\AngularApp1\\AngularApp1.Server\\obj\\",
       "projectStyle": "PackageReference",
