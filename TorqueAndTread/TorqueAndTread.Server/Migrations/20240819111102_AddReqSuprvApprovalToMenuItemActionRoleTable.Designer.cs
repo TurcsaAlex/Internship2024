@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TorqueAndTread.Server.Context;
 
@@ -11,9 +12,11 @@ using TorqueAndTread.Server.Context;
 namespace TorqueAndTread.Server.Migrations
 {
     [DbContext(typeof(TorqueDbContext))]
-    partial class UserDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240819111102_AddReqSuprvApprovalToMenuItemActionRoleTable")]
+    partial class AddReqSuprvApprovalToMenuItemActionRoleTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,9 +54,11 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasKey("ActionTypeId");
 
-                    b.HasIndex("CreatedById");
+                    b.HasIndex("CreatedById")
+                        .IsUnique();
 
-                    b.HasIndex("LastUpdatedById");
+                    b.HasIndex("LastUpdatedById")
+                        .IsUnique();
 
                     b.ToTable("ActionType");
                 });
@@ -98,9 +103,11 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasKey("MenuItemId");
 
-                    b.HasIndex("CreatedById");
+                    b.HasIndex("CreatedById")
+                        .IsUnique();
 
-                    b.HasIndex("LastUpdatedById");
+                    b.HasIndex("LastUpdatedById")
+                        .IsUnique();
 
                     b.ToTable("MenuItems");
                 });
@@ -144,9 +151,11 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasIndex("ActionTypeId");
 
-                    b.HasIndex("CreatedById");
+                    b.HasIndex("CreatedById")
+                        .IsUnique();
 
-                    b.HasIndex("LastUpdatedById");
+                    b.HasIndex("LastUpdatedById")
+                        .IsUnique();
 
                     b.HasIndex("MenuItemId");
 
@@ -186,9 +195,11 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasKey("MenuItemRoleId");
 
-                    b.HasIndex("CreatedById");
+                    b.HasIndex("CreatedById")
+                        .IsUnique();
 
-                    b.HasIndex("LastUpdatedById");
+                    b.HasIndex("LastUpdatedById")
+                        .IsUnique();
 
                     b.HasIndex("MenuItemId");
 
@@ -226,9 +237,11 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasKey("RoleId");
 
-                    b.HasIndex("CreatedById");
+                    b.HasIndex("CreatedById")
+                        .IsUnique();
 
-                    b.HasIndex("LastUpdatedById");
+                    b.HasIndex("LastUpdatedById")
+                        .IsUnique();
 
                     b.ToTable("Roles");
                 });
@@ -282,21 +295,6 @@ namespace TorqueAndTread.Server.Migrations
                         .IsUnique();
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = 1,
-                            Active = true,
-                            CreatedById = 1,
-                            CreatedOn = new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified),
-                            Email = "admin@admin.com",
-                            LastUpdatedById = 1,
-                            LastUpdatedOn = new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Administrator",
-                            Password = "",
-                            UserName = "admin"
-                        });
                 });
 
             modelBuilder.Entity("TorqueAndTread.Server.Models.UserRole", b =>
@@ -330,9 +328,11 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasKey("UserRoleId");
 
-                    b.HasIndex("CreatedById");
+                    b.HasIndex("CreatedById")
+                        .IsUnique();
 
-                    b.HasIndex("LastUpdatedById");
+                    b.HasIndex("LastUpdatedById")
+                        .IsUnique();
 
                     b.HasIndex("RoleId");
 
@@ -344,14 +344,14 @@ namespace TorqueAndTread.Server.Migrations
             modelBuilder.Entity("TorqueAndTread.Server.Models.ActionType", b =>
                 {
                     b.HasOne("TorqueAndTread.Server.Models.User", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById")
+                        .WithOne()
+                        .HasForeignKey("TorqueAndTread.Server.Models.ActionType", "CreatedById")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("TorqueAndTread.Server.Models.User", "LastUpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("LastUpdatedById")
+                        .WithOne()
+                        .HasForeignKey("TorqueAndTread.Server.Models.ActionType", "LastUpdatedById")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
@@ -363,14 +363,14 @@ namespace TorqueAndTread.Server.Migrations
             modelBuilder.Entity("TorqueAndTread.Server.Models.MenuItem", b =>
                 {
                     b.HasOne("TorqueAndTread.Server.Models.User", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById")
+                        .WithOne()
+                        .HasForeignKey("TorqueAndTread.Server.Models.MenuItem", "CreatedById")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("TorqueAndTread.Server.Models.User", "LastUpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("LastUpdatedById")
+                        .WithOne()
+                        .HasForeignKey("TorqueAndTread.Server.Models.MenuItem", "LastUpdatedById")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
@@ -388,14 +388,14 @@ namespace TorqueAndTread.Server.Migrations
                         .IsRequired();
 
                     b.HasOne("TorqueAndTread.Server.Models.User", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById")
+                        .WithOne()
+                        .HasForeignKey("TorqueAndTread.Server.Models.MenuItemActionRole", "CreatedById")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("TorqueAndTread.Server.Models.User", "LastUpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("LastUpdatedById")
+                        .WithOne()
+                        .HasForeignKey("TorqueAndTread.Server.Models.MenuItemActionRole", "LastUpdatedById")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
@@ -425,14 +425,14 @@ namespace TorqueAndTread.Server.Migrations
             modelBuilder.Entity("TorqueAndTread.Server.Models.MenuItemRole", b =>
                 {
                     b.HasOne("TorqueAndTread.Server.Models.User", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById")
+                        .WithOne()
+                        .HasForeignKey("TorqueAndTread.Server.Models.MenuItemRole", "CreatedById")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("TorqueAndTread.Server.Models.User", "LastUpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("LastUpdatedById")
+                        .WithOne()
+                        .HasForeignKey("TorqueAndTread.Server.Models.MenuItemRole", "LastUpdatedById")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
@@ -460,14 +460,14 @@ namespace TorqueAndTread.Server.Migrations
             modelBuilder.Entity("TorqueAndTread.Server.Models.Role", b =>
                 {
                     b.HasOne("TorqueAndTread.Server.Models.User", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById")
+                        .WithOne()
+                        .HasForeignKey("TorqueAndTread.Server.Models.Role", "CreatedById")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("TorqueAndTread.Server.Models.User", "LastUpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("LastUpdatedById")
+                        .WithOne()
+                        .HasForeignKey("TorqueAndTread.Server.Models.Role", "LastUpdatedById")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
@@ -498,14 +498,14 @@ namespace TorqueAndTread.Server.Migrations
             modelBuilder.Entity("TorqueAndTread.Server.Models.UserRole", b =>
                 {
                     b.HasOne("TorqueAndTread.Server.Models.User", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById")
+                        .WithOne()
+                        .HasForeignKey("TorqueAndTread.Server.Models.UserRole", "CreatedById")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("TorqueAndTread.Server.Models.User", "LastUpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("LastUpdatedById")
+                        .WithOne()
+                        .HasForeignKey("TorqueAndTread.Server.Models.UserRole", "LastUpdatedById")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 

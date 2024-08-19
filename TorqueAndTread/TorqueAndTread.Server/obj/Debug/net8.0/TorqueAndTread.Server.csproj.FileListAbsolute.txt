@@ -139,3 +139,5 @@ C:\Internship\TorqueAndTread\TorqueAndTread.Server\obj\Debug\net8.0\refint\Torqu
 C:\Internship\TorqueAndTread\TorqueAndTread.Server\obj\Debug\net8.0\TorqueAndTread.Server.pdb
 C:\Internship\TorqueAndTread\TorqueAndTread.Server\obj\Debug\net8.0\TorqueAndTread.Server.genruntimeconfig.cache
 C:\Internship\TorqueAndTread\TorqueAndTread.Server\obj\Debug\net8.0\ref\TorqueAndTread.Server.dll
+C:\Internship\TorqueAndTread\TorqueAndTread.Server\bin\Debug\net8.0\Seed\Roles.json
+C:\Internship\TorqueAndTread\TorqueAndTread.Server\bin\Debug\net8.0\Seed\Users.json

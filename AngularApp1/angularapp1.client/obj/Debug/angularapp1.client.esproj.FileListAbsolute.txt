@@ -1,2 +1,0 @@
-C:\Internship testing\AngularApp1\angularapp1.client\obj\Debug\angularapp1.client.esproj.CoreCompileInputs.cache
-C:\Internship\AngularApp1\angularapp1.client\obj\Debug\angularapp1.client.esproj.CoreCompileInputs.cache

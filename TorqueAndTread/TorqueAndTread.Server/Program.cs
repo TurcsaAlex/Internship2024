@@ -51,7 +51,8 @@ builder.Services.AddCors(option =>
     });
 });
 builder.Services.AddScoped<UserService>();
-builder.Services.AddDbContext<UserDbContext>(option =>
+builder.Services.AddDbContext<TorqueDbContext>(option =>
+
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerConnStr"));
 });

@@ -14,9 +14,9 @@ namespace TorqueAndTread.Server.Services
     public class UserService
     {
 
-        private readonly UserDbContext _authContext;
+        private readonly TorqueDbContext _authContext;
         private IConfiguration _config;
-        public UserService(UserDbContext authContext,IConfiguration config)
+        public UserService(TorqueDbContext authContext,IConfiguration config)
         {
             _config = config;
             _authContext = authContext;

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TorqueAndTread.Server.Context;
 
@@ -11,9 +12,11 @@ using TorqueAndTread.Server.Context;
 namespace TorqueAndTread.Server.Migrations
 {
     [DbContext(typeof(TorqueDbContext))]
-    partial class UserDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240819111551_FixedCreatedByRelations")]
+    partial class FixedCreatedByRelations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -282,21 +285,6 @@ namespace TorqueAndTread.Server.Migrations
                         .IsUnique();
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = 1,
-                            Active = true,
-                            CreatedById = 1,
-                            CreatedOn = new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified),
-                            Email = "admin@admin.com",
-                            LastUpdatedById = 1,
-                            LastUpdatedOn = new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Administrator",
-                            Password = "",
-                            UserName = "admin"
-                        });
                 });
 
             modelBuilder.Entity("TorqueAndTread.Server.Models.UserRole", b =>
