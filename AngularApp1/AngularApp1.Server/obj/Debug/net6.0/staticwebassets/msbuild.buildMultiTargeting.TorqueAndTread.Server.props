@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\build\TorqueAndTread.Server.props" />
-</Project>

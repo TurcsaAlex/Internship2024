@@ -1,22 +1,22 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TorqueAndTread.Server.Models
 {
-    [Index(nameof(UserName),nameof(Email),IsUnique = true)]
-    public class User
+    public class Role
     {
         [Key]
-        public int UserId { get; set; }
+        public int RoleId { get; set; }
         public string Name { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
-        public string Email { get; set; }
         
         
-        public List<Role> Roles { get; set; }
+        public List<User> Users { get; set; }
         public List<UserRole> UserRoles { get; set; }
+        public List<MenuItem> MenuItems { get; set; }
+        public List<MenuItemRole> MenuItemRoles { get; set; }
+        public List<ActionType> ActionTypes { get; set; }
+        public List<MenuItemActionRole> MenuItemActionRoles { get; set; }
+
 
 
         [Required]
