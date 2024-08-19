@@ -1,2 +1,0 @@
-C:\Internship\TorqueAndTread\torqueandtread.client\obj\Debug\torqueandtread.client.esproj.CoreCompileInputs.cache
-C:\Work\Internship2024\TorqueAndTread\torqueandtread.client\obj\Debug\torqueandtread.client.esproj.CoreCompileInputs.cache
