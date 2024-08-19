@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TorqueAndTread.Server.Models
 {
@@ -7,12 +8,28 @@ namespace TorqueAndTread.Server.Models
     public class User
     {
         [Key]
-        public int Id { get; set; }
-
+        public int UserId { get; set; }
         public string Name { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
         public string Email { get; set; }
+        
+        
+        public List<Role> Roles { get; set; }
+        public List<UserRole> UserRoles { get; set; }
 
+
+        [Required]
+        public bool Active { get; set; }
+        [Required]
+        [ForeignKey("CreatedById")]
+        public User CreatedBy { get; set; }
+        [Required]
+        public DateTime CreatedOn { get; set; }
+        [Required]
+        [ForeignKey("LastUpdatedById")]
+        public User LastUpdatedBy { get; set; }
+        [Required]
+        public DateTime LastUpdatedOn { get; set; }
     }
 }

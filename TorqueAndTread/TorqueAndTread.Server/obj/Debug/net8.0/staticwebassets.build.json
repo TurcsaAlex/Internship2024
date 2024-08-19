@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "Hash": "U9igFv+qeQbtPlnZfKGAjGXUDbzYWZoqvkmHeaSuDjo=",
+  "Hash": "eo2AgHb7Qd3W0vAgoF6zcLqIT1Tqcr6/tmQDRGZMZb0=",
   "Source": "TorqueAndTread.Server",
   "BasePath": "_content/TorqueAndTread.Server",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [
     {
-      "Identity": "C:\\Internship\\TorqueAndTread\\torqueandtread.client\\torqueandtread.client.esproj",
+      "Identity": "C:\\Work\\Internship2024\\TorqueAndTread\\torqueandtread.client\\torqueandtread.client.esproj",
       "Version": 2,
       "Source": "torqueandtread.client",
       "GetPublishAssetsTargets": "GetCurrentProjectPublishStaticWebAssetItems",

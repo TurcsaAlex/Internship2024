@@ -10,7 +10,7 @@ using TorqueAndTread.Server.Context;
 
 namespace TorqueAndTread.Server.Migrations
 {
-    [DbContext(typeof(UserDbContext))]
+    [DbContext(typeof(TorqueDbContext))]
     [Migration("20240816133306_Initial")]
     partial class Initial
     {
