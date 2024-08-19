@@ -1,21 +1,25 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Globalization;
 namespace TorqueAndTread.Server.Models
 {
-    public class Product
+    public class ProductBOM
     {
+
         [Key]
+        public int ProductBOMId { get; set; }
+
+        [Required]
         public int ProductId { get; set; }
 
-        [Required]
-
-        public string ProductTypeIdName { get; set; }
 
         [Required]
 
-        public string ProductCodeName { get; set; }
+        public int BOMId { get; set; }
+
+        [Required]
+
+        public int Quantity { get; set; }
 
         [Required]
 
@@ -27,21 +31,18 @@ namespace TorqueAndTread.Server.Models
 
         [Required]
 
-        public DateTime CreatedOn { get; set; } 
+        public DateTime CreatedOn { get; set; }
 
         public string LastUpdatedBy { get; set; }
 
         public DateTime? LastUpdatedOn { get; set; }
 
-        public int ProductTypeId { get; set; }
+        [ForeignKey("ProductId")]
 
-        
+        public Product Product { get; set; }
 
-        [ForeignKey("ProductTypeId")]
+        [ForeignKey("BOMId")]
 
-        public ProductType ProductType { get; set; } //navigation for ProductType, one-to-one relation
-
-        public ICollection<ProductBOM> ProductBOMs { get; set; } //navigation for ProductBOM, one-to-many relation
-
+        public BOM BOM { get; set; }
     }
 }

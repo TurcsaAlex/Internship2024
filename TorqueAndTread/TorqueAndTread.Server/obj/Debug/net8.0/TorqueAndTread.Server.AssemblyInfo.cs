@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TorqueAndTread.Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f6a79ddfc41ac42a886f832f4d1fbb13c625909e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5199afa83197228d716232c455ac5d8e4347e296")]
 [assembly: System.Reflection.AssemblyProductAttribute("TorqueAndTread.Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TorqueAndTread.Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
