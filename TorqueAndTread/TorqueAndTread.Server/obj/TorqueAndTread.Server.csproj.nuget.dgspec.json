@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Internship\\TorqueAndTread\\TorqueAndTread.Server\\TorqueAndTread.Server.csproj": {}
+    "C:\\Work\\Internship2024\\TorqueAndTread\\TorqueAndTread.Server\\TorqueAndTread.Server.csproj": {}
   },
   "projects": {
-    "C:\\Internship\\TorqueAndTread\\TorqueAndTread.Server\\TorqueAndTread.Server.csproj": {
+    "C:\\Work\\Internship2024\\TorqueAndTread\\TorqueAndTread.Server\\TorqueAndTread.Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Internship\\TorqueAndTread\\TorqueAndTread.Server\\TorqueAndTread.Server.csproj",
+        "projectUniqueName": "C:\\Work\\Internship2024\\TorqueAndTread\\TorqueAndTread.Server\\TorqueAndTread.Server.csproj",
         "projectName": "TorqueAndTread.Server",
-        "projectPath": "C:\\Internship\\TorqueAndTread\\TorqueAndTread.Server\\TorqueAndTread.Server.csproj",
-        "packagesPath": "C:\\Users\\alexandru.a.turcsa\\.nuget\\packages\\",
-        "outputPath": "C:\\Internship\\TorqueAndTread\\TorqueAndTread.Server\\obj\\",
+        "projectPath": "C:\\Work\\Internship2024\\TorqueAndTread\\TorqueAndTread.Server\\TorqueAndTread.Server.csproj",
+        "packagesPath": "C:\\Users\\tulan.ilinca\\.nuget\\packages\\",
+        "outputPath": "C:\\Work\\Internship2024\\TorqueAndTread\\TorqueAndTread.Server\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\alexandru.a.turcsa\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\tulan.ilinca\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

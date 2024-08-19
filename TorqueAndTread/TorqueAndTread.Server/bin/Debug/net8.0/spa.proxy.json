@@ -3,7 +3,7 @@
 "ServerUrl": "https://localhost:4200",
 "RedirectUrl": "",
 "LaunchCommand": "npm start",
-"WorkingDirectory": "C:\\Internship\\TorqueAndTread\\TorqueAndTread.Server\\..\\torqueandtread.client",
+"WorkingDirectory": "C:\\Work\\Internship2024\\TorqueAndTread\\TorqueAndTread.Server\\..\\torqueandtread.client",
 "MaxTimeoutInSeconds": "120",
 "KeepRunning": "false"
 }
