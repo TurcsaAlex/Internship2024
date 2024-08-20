@@ -130,8 +130,7 @@ namespace TorqueAndTread.Server.Context
 
             //seeding
 
-            var userSeed =LoadUserSeedDataFromFile();
-            modelBuilder.Entity<User>().HasData(userSeed);
+            SeedData.Initialize(modelBuilder);
         }
         private List<UserSeedObject> LoadUserSeedDataFromFile()
         {

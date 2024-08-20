@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TorqueAndTread.Server.Context;
 
@@ -11,9 +12,11 @@ using TorqueAndTread.Server.Context;
 namespace TorqueAndTread.Server.Migrations
 {
     [DbContext(typeof(TorqueDbContext))]
-    partial class TorqueDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240820070531_RemoveUserSeed")]
+    partial class RemoveUserSeed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -433,38 +436,6 @@ namespace TorqueAndTread.Server.Migrations
                     b.HasIndex("LastUpdatedById");
 
                     b.ToTable("Roles");
-
-                    b.HasData(
-                        new
-                        {
-                            RoleId = -1,
-                            Active = true,
-                            CreatedById = -1,
-                            CreatedOn = new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified),
-                            LastUpdatedById = -1,
-                            LastUpdatedOn = new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Administrator"
-                        },
-                        new
-                        {
-                            RoleId = -2,
-                            Active = true,
-                            CreatedById = -1,
-                            CreatedOn = new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified),
-                            LastUpdatedById = -1,
-                            LastUpdatedOn = new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Operator"
-                        },
-                        new
-                        {
-                            RoleId = -3,
-                            Active = true,
-                            CreatedById = -1,
-                            CreatedOn = new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified),
-                            LastUpdatedById = -1,
-                            LastUpdatedOn = new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Supervisor"
-                        });
                 });
 
             modelBuilder.Entity("TorqueAndTread.Server.Models.UOM", b =>
@@ -550,47 +521,6 @@ namespace TorqueAndTread.Server.Migrations
                         .IsUnique();
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = -1,
-                            Active = true,
-                            CreatedById = -1,
-                            CreatedOn = new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified),
-                            Email = "admin@admin.com",
-                            LastUpdatedById = -1,
-                            LastUpdatedOn = new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Administrator",
-                            Password = "",
-                            UserName = "admin"
-                        },
-                        new
-                        {
-                            UserId = -2,
-                            Active = true,
-                            CreatedById = -1,
-                            CreatedOn = new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified),
-                            Email = "admin2@admin.com",
-                            LastUpdatedById = -1,
-                            LastUpdatedOn = new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Administrator",
-                            Password = "",
-                            UserName = "admin1"
-                        },
-                        new
-                        {
-                            UserId = -3,
-                            Active = true,
-                            CreatedById = -1,
-                            CreatedOn = new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified),
-                            Email = "admin3@admin.com",
-                            LastUpdatedById = -1,
-                            LastUpdatedOn = new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Administrator",
-                            Password = "",
-                            UserName = "admin2"
-                        });
                 });
 
             modelBuilder.Entity("TorqueAndTread.Server.Models.UserRole", b =>

@@ -1,11 +1,29 @@
 [
   {
-    "RoleId": 1,
+    "RoleId": -1,
     "Name": "Administrator",
     "Active": true,
-    "CreatedBy": 1,
+    "CreatedById": -1,
     "CreatedOn": "2024-08-19T10:15:30",
-    "LastUpdatedBy": 1,
+    "LastUpdatedById": -1,
+    "LastUpdatedOn": "2024-08-19T12:00:00"
+  },
+  {
+    "RoleId": -2,
+    "Name": "Operator",
+    "Active": true,
+    "CreatedById": -1,
+    "CreatedOn": "2024-08-19T10:15:30",
+    "LastUpdatedById": -1,
+    "LastUpdatedOn": "2024-08-19T12:00:00"
+  },
+  {
+    "RoleId": -3,
+    "Name": "Supervisor",
+    "Active": true,
+    "CreatedById": -1,
+    "CreatedOn": "2024-08-19T10:15:30",
+    "LastUpdatedById": -1,
     "LastUpdatedOn": "2024-08-19T12:00:00"
   }
 ]
