@@ -27,6 +27,7 @@ export class AuthService {
         console.log(this.cookie);
         console.log(response);
         localStorage.setItem('authToken', this.cookie);
+        localStorage.getItem('authToken');
         return response;
       })
     );

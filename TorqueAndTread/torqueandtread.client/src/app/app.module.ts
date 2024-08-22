@@ -9,17 +9,16 @@ import { LoginComponent } from './screens/login/login.component';
 import { PageNotFoundComponent } from './screens/page-not-found/page-not-found.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './screens/register/register.component';
-import {MenuComponent} from '../../../src/app/menu/menu.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { MenusComponent } from './menus/menus.component';
-import { UsersComponent } from './users/users.component';
-import { ProductsComponent } from './products/products.component';
-import { ContainersComponent } from './containers/containers.component';
-import { ProductionordersComponent } from './productionorders/productionorders.component';
-import { PolicyComponent } from './policy/policy.component'
+import { MenusComponent } from './screens/menus/menus.component';
+import { UsersComponent } from './screens/users/users.component';
+import { ProductsComponent } from './screens/products/products.component';
+import { ContainersComponent } from './screens/containers/containers.component';
+import { ProductionordersComponent } from './screens/productionorders/productionorders.component';
+import { PolicyComponent } from './screens/policy/policy.component'
 import { RouterModule, Routes } from '@angular/router';
-import { RolesComponent } from './roles/roles.component';
+import { RolesComponent } from './screens/roles/roles.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome'
 
 
@@ -34,7 +33,6 @@ export class AppService {
     LoginComponent,
     PageNotFoundComponent,
     RegisterComponent,
-    MenuComponent,
     HeaderComponent,
     FooterComponent,
     MenusComponent,
@@ -51,6 +49,7 @@ export class AppService {
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    FontAwesomeModule
   ],
    providers: [],
    bootstrap: [AppComponent],

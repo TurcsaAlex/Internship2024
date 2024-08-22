@@ -3,13 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './screens/login/login.component';
 import { PageNotFoundComponent } from './screens/page-not-found/page-not-found.component';
 import { RegisterComponent } from './screens/register/register.component';
-import { MenusComponent } from './menus/menus.component';
-import { UsersComponent } from './users/users.component';
-import { ProductsComponent } from './products/products.component';
-import { ContainersComponent } from './containers/containers.component';
-import { ProductionordersComponent } from './productionorders/productionorders.component';
-import { PolicyComponent } from './policy/policy.component'
-import { RolesComponent } from './roles/roles.component';
+import { MenusComponent } from './screens/menus/menus.component';
+import { UsersComponent } from './screens/users/users.component';
+import { ProductsComponent } from './screens/products/products.component';
+import { ContainersComponent } from './screens/containers/containers.component';
+import { ProductionordersComponent } from './screens/productionorders/productionorders.component';
+import { PolicyComponent } from './screens/policy/policy.component'
+import { RolesComponent } from './screens/roles/roles.component';
 
 const routes: Routes = [
   {path:"",redirectTo:"login",pathMatch:"full"},
