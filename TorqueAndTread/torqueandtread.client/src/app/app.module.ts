@@ -47,12 +47,10 @@ export class AppService {
   ],
   imports: [
     BrowserModule,
-    FontAwesomeModule,
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-
   ],
    providers: [],
    bootstrap: [AppComponent],
