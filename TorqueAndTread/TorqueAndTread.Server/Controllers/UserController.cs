@@ -10,10 +10,11 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using TorqueAndTread.Server.DTOs;
 
 namespace TorqueAndTread.Server.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("/api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {
@@ -31,16 +32,16 @@ namespace TorqueAndTread.Server.Controllers
             return Ok(new { Message = "Ok" });
         }
 
-        [HttpPost("auth")]
-        public async Task<IActionResult> Authenticate([FromBody] User userObj)
+        [HttpPost("login", Name ="LoginUser")]
+        public async Task<IActionResult> Authenticate([FromBody] LoginDTO loginDTO)
         {
-            if (userObj == null)
+            if (loginDTO == null)
                 return BadRequest();
-            var authResp= await _userService.Authenticate(userObj);
+            var authResp= await _userService.Authenticate(loginDTO);
             switch (authResp.Code)
             {
                 case 200:
-                    return Ok(new { Message = "Login Success!", Token =authResp.Token });
+                    return Ok(new { Token =authResp.Token });
                 case 404:
                     return NotFound(new { Message = "User not found" });
                 case 500:
@@ -50,12 +51,14 @@ namespace TorqueAndTread.Server.Controllers
             }
         }
 
-        [HttpPost("register")]
-        public async Task<IActionResult> RegisterUser([FromBody] User userObj)
+        [HttpPost("register",Name ="RegisterUser")]
+        public async Task<IActionResult> RegisterUser([FromBody] RegisterDTO registerDTO)
         {
-            if(userObj== null) { return BadRequest();}
-            if (string.IsNullOrEmpty(userObj.UserName) || string.IsNullOrEmpty(userObj.Password)) { return BadRequest(); }
-            await _userService.RegisterUser(userObj);
+            if(registerDTO== null) { return BadRequest();}
+            if (string.IsNullOrEmpty(registerDTO.UserName) || string.IsNullOrEmpty(registerDTO.Password)) { 
+                return BadRequest(); 
+            }
+            await _userService.RegisterUser(registerDTO);
             return Ok(new { Message = "User registered!" });
         }
     }

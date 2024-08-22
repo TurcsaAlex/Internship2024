@@ -1,0 +1,73 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-5">
+        <div class="card">
+          <div class="card-body text-start">
+            <h3 class="text-start justify-content-start">Register</h3>
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <div class="form-group mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input
+                        type="text"
+                        id="name"
+                        formControlName="name"
+                        class="form-control"
+                        [ngClass]="{ 'is-invalid': registerForm.get('name')?.invalid && registerForm.get('name')?.touched }"
+                    />
+                    <div class="invalid-feedback">
+                        Name is required
+                    </div>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input
+                      type="text"
+                      id="email"
+                      formControlName="email"
+                      class="form-control"
+                      [ngClass]="{ 'is-invalid': registerForm.get('email')?.invalid && registerForm.get('email')?.touched }"
+                    />
+                    <div class="invalid-feedback">
+                      Email is required
+                    </div>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input
+                    type="text"
+                    id="username"
+                    formControlName="username"
+                    class="form-control"
+                    [ngClass]="{ 'is-invalid': registerForm.get('username')?.invalid && registerForm.get('username')?.touched }"
+                    />
+                    <div class="invalid-feedback">
+                    Username is required
+                    </div>
+                </div>
+    
+                <div class="form-group mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input
+                    type="password"
+                    id="password"
+                    formControlName="password"
+                    class="form-control"
+                    [ngClass]="{ 'is-invalid': registerForm.get('password')?.invalid && registerForm.get('password')?.touched }"
+                    />
+                    <div class="invalid-feedback">
+                    Password is required
+                    </div>
+                </div>
+    
+              <button type="submit" class="btn btn-primary col-md-3">Register</button>
+            </form>
+            <div class="pt-3">
+                <a routerLink="/login" routerLinkActive="active" ariaCurrentWhenActive="page" class="text-muted small">Back To Login</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 using TorqueAndTread.Server.Context;
+using TorqueAndTread.Server.Helpers;
 using TorqueAndTread.Server.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -51,6 +52,7 @@ builder.Services.AddCors(option =>
     });
 });
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<MailSender>();
 builder.Services.AddDbContext<TorqueDbContext>(option =>
 
 {

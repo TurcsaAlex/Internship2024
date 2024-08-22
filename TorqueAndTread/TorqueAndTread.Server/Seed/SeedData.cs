@@ -8,28 +8,28 @@ namespace TorqueAndTread.Server.Seed
     public class SeedData
     {
         
-        public static void Initialize(TorqueDbContext context)
-        {
-            if (context.Users.Any())
-            {
-                return;
-            }
-            var userSeed = LoadUserSeedDataFromFile1();
-            foreach (var u in userSeed) {
-                context.Users.Add(new User() {
-                    Name = u.Name,
-                    UserName = u.UserName,
-                    Password = u.Password,
-                    Email = u.Email,
-                    CreatedOn = u.CreatedOn,
-                    CreatedBy =u,
-                    LastUpdatedBy =u,
-                    LastUpdatedOn=u.LastUpdatedOn,
-                    Active = u.Active
-                });
-            }
-            context.SaveChanges();
-        }
+        //public static void Initialize(TorqueDbContext context)
+        //{
+        //    if (context.Users.Any())
+        //    {
+        //        return;
+        //    }
+        //    var userSeed = LoadUserSeedDataFromFile1();
+        //    foreach (var u in userSeed) {
+        //        context.Users.Add(new User() {
+        //            Name = u.Name,
+        //            UserName = u.UserName,
+        //            Password = u.Password,
+        //            Email = u.Email,
+        //            CreatedOn = u.CreatedOn,
+        //            CreatedBy =u,
+        //            LastUpdatedBy =u,
+        //            LastUpdatedOn=u.LastUpdatedOn,
+        //            Active = u.Active
+        //        });
+        //    }
+        //    context.SaveChanges();
+        //}
         public static void Initialize(ModelBuilder modelBuilder) {
             var userSeed = LoadUserSeedDataFromFile();
             modelBuilder.Entity<User>().HasData(userSeed);

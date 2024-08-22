@@ -8,6 +8,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Net.Mail;
+using System.Net;
 
 namespace TorqueAndTread.Server.Services
 {
@@ -16,13 +18,16 @@ namespace TorqueAndTread.Server.Services
 
         private readonly TorqueDbContext _authContext;
         private IConfiguration _config;
-        public UserService(TorqueDbContext authContext,IConfiguration config)
+        private MailSender _mailSender;
+        public UserService(TorqueDbContext authContext,IConfiguration config, MailSender mailSender)
         {
             _config = config;
             _authContext = authContext;
+            _mailSender = mailSender;
         }
-        public async Task<AuthDTO> Authenticate(User userObj)
+        public async Task<AuthDTO> Authenticate(LoginDTO userObj)
         {
+            //_mailSender.SendTest();
             var user = await _authContext.Users.FirstOrDefaultAsync(x => x.UserName == userObj.UserName);
             if (user == null)
                 return new AuthDTO(404);
@@ -35,11 +40,20 @@ namespace TorqueAndTread.Server.Services
             return new AuthDTO(200, token);
         }
 
-        public async Task<int> RegisterUser(User userObj)
+        public async Task<int> RegisterUser(RegisterDTO registerDTO)
         {
+
+            var searchUser = _authContext.Users.Where(u=>u.UserId==-1);
+            var active0User=searchUser.First();
+            var userObj = new User(registerDTO);
             userObj.Password = PasswordHasher.HashPassword(userObj.Password);
+            userObj.CreatedOn = DateTime.UtcNow;
+            userObj.LastUpdatedOn = DateTime.UtcNow;
+            userObj.CreatedBy = active0User;
+            userObj.LastUpdatedBy = active0User;
             await _authContext.Users.AddAsync(userObj);
             var saveResp=await _authContext.SaveChangesAsync();
+            _mailSender.SendActivationMail(userObj.Email);
             return saveResp;
         }
         private string GenerateJSONWebToken(User userInfo)
