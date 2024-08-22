@@ -28,20 +28,25 @@ namespace TorqueAndTread.Server.Context
         public DbSet<Container> Containers { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().HasMany(e=>e.Roles).WithMany(e=>e.Users)
+            modelBuilder.Entity<User>().HasMany(e => e.Roles).WithMany(e => e.Users)
                 .UsingEntity<UserRole>(
-                j=>j.HasOne(t=>t.Role).WithMany(p=>p.UserRoles),
-                j=>j.HasOne(t=>t.User).WithMany(p=>p.UserRoles));
+                j => j.HasOne(t => t.Role).WithMany(p => p.UserRoles),
+                j => j.HasOne(t => t.User).WithMany(p => p.UserRoles));
 
             modelBuilder.Entity<MenuItem>().HasMany(e => e.Roles).WithMany(e => e.MenuItems)
                 .UsingEntity<MenuItemRole>(
                 j => j.HasOne(t => t.Role).WithMany(p => p.MenuItemRoles),
                 j => j.HasOne(t => t.MenuItem).WithMany(p => p.MenuItemRoles));
 
-            modelBuilder.Entity<ActionType>().HasMany(e=>e.Roles).WithMany(e=>e.ActionTypes)
+            modelBuilder.Entity<ActionType>().HasMany(e => e.Roles).WithMany(e => e.ActionTypes)
                 .UsingEntity<MenuItemActionRole>(
                 j => j.HasOne(t => t.Role).WithMany(p => p.MenuItemActionRoles),
                 j => j.HasOne(t => t.ActionType).WithMany(p => p.MenuItemActionRoles));
+            //modelBuilder.Entity<UserRole>().HasOne(ur => ur.User).WithMany(u => u.UserRoles)
+            //    .HasForeignKey(ur => ur.UserId); 
+            //modelBuilder.Entity<UserRole>().HasOne(ur => ur.Role).WithMany(r => r.UserRoles)
+            //    .HasForeignKey(ur => ur.RoleId);
+            modelBuilder.Entity<UserRole>().HasKey(ur =>new{ ur.UserId, ur.RoleId });
 
             modelBuilder.Entity<ActionType>().HasMany(e => e.MenuItems).WithMany(e => e.ActionTypes)
                 .UsingEntity<MenuItemActionRole>(

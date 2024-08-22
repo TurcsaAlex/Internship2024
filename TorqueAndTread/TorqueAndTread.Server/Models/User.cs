@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TorqueAndTread.Server.DTOs;
 
 namespace TorqueAndTread.Server.Models
 {
@@ -31,5 +32,14 @@ namespace TorqueAndTread.Server.Models
         public User LastUpdatedBy { get; set; }
         [Required]
         public DateTime LastUpdatedOn { get; set; }
+
+        public User(RegisterDTO registerDTO)
+        {
+            this.Name = registerDTO.Name;
+            this.UserName = registerDTO.UserName;
+            this.Password = registerDTO.Password;
+            this.Email = registerDTO.Email;
+        }
+        public User() { }
     }
 }

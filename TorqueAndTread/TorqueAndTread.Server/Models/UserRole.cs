@@ -1,12 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TorqueAndTread.Server.Models
 {
     public class UserRole
     {
-        [Key]
-        public int UserRoleId { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }
         public int RoleId { get; set; }

@@ -5,6 +5,10 @@ import { Injectable } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { LoginComponent } from './screens/login/login.component';
+import { PageNotFoundComponent } from './screens/page-not-found/page-not-found.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RegisterComponent } from './screens/register/register.component';
 import {MenuComponent} from '../../../src/app/menu/menu.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
@@ -27,6 +31,9 @@ export class AppService {
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
+    PageNotFoundComponent,
+    RegisterComponent,
     MenuComponent,
     HeaderComponent,
     FooterComponent,
@@ -40,10 +47,10 @@ export class AppService {
   ],
   imports: [
     BrowserModule,
-    FontAwesomeModule,
     HttpClientModule,
     AppRoutingModule,
-
+    FormsModule,
+    ReactiveFormsModule,
   ],
    providers: [],
    bootstrap: [AppComponent],
