@@ -6,9 +6,7 @@ import { map, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  private baseUrl="/api/user"
-  private cookie:string='';
-
+  private baseUrl="/api/auth"
   constructor(private http:HttpClient) { }
 
   register(registerForm:any){
@@ -23,11 +21,8 @@ export class AuthService {
     console.log('login')
     return this.http.post<any>(this.baseUrl+'/login', loginForm).pipe(
       map((response: any) => {
-        this.cookie=`Bearer ${response.token}`;
-        console.log(this.cookie);
         console.log(response);
-        localStorage.setItem('authToken', this.cookie);
-        localStorage.getItem('authToken');
+        localStorage.setItem('authToken',`Bearer ${response.token}`);
         return response;
       })
     );

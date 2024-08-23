@@ -10,6 +10,8 @@ import { ContainersComponent } from './screens/containers/containers.component';
 import { ProductionordersComponent } from './screens/productionorders/productionorders.component';
 import { PolicyComponent } from './screens/policy/policy.component'
 import { RolesComponent } from './screens/roles/roles.component';
+import { UserEditComponent } from './screens/user-edit/user-edit.component';
+import { UserAddComponent } from './screens/user-add/user-add.component';
 
 const routes: Routes = [
   {path:"",redirectTo:"login",pathMatch:"full"},
@@ -17,6 +19,8 @@ const routes: Routes = [
   {path:"register",component:RegisterComponent},
   {path: 'menus',component:MenusComponent},
   {path: 'users',component:UsersComponent},
+  {path: 'edit-user' ,component:UserEditComponent},
+  {path: 'add-user', component:UserAddComponent},
   {path: 'roles',component:RolesComponent},
   {path: 'products',component:ProductsComponent},
   {path: 'containers',component:ContainersComponent},

@@ -25,9 +25,6 @@ export class LoginComponent {
       const username = this.loginForm.get('username')?.value;
       const password = this.loginForm.get('password')?.value;
 
-      console.log('Username:', username);
-      console.log('Password:', password);
-      console.log("huh");
       this.auth.login(
         { username: username, password: password })
         .subscribe({
