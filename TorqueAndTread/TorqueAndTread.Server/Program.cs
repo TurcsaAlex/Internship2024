@@ -55,6 +55,8 @@ builder.Services.AddCors(option =>
 });
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<MailSender>();
+builder.Services.AddScoped<AuthService>();
+
 builder.Services.AddDbContext<TorqueDbContext>(option =>
 
 {
