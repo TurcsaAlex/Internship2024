@@ -1,13 +1,16 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, TemplateRef } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../models/user';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../service/user.service';
+import { DatePipe } from '@angular/common';
+import { ToastService } from '../../service/toast.service';
 
 @Component({
   selector: 'app-user-edit',
   templateUrl: './user-edit.component.html',
-  styleUrls: ['./user-edit.component.css']
+  styleUrls: ['./user-edit.component.css'],
+  providers:[DatePipe]
 })
 export class UserEditComponent implements OnInit {
   user: User | null = null;
@@ -20,7 +23,12 @@ export class UserEditComponent implements OnInit {
     createdOn: new FormControl({value:this.user?.createdOn || '',disabled:true}, Validators.required),
     lastUpdatedOn: new FormControl({value:this.user?.lastUpdatedOn || '',disabled:true}, Validators.required)
   });
-  constructor(private route: ActivatedRoute,private userService:UserService,private router:Router) {}
+  constructor(
+    private datePipe: DatePipe,
+    private userService:UserService,
+    private router:Router,
+    private toastService:ToastService
+  ) {}
 
   ngOnInit(): void {
     var userId=this.userService.getUserId();
@@ -35,21 +43,25 @@ export class UserEditComponent implements OnInit {
         userName: this.user?.userName ,
         email: this.user?.email || '',
         active:this.user?.active || false,
-        createdOn: this.user?.createdOn||'',
-        lastUpdatedOn: this.user?.lastUpdatedOn || ''});
+        createdOn: this.datePipe.transform(this.user?.createdOn||'',"medium"),
+        lastUpdatedOn: this.datePipe.transform(this.user?.lastUpdatedOn || '',"medium") });
     });
   }
   
-  onSubmit(): void {
+  onSubmit(toastTemplate:TemplateRef<any>): void {
     if (this.userForm.valid) {
       const updatedUser: User = this.userForm.value;
       console.log('User saved', updatedUser);
       this.userService.updateUser(updatedUser).subscribe(()=>{
-        console.log("ok")
+        this.toastService.show({template:toastTemplate,classname:'bg-success text-light',data:this.user?.userName});
         this.router.navigateByUrl("/users");
       });
     }else{
       alert("Invalid Form");
     }
+  }
+
+  back(){
+    this.router.navigateByUrl('/users');
   }
 }

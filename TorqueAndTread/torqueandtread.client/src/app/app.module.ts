@@ -24,6 +24,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { UserAddComponent } from './screens/user-add/user-add.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ToastsContainer } from './toast-container/toast-container.component';
 
 
 @Injectable({
@@ -46,7 +48,7 @@ export class AppService {
     PolicyComponent,
     RolesComponent,
     UserEditComponent,
-    UserAddComponent
+    UserAddComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,7 +59,9 @@ export class AppService {
     FontAwesomeModule,
     MatTableModule,
     MatPaginatorModule,
-    UsersComponent
+    UsersComponent,
+    NgbModule,
+    ToastsContainer
   ],
    providers: [
     provideAnimationsAsync()

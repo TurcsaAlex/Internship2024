@@ -1,8 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, Input, TemplateRef } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../models/user';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { UserService } from '../../service/user.service';
+import { ToastService } from '../../service/toast.service';
 
 @Component({
   selector: 'app-user-add',
@@ -21,21 +22,30 @@ export class UserAddComponent implements OnInit {
     createdOn: new FormControl({value:this.user?.createdOn || '',disabled:true}, Validators.required),
     lastUpdatedOn: new FormControl({value:this.user?.lastUpdatedOn || '',disabled:true}, Validators.required)
   });
-  constructor(private route: ActivatedRoute,private userService:UserService,private router:Router) {}
+  constructor(
+    private userService:UserService,
+    private router:Router,
+    private toastService:ToastService
+  ) {}
 
   ngOnInit(): void {
   }
 
-  onSubmit(): void {
+  onSubmit(toastTemplate:TemplateRef<any>): void {
     if (this.userForm.valid) {
       const createdUser: User = this.userForm.value;
       console.log('User saved', createdUser);
       this.userService.createUser(createdUser).subscribe(()=>{
+        this.toastService.show({template:toastTemplate,classname:'bg-success text-light',data:createdUser.userName});
         console.log("ok")
         this.router.navigateByUrl("/users");
       });
     }else{
       alert("Invalid Form");
     }
+  }
+
+  back(){
+    this.router.navigateByUrl('/users');
   }
 }
