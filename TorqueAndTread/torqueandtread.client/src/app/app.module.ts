@@ -17,10 +17,16 @@ import { ProductsComponent } from './screens/products/products.component';
 import { ContainersComponent } from './screens/containers/containers.component';
 import { ProductionordersComponent } from './screens/productionorders/productionorders.component';
 import { PolicyComponent } from './screens/policy/policy.component'
-import { RouterModule, Routes } from '@angular/router';
 import { RolesComponent } from './screens/roles/roles.component';
-import {FontAwesomeModule} from '@fortawesome/angular-fontawesome'
-import { MenuService } from './service/menu.service';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import { UserEditComponent } from './screens/user-edit/user-edit.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { UserAddComponent } from './screens/user-add/user-add.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ToastsContainer } from './toast-container/toast-container.component';
+
 
 @Injectable({
   providedIn:'root'
@@ -36,12 +42,13 @@ export class AppService {
     HeaderComponent,
     FooterComponent,
     MenusComponent,
-    UsersComponent,
     ProductsComponent,
     ContainersComponent,
     ProductionordersComponent,
     PolicyComponent,
-    RolesComponent
+    RolesComponent,
+    UserEditComponent,
+    UserAddComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,9 +56,16 @@ export class AppService {
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    MatTableModule,
+    MatPaginatorModule,
+    UsersComponent,
+    NgbModule,
+    ToastsContainer
   ],
-   providers: [MenuService],
+   providers: [
+    provideAnimationsAsync()
+  ],
    bootstrap: [AppComponent],
   
 })
