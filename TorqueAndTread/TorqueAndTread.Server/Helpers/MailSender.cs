@@ -59,14 +59,25 @@ namespace TorqueAndTread.Server.Helpers
                 EnableSsl = true,
             };
         }
+        private string getHtmlContent()
+        {
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "HTMLTemplates\\emailTemplate.html");
+            //var filePath = "..\\HTMLTemplates\\emailTemplate.html";
+            if (!File.Exists(filePath))
+            {
+                throw new FileNotFoundException("Html file not found", filePath);
+            }
 
+            return  File.ReadAllText(filePath);
+        }
         public void SendActivationMail(string recieverMail)
         {
+            
             MailMessage mail = new MailMessage();
             mail.From = new MailAddress(smtpUser);
             mail.To.Add(recieverMail);
             mail.Subject = "Account Activation Pending";
-            mail.Body = htmlContent;
+            mail.Body = getHtmlContent();
             mail.IsBodyHtml = true;
 
             _smtpClient.Send(mail);
@@ -77,7 +88,7 @@ namespace TorqueAndTread.Server.Helpers
             mail.From = new MailAddress(smtpUser);
             mail.To.Add("aturcsa@gmail.com");
             mail.Subject = "Account Activation Pending";
-            mail.Body = htmlContent;
+            mail.Body = getHtmlContent();
             mail.IsBodyHtml = true;
 
             this._smtpClient.Send(mail);
