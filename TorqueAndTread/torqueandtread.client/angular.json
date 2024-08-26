@@ -83,7 +83,10 @@
           },
           "defaultConfiguration": "development",
           "options": {
-            "proxyConfig": "src/proxy.conf.js"
+            "proxyConfig": "src/proxy.conf.js",
+            "ssl": false,
+            "sslKey": "ssl/server.key",
+            "sslCert": "ssl/server.crt"
           }
         },
         "extract-i18n": {

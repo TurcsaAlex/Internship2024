@@ -18,6 +18,7 @@ import { ContainersComponent } from './screens/containers/containers.component';
 import { ProductionordersComponent } from './screens/productionorders/productionorders.component';
 import { PolicyComponent } from './screens/policy/policy.component'
 import { RolesComponent } from './screens/roles/roles.component';
+import { MenuService } from './service/menu.service';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import { UserEditComponent } from './screens/user-edit/user-edit.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -63,12 +64,14 @@ export class AppService {
     MatPaginatorModule,
     UsersComponent,
     NgbModule,
-    ToastsContainer
+    ToastsContainer,
   ],
    providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    MenuService
   ],
-   bootstrap: [AppComponent],
+
+   bootstrap: [AppComponent]
   
 })
 export class AppModule { }
