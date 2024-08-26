@@ -20,7 +20,7 @@ import { PolicyComponent } from './screens/policy/policy.component'
 import { RouterModule, Routes } from '@angular/router';
 import { RolesComponent } from './screens/roles/roles.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome'
-
+import { MenuService } from './service/menu.service';
 
 @Injectable({
   providedIn:'root'
@@ -51,7 +51,7 @@ export class AppService {
     ReactiveFormsModule,
     FontAwesomeModule
   ],
-   providers: [],
+   providers: [MenuService],
    bootstrap: [AppComponent],
   
 })

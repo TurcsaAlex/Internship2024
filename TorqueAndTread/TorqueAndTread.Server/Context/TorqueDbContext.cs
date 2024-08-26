@@ -72,11 +72,10 @@ namespace TorqueAndTread.Server.Context
 
             modelBuilder.Entity<Product>().Property(p => p.Active).IsRequired();
 
-            modelBuilder.Entity<Product>().Property(p => p.CreatedBy).IsRequired();
+            modelBuilder.Entity<Product>().HasOne(e => e.CreatedBy).WithMany().OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Product>().HasOne(e => e.LastUpdatedBy).WithMany().OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Product>().Property(p => p.CreatedOn).IsRequired();
-
-            modelBuilder.Entity<Product>().Property(p => p.LastUpdatedBy).IsRequired(false);
 
             modelBuilder.Entity<Product>().Property(p => p.LastUpdatedOn).IsRequired(false);
 
@@ -86,11 +85,10 @@ namespace TorqueAndTread.Server.Context
 
             modelBuilder.Entity<ProductType>().Property(pt => pt.Active).IsRequired();
 
-            modelBuilder.Entity<ProductType>().Property(pt => pt.CreatedBy).IsRequired();
+            modelBuilder.Entity<ProductType>().HasOne(e => e.CreatedBy).WithMany().OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<ProductType>().HasOne(e => e.LastUpdatedBy).WithMany().OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<ProductType>().Property(pt => pt.CreatedOn).IsRequired();
-
-            modelBuilder.Entity<ProductType>().Property(pt => pt.LastUpdatedBy).IsRequired(false);
 
             modelBuilder.Entity<ProductType>().Property(pt => pt.LastUpdatedOn).IsRequired(false);
 
@@ -100,11 +98,10 @@ namespace TorqueAndTread.Server.Context
 
             modelBuilder.Entity<ProductBOM>().Property(pb => pb.Active).IsRequired();
 
-            modelBuilder.Entity<ProductBOM>().Property(pb => pb.CreatedBy).IsRequired();
+            modelBuilder.Entity<ProductBOM>().HasOne(e => e.CreatedBy).WithMany().OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<ProductBOM>().HasOne(e => e.LastUpdatedBy).WithMany().OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<ProductBOM>().Property(pb => pb.CreatedOn).IsRequired();
-
-            modelBuilder.Entity<ProductBOM>().Property(pb => pb.LastUpdatedBy).IsRequired(false);
 
             modelBuilder.Entity<ProductBOM>().Property(pb => pb.LastUpdatedOn).IsRequired(false);
 
@@ -114,11 +111,11 @@ namespace TorqueAndTread.Server.Context
 
             modelBuilder.Entity<BOM>().Property(pb => pb.Active).IsRequired();
 
-            modelBuilder.Entity<BOM>().Property(pb => pb.CreatedBy).IsRequired();
+            modelBuilder.Entity<BOM>().HasOne(e => e.CreatedBy).WithMany().OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<BOM>().HasOne(e => e.LastUpdatedBy).WithMany().OnDelete(DeleteBehavior.NoAction);
+
 
             modelBuilder.Entity<BOM>().Property(pb => pb.CreatedOn).IsRequired();
-
-            modelBuilder.Entity<BOM>().Property(pb => pb.LastUpdatedBy).IsRequired(false);
 
             modelBuilder.Entity<BOM>().Property(pb => pb.LastUpdatedOn).IsRequired(false);
 

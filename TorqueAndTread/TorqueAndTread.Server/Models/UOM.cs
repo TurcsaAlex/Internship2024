@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TorqueAndTread.Server.Models
 {
@@ -17,15 +18,15 @@ namespace TorqueAndTread.Server.Models
 
         [Required]
 
-        public string CreatedBy { get; set; }
-
+        [ForeignKey("CreatedById")]
+        public User CreatedBy { get; set; }
         [Required]
-
         public DateTime CreatedOn { get; set; }
-
-        public string LastUpdatedBy { get; set; }
-
-        public DateTime? LastUpdatedOn { get; set; }
+        [Required]
+        [ForeignKey("LastUpdatedById")]
+        public User LastUpdatedBy { get; set; }
+        [Required]
+        public DateTime LastUpdatedOn { get; set; }
 
         public Container Container { get; set; }
     }

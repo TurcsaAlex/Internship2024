@@ -73,15 +73,14 @@ namespace TorqueAndTread.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CreatedById")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("LastUpdatedBy")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("LastUpdatedById")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("LastUpdatedOn")
                         .HasColumnType("datetime2");
@@ -90,6 +89,10 @@ namespace TorqueAndTread.Server.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("BOMId");
+
+                    b.HasIndex("CreatedById");
+
+                    b.HasIndex("LastUpdatedById");
 
                     b.ToTable("BOMs");
                 });
@@ -108,18 +111,16 @@ namespace TorqueAndTread.Server.Migrations
                     b.Property<int>("BOMId")
                         .HasColumnType("int");
 
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CreatedById")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("LastUpdatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("LastUpdatedById")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime?>("LastUpdatedOn")
+                    b.Property<DateTime>("LastUpdatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -135,6 +136,10 @@ namespace TorqueAndTread.Server.Migrations
                     b.HasKey("ContainerId");
 
                     b.HasIndex("BOMId");
+
+                    b.HasIndex("CreatedById");
+
+                    b.HasIndex("LastUpdatedById");
 
                     b.HasIndex("UOMId")
                         .IsUnique();
@@ -292,15 +297,14 @@ namespace TorqueAndTread.Server.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
 
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CreatedById")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("LastUpdatedBy")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("LastUpdatedById")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("LastUpdatedOn")
                         .HasColumnType("datetime2");
@@ -317,6 +321,10 @@ namespace TorqueAndTread.Server.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ProductId");
+
+                    b.HasIndex("CreatedById");
+
+                    b.HasIndex("LastUpdatedById");
 
                     b.HasIndex("ProductTypeId")
                         .IsUnique();
@@ -338,15 +346,14 @@ namespace TorqueAndTread.Server.Migrations
                     b.Property<int>("BOMId")
                         .HasColumnType("int");
 
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CreatedById")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("LastUpdatedBy")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("LastUpdatedById")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("LastUpdatedOn")
                         .HasColumnType("datetime2");
@@ -360,6 +367,10 @@ namespace TorqueAndTread.Server.Migrations
                     b.HasKey("ProductBOMId");
 
                     b.HasIndex("BOMId");
+
+                    b.HasIndex("CreatedById");
+
+                    b.HasIndex("LastUpdatedById");
 
                     b.HasIndex("ProductId");
 
@@ -377,15 +388,14 @@ namespace TorqueAndTread.Server.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
 
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CreatedById")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("LastUpdatedBy")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("LastUpdatedById")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("LastUpdatedOn")
                         .HasColumnType("datetime2");
@@ -395,6 +405,10 @@ namespace TorqueAndTread.Server.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ProductTypeId");
+
+                    b.HasIndex("CreatedById");
+
+                    b.HasIndex("LastUpdatedById");
 
                     b.ToTable("ProductTypes");
                 });
@@ -406,9 +420,6 @@ namespace TorqueAndTread.Server.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoleId"));
-
-                    b.Property<int?>("ActionTypeId")
-                        .HasColumnType("int");
 
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
@@ -425,22 +436,15 @@ namespace TorqueAndTread.Server.Migrations
                     b.Property<DateTime>("LastUpdatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("MenuItemId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("RoleId");
 
-                    b.HasIndex("ActionTypeId");
-
                     b.HasIndex("CreatedById");
 
                     b.HasIndex("LastUpdatedById");
-
-                    b.HasIndex("MenuItemId");
 
                     b.ToTable("Roles");
 
@@ -488,18 +492,16 @@ namespace TorqueAndTread.Server.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
 
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CreatedById")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("LastUpdatedBy")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("LastUpdatedById")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime?>("LastUpdatedOn")
+                    b.Property<DateTime>("LastUpdatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UOMName")
@@ -507,6 +509,10 @@ namespace TorqueAndTread.Server.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("UOMId");
+
+                    b.HasIndex("CreatedById");
+
+                    b.HasIndex("LastUpdatedById");
 
                     b.ToTable("UOMs");
                 });
@@ -656,11 +662,42 @@ namespace TorqueAndTread.Server.Migrations
                     b.Navigation("LastUpdatedBy");
                 });
 
+            modelBuilder.Entity("TorqueAndTread.Server.Models.BOM", b =>
+                {
+                    b.HasOne("TorqueAndTread.Server.Models.User", "CreatedBy")
+                        .WithMany()
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("TorqueAndTread.Server.Models.User", "LastUpdatedBy")
+                        .WithMany()
+                        .HasForeignKey("LastUpdatedById")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("CreatedBy");
+
+                    b.Navigation("LastUpdatedBy");
+                });
+
             modelBuilder.Entity("TorqueAndTread.Server.Models.Container", b =>
                 {
                     b.HasOne("TorqueAndTread.Server.Models.BOM", "BOM")
                         .WithMany("Containers")
                         .HasForeignKey("BOMId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TorqueAndTread.Server.Models.User", "CreatedBy")
+                        .WithMany()
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TorqueAndTread.Server.Models.User", "LastUpdatedBy")
+                        .WithMany()
+                        .HasForeignKey("LastUpdatedById")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -671,6 +708,10 @@ namespace TorqueAndTread.Server.Migrations
                         .IsRequired();
 
                     b.Navigation("BOM");
+
+                    b.Navigation("CreatedBy");
+
+                    b.Navigation("LastUpdatedBy");
 
                     b.Navigation("UOM");
                 });
@@ -721,7 +762,7 @@ namespace TorqueAndTread.Server.Migrations
                         .IsRequired();
 
                     b.HasOne("TorqueAndTread.Server.Models.Role", "Role")
-                        .WithMany()
+                        .WithMany("MenuItemActionRoles")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -758,7 +799,7 @@ namespace TorqueAndTread.Server.Migrations
                         .IsRequired();
 
                     b.HasOne("TorqueAndTread.Server.Models.Role", "Role")
-                        .WithMany()
+                        .WithMany("MenuItemRoles")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -774,11 +815,27 @@ namespace TorqueAndTread.Server.Migrations
 
             modelBuilder.Entity("TorqueAndTread.Server.Models.Product", b =>
                 {
+                    b.HasOne("TorqueAndTread.Server.Models.User", "CreatedBy")
+                        .WithMany()
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("TorqueAndTread.Server.Models.User", "LastUpdatedBy")
+                        .WithMany()
+                        .HasForeignKey("LastUpdatedById")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("TorqueAndTread.Server.Models.ProductType", "ProductType")
                         .WithOne("Product")
                         .HasForeignKey("TorqueAndTread.Server.Models.Product", "ProductTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("CreatedBy");
+
+                    b.Navigation("LastUpdatedBy");
 
                     b.Navigation("ProductType");
                 });
@@ -790,23 +847,6 @@ namespace TorqueAndTread.Server.Migrations
                         .HasForeignKey("BOMId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("TorqueAndTread.Server.Models.Product", "Product")
-                        .WithMany("ProductBOMs")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("BOM");
-
-                    b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("TorqueAndTread.Server.Models.Role", b =>
-                {
-                    b.HasOne("TorqueAndTread.Server.Models.ActionType", null)
-                        .WithMany("Roles")
-                        .HasForeignKey("ActionTypeId");
 
                     b.HasOne("TorqueAndTread.Server.Models.User", "CreatedBy")
                         .WithMany()
@@ -820,9 +860,72 @@ namespace TorqueAndTread.Server.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("TorqueAndTread.Server.Models.MenuItem", null)
-                        .WithMany("Roles")
-                        .HasForeignKey("MenuItemId");
+                    b.HasOne("TorqueAndTread.Server.Models.Product", "Product")
+                        .WithMany("ProductBOMs")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("BOM");
+
+                    b.Navigation("CreatedBy");
+
+                    b.Navigation("LastUpdatedBy");
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("TorqueAndTread.Server.Models.ProductType", b =>
+                {
+                    b.HasOne("TorqueAndTread.Server.Models.User", "CreatedBy")
+                        .WithMany()
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("TorqueAndTread.Server.Models.User", "LastUpdatedBy")
+                        .WithMany()
+                        .HasForeignKey("LastUpdatedById")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("CreatedBy");
+
+                    b.Navigation("LastUpdatedBy");
+                });
+
+            modelBuilder.Entity("TorqueAndTread.Server.Models.Role", b =>
+                {
+                    b.HasOne("TorqueAndTread.Server.Models.User", "CreatedBy")
+                        .WithMany()
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("TorqueAndTread.Server.Models.User", "LastUpdatedBy")
+                        .WithMany()
+                        .HasForeignKey("LastUpdatedById")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("CreatedBy");
+
+                    b.Navigation("LastUpdatedBy");
+                });
+
+            modelBuilder.Entity("TorqueAndTread.Server.Models.UOM", b =>
+                {
+                    b.HasOne("TorqueAndTread.Server.Models.User", "CreatedBy")
+                        .WithMany()
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TorqueAndTread.Server.Models.User", "LastUpdatedBy")
+                        .WithMany()
+                        .HasForeignKey("LastUpdatedById")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("CreatedBy");
 
@@ -886,8 +989,6 @@ namespace TorqueAndTread.Server.Migrations
             modelBuilder.Entity("TorqueAndTread.Server.Models.ActionType", b =>
                 {
                     b.Navigation("MenuItemActionRoles");
-
-                    b.Navigation("Roles");
                 });
 
             modelBuilder.Entity("TorqueAndTread.Server.Models.BOM", b =>
@@ -902,8 +1003,6 @@ namespace TorqueAndTread.Server.Migrations
                     b.Navigation("MenuItemActionRoles");
 
                     b.Navigation("MenuItemRoles");
-
-                    b.Navigation("Roles");
                 });
 
             modelBuilder.Entity("TorqueAndTread.Server.Models.Product", b =>
@@ -919,6 +1018,10 @@ namespace TorqueAndTread.Server.Migrations
 
             modelBuilder.Entity("TorqueAndTread.Server.Models.Role", b =>
                 {
+                    b.Navigation("MenuItemActionRoles");
+
+                    b.Navigation("MenuItemRoles");
+
                     b.Navigation("UserRoles");
                 });
 

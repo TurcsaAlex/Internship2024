@@ -1,1 +1,31 @@
-<p>menus works!</p>
+<div>
+    <h2>Menu Items</h2>
+    <ul>
+    <li *ngFor="let item of menuItems"> {{item.name}} {{item.link}}
+        <button (click)="selectMenuItem(item)">Edit</button>
+        <button (click)="deleteMenuItem(item.menuItemId)">Delete</button>
+    </li>
+</ul>
+
+<div>
+    <h3>{{isEditing ? 'Edit' : 'Add '}} Menu Item</h3>
+    <form (ngSubmit) = "isEditing ? updateMenuItem() : addMenuItem()">
+        <label>
+            Name:
+            <input [(ngModel)]="selectedMenuItem.name" name="name" required />
+        </label>
+        <label>
+            OrderNo:
+            <input [(ngModel)]="selectedMenuItem.orderNo" name="orderNo" type="number" required />
+        </label>
+        <label>
+            Icon Class:
+            <input [(ngModel)]="selectedMenuItem.iconClass" name="iconClass" required />
+        </label>
+        <label>
+            Link:
+            <input [(ngModel)]="selectedMenuItem.link" name="link" required />
+        </label>
+    </form>
+</div>
+</div>

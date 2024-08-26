@@ -8,8 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "prestart": "node aspnetcore-https",
-    "start:windows": "ng serve --ssl --ssl-cert \"%APPDATA%\\ASP.NET\\https\\%npm_package_name%.pem\" --ssl-key \"%APPDATA%\\ASP.NET\\https\\%npm_package_name%.key\" --host=127.0.0.1",
-    "start:default": "ng serve --ssl --ssl-cert \"$HOME/.aspnet/https/${npm_package_name}.pem\" --ssl-key \"$HOME/.aspnet/https/${npm_package_name}.key\" --host=127.0.0.1"
+    "start:windows": "ng serve --ssl --ssl-cert \"ssl/server.crt\" --ssl-key \"ssl/server.key\" --host=127.0.0.1",
+    "start:default": "ng serve --ssl --ssl-cert \"ssl/server.crt\" --ssl-key \"ssl/server.key\" --host=127.0.0.1"
   },
   "private": true,
   "dependencies": {
@@ -37,6 +37,7 @@
     "@angular/cli": "^18.1.4",
     "@angular/compiler-cli": "^18.1.0",
     "@types/jasmine": "~5.1.0",
+    "browser-sync": "^3.0.2",
     "eslint": "^9.9.0",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
