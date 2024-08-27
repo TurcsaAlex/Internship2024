@@ -12,6 +12,8 @@ import { PolicyComponent } from './screens/policy/policy.component'
 import { RolesComponent } from './screens/roles/roles.component';
 import { UserEditComponent } from './screens/user-edit/user-edit.component';
 import { UserAddComponent } from './screens/user-add/user-add.component';
+import { MenuAddComponent } from './screens/menu-add/menu-add.component';
+import { MenuEditComponent } from './screens/menu-edit/menu-edit.component';
 
 const routes: Routes = [
   {path:"",redirectTo:"login",pathMatch:"full"},
@@ -26,7 +28,9 @@ const routes: Routes = [
   {path: 'containers',component:ContainersComponent},
   {path: 'productionorders',component:ProductionordersComponent},
   {path: 'policy',component:PolicyComponent},
-  {path:"**",component:PageNotFoundComponent}
+  {path: 'add-menu-item', component:MenuAddComponent},
+  {path: 'edit-menu-item', component:MenuEditComponent},
+  {path:"**",component:PageNotFoundComponent},
 ];
 
 

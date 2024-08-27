@@ -8,11 +8,19 @@ import { MenuItem } from "../screens/menus/menu-item.model";
 })
 export class MenuService{
     private apiUrl = '/api/MenuItem';
+    private selectedMenuItemId:number=0;
     constructor (private http: HttpClient){}
-    getMenuItems():
     
+    setMenuItemID(id:number) : void{
+        this.selectedMenuItemId;
+    }
+    
+    
+    getMenuItems():
+        
         Observable<MenuItem[]>{
             return this.http.get<MenuItem[]>(this.apiUrl);
+          
         }
     
 

@@ -27,6 +27,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { UserAddComponent } from './screens/user-add/user-add.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastsContainer } from './toast-container/toast-container.component';
+import { MenuAddComponent } from './screens/menu-add/menu-add.component';
+import { MenuEditComponent } from './screens/menu-edit/menu-edit.component';
 
 
 @Injectable({
@@ -42,7 +44,6 @@ export class AppService {
     RegisterComponent,
     HeaderComponent,
     FooterComponent,
-    MenusComponent,
     ProductsComponent,
     ContainersComponent,
     ProductionordersComponent,
@@ -50,9 +51,12 @@ export class AppService {
     RolesComponent,
     UserEditComponent,
     UserAddComponent,
+    MenuAddComponent,
+    MenuEditComponent,
   ],
   imports: [
     BrowserModule,
+    MenusComponent,
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
