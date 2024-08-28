@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TorqueAndTread.Server.Services;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,11 +9,18 @@ namespace TorqueAndTread.Server.Controllers
     [ApiController]
     public class RoleController : ControllerBase
     {
-        // GET: api/<RoleController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly RoleService _roleService;
+
+        public RoleController(RoleService roleService)
         {
-            return new string[] { "value1", "value2" };
+            _roleService = roleService;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            var roleList = await _roleService.GetAllRoles();
+            return Ok(roleList);
         }
 
         // GET api/<RoleController>/5

@@ -35,6 +35,8 @@ namespace TorqueAndTread.Server.Seed
             modelBuilder.Entity<User>().HasData(userSeed);
             var roleSeed= LoadRoleSeedDataFromFile();
             modelBuilder.Entity<Role>().HasData(roleSeed);
+            var userRoleSeed = LoadUserRoleSeedDataFromFile();
+            modelBuilder.Entity<UserRole>().HasData(userRoleSeed);
         }
         private static List<UserSeedObject> LoadUserSeedDataFromFile()
         {
@@ -59,6 +61,19 @@ namespace TorqueAndTread.Server.Seed
 
             var jsonData = File.ReadAllText(filePath);
             return JsonSerializer.Deserialize<List<RoleSeedObject>>(jsonData);
+        }
+
+        private static List<UserRoleSeedObject> LoadUserRoleSeedDataFromFile()
+        {
+            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Seed\\UserRoles.json");
+
+            if (!File.Exists(filePath))
+            {
+                throw new FileNotFoundException("Seed data file not found", filePath);
+            }
+
+            var jsonData = File.ReadAllText(filePath);
+            return JsonSerializer.Deserialize<List<UserRoleSeedObject>>(jsonData);
         }
         private static List<User> LoadUserSeedDataFromFile1()
         {

@@ -7,4 +7,7 @@ export type User={
     active:boolean;
     createdOn:string;
     lastUpdatedOn:string;
+    profilePictureData:any;
+    profilePicturePath:string | null;
+
 };

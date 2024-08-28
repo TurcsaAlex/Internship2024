@@ -12,8 +12,8 @@ using TorqueAndTread.Server.Context;
 namespace TorqueAndTread.Server.Migrations
 {
     [DbContext(typeof(TorqueDbContext))]
-    [Migration("20240826060909_MenuItemTable")]
-    partial class MenuItemTable
+    [Migration("20240827092424_UserPFP")]
+    partial class UserPFP
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -555,6 +555,10 @@ namespace TorqueAndTread.Server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ProfilePicturePath")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -582,6 +586,7 @@ namespace TorqueAndTread.Server.Migrations
                             LastUpdatedOn = new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Administrator",
                             Password = "",
+                            ProfilePicturePath = "",
                             UserName = "admin"
                         },
                         new
@@ -595,6 +600,7 @@ namespace TorqueAndTread.Server.Migrations
                             LastUpdatedOn = new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Administrator",
                             Password = "",
+                            ProfilePicturePath = "",
                             UserName = "admin1"
                         },
                         new
@@ -608,6 +614,7 @@ namespace TorqueAndTread.Server.Migrations
                             LastUpdatedOn = new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Administrator",
                             Password = "",
+                            ProfilePicturePath = "",
                             UserName = "admin2"
                         });
                 });

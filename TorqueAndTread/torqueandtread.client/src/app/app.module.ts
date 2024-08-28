@@ -28,6 +28,8 @@ import { UserAddComponent } from './screens/user-add/user-add.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastsContainer } from './toast-container/toast-container.component';
 import { RolesTableComponent } from './screens/user-edit/roles-table/roles-table.component';
+import { WebcamComponent } from './screens/user-edit/webcam/webcam.component';
+import { AddUserRolesComponent } from './screens/user-edit/roles-table/add-user-roles/add-user-roles.component';
 
 
 @Injectable({
@@ -52,6 +54,8 @@ export class AppService {
     UserEditComponent,
     UserAddComponent,
     RolesTableComponent,
+    WebcamComponent,
+    AddUserRolesComponent,
   ],
   imports: [
     BrowserModule,

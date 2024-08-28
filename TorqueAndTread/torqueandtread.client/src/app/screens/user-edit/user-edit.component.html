@@ -20,7 +20,13 @@
         <label for="email" class="form-label">Email</label>
         <input type="email" id="email" class="form-control" formControlName="email" />
       </div>
-  
+
+      <button type="button" class="btn btn-primary mb-3" (click)="openCameraModal()">Camera</button>
+
+      <div class="mb-3" *ngIf="user?.profilePictureData">
+        <div>Profile Picture</div>
+        <img src="{{user?.profilePictureData}}" alt="">
+      </div>      
       <div class="mb-3 form-check">
         <input type="checkbox" id="active" class="form-check-input" formControlName="active" />
         <label for="active" class="form-check-label">Active</label>
@@ -36,9 +42,9 @@
         <input type="text" id="lastUpdatedOn" class="form-control" formControlName="lastUpdatedOn" />
       </div>
       <div class="mb-5">
-        <h4>Roles</h4>
-        <app-roles-table></app-roles-table>
+        <app-roles-table [user]="user"></app-roles-table>
       </div>
+      
       <div class="row">
         <div class="col">
           <button class="btn btn-secondary" (click)="back()">Back</button>

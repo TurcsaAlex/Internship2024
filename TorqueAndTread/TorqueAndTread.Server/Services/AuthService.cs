@@ -24,7 +24,7 @@ namespace TorqueAndTread.Server.Services
     }
     public async Task<AuthDTO> Authenticate(LoginDTO userObj)
     {
-      _mailSender.SendTest();
+      //_mailSender.SendTest();
       var user = await _authContext.Users.FirstOrDefaultAsync(x => x.UserName == userObj.UserName);
       if (user == null)
         return new AuthDTO(404);
