@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { catchError, map, Observable, switchMap, throwError } from 'rxjs';
 import { User } from '../models/user';
 
 @Injectable({
@@ -9,6 +9,7 @@ import { User } from '../models/user';
 export class UserService {
 
   private baseUrl="/api/user";
+  private imageUrl="/api/Image";
   private selectedUserId:number=0;
   constructor(private http:HttpClient) { }
   private getToken(){
@@ -48,6 +49,7 @@ export class UserService {
   }
 
   updateUser(user:User){
+    console.log(user);
     return this.http.put<any>(this.baseUrl,user,{
       headers:{
         Authentification:this.getToken()
@@ -58,6 +60,46 @@ export class UserService {
       })
     );
   }
+
+  updateUserWithPicture(user: User) {
+    if (user.profilePictureData) {
+      return this.uploadPicture(user.profilePictureData).pipe(
+        switchMap((response: any) => {
+          console.log('Image uploaded successfully:', response);
+          user.profilePicturePath = response.filePath;
+          return this.http.put<any>(this.baseUrl, user, {
+            headers: {
+              Authentification: this.getToken()
+            }
+          });
+        }),
+        map((response: any) => {
+          console.log('User updated successfully:', response);
+          return response;
+        }),
+        catchError((e: any) => {
+          console.error('Error updating user:', e);
+          return throwError(e);
+        })
+      );
+    }
+  
+    return this.http.put<any>(this.baseUrl, user, {
+      headers: {
+        Authentification: this.getToken()
+      }
+    }).pipe(
+      map((response: any) => {
+        console.log('User updated successfully:', response);
+        return response;
+      }),
+      catchError((e: any) => {
+        console.error('Error updating user:', e);
+        return throwError(e);
+      })
+    );
+  }
+  
   createUser(user:User){
     return this.http.post<any>(this.baseUrl,user,{
       headers:{
@@ -80,5 +122,63 @@ export class UserService {
         console.log(response)
       })
     );
+  }
+
+
+  getImage(imagePath:string){
+      return this.http.get(this.imageUrl +'/'+ imagePath,{
+        headers:{
+          Authentification: this.getToken()
+        },
+        responseType: "blob"
+      }).pipe(
+        map((r)=>{
+          return r;
+          // console.log(r);
+        })
+      );
+  }
+
+  uploadPicture(capturedImage: string): Observable<any> {
+    const imageData = capturedImage.replace('data:image/png;base64,', '');
+    const blob = this.base64ToBlob(imageData, 'image/png');
+  
+    const formData = new FormData();
+    formData.append('image', blob, 'captured-image.png');
+  
+    // Return an observable from the image upload
+    return this.http.post<any>(this.imageUrl + `/upload`, formData, {
+      headers: {
+        Authentification: this.getToken()
+      }
+    }).pipe(
+      map((response: any) => {
+        console.log('Image uploaded successfully:', response);
+        return response;
+      }),
+      catchError((e: any) => {
+        console.error('Error uploading image:', e);
+        return throwError(e);
+      })
+    );
+  }
+  
+  private base64ToBlob(base64Data: string, contentType: string): Blob {
+    const byteCharacters = atob(base64Data);
+    const byteArrays = [];
+  
+    for (let offset = 0; offset < byteCharacters.length; offset += 512) {
+      const slice = byteCharacters.slice(offset, offset + 512);
+  
+      const byteNumbers = new Array(slice.length);
+      for (let i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+  
+      const byteArray = new Uint8Array(byteNumbers);
+      byteArrays.push(byteArray);
+    }
+  
+    return new Blob(byteArrays, { type: contentType });
   }
 }

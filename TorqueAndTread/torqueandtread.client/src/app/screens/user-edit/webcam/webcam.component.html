@@ -1,0 +1,34 @@
+<div class="modal-header">
+    <h4 class="modal-title">Take Picture For Profile</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Close')"></button>
+</div>
+
+<div class="modal-body">
+    <div class="container text-center my-4">
+        <div *ngIf="!capturedImage" class="mt-4">
+            <h3>Smile!</h3>
+            <div class="d-flex justify-content-center" *ngIf="!capturedImage">
+                <video #video class="border rounded" autoplay></video>
+            </div>
+            <canvas #canvas class="d-none"></canvas>
+    
+            <button class="btn btn-primary mt-3" (click)="takePicture();" *ngIf="!capturedImage">Take Picture</button>
+        </div>
+        
+    
+        <div *ngIf="capturedImage" class="mt-4">
+            <h3>Captured Image:</h3>
+            <div class="d-flex justify-content-center">
+                <img [src]="capturedImage" class="img-fluid border rounded" alt="Captured Image">
+            </div>
+        
+            <button class="btn btn-secondary mt-3" (click)="retry()">Retry</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal-footer justify-content-between">
+    <button type="button" class="btn btn-secondary" (click)="activeModal.close('Close')">Close</button>
+    <button type="button" class="btn btn-success" (click)="downloadPicture()" [disabled]="capturedImage">Save</button>
+</div>
+  

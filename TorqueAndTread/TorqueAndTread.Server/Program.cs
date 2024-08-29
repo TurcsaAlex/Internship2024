@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
@@ -56,6 +57,8 @@ builder.Services.AddCors(option =>
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<MailSender>();
 builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<RoleService>();
+
 
 builder.Services.AddDbContext<TorqueDbContext>(option =>
 
@@ -101,7 +104,13 @@ else
 }
 
 app.UseHttpsRedirection();
-app.UseStaticFiles();
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+           Path.Combine(builder.Environment.ContentRootPath, "Files")),
+    RequestPath = "/StaticFiles"
+});
+
 app.UseRouting();
 
 app.UseCors("AllowAll");
