@@ -7,5 +7,6 @@
         public int OrderNo { get; set; }
         public string IconClass { get; set; }
         public string Link { get; set; }
+        public bool Active { get; set; }
     }
 }

@@ -11,7 +11,7 @@ namespace TorqueAndTread.Server.Controllers
     [ApiController]
     public class MenuItemController : ControllerBase
     {
-        private readonly TorqueDbContext context; //inject dbcontext
+        private readonly TorqueDbContext context; 
         public MenuItemController(TorqueDbContext context)
         {
             this.context = context;
@@ -20,8 +20,19 @@ namespace TorqueAndTread.Server.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MenuItem>>> GetMenuItems()
         {
-            return await context.MenuItems.ToListAsync();
-            
+            var menuItems = await context.MenuItems.Select(
+                m => new MenuItemDTO
+                {
+                    MenuItemId = m.MenuItemId,
+                    Name = m.Name,
+                    OrderNo = m.OrderNo,
+                    IconClass = m.IconClass,
+                    Active = m.Active,
+                    Link = m.Link,
+                }).ToListAsync();
+            return Ok(menuItems);
+
+            //return await context.MenuItems.ToListAsync();
         }
 
         [HttpGet("{id}")]
@@ -56,35 +67,31 @@ namespace TorqueAndTread.Server.Controllers
                 Link = menuItemDTO.Link,
                 //CreatedBy = createdBy,
                 //CreatedOn = DateTime.UtcNow,
+                Active = true,
                 LastUpdatedBy = createdBy,
                 LastUpdatedOn = DateTime.UtcNow,
-            }; 
-            if(!isUpdated)
+            };
+            if (!isUpdated)
             {
                 menuItem.CreatedBy = createdBy;
                 menuItem.CreatedOn = DateTime.UtcNow;
                 context.MenuItems.Add(menuItem);
-              
+
             }
             else
             {
-               
+
                 context.MenuItems.Update(menuItem);
                 menuItem.CreatedBy = createdBy;
-            }
+            }   await context.SaveChangesAsync();
 
-            await context.SaveChangesAsync();
-            return CreatedAtAction(nameof(GetMenuItem), new { id = menuItemDTO.MenuItemId }, menuItemDTO); //return a 201 created status code
-        }
+                return CreatedAtAction(nameof(GetMenuItem), new { id = menuItem.MenuItemId }, menuItem);
+            }
 
         [HttpPut("{id}")]
 
         public async Task<IActionResult> PutMenuItem(int id, [FromBody] MenuItemDTO menuItemDTO)
         {
-            //if (id != menuItemDTO.MenuItemId)
-            //{
-            //    return BadRequest();
-            //}
 
             var existingMenuItem = context.MenuItems.FirstOrDefault(m => m.MenuItemId == id);
             if (existingMenuItem == null)
@@ -96,10 +103,9 @@ namespace TorqueAndTread.Server.Controllers
             existingMenuItem.IconClass = menuItemDTO.IconClass;
             existingMenuItem.Link = menuItemDTO.Link;
 
-            context.Entry(existingMenuItem).State = EntityState.Modified;
-
             try
             {
+                context.Entry(existingMenuItem).State = EntityState.Modified;
                 await context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
@@ -114,16 +120,16 @@ namespace TorqueAndTread.Server.Controllers
             return Ok(existingMenuItem);
         }
 
-        [HttpDelete("id")]
-        public async Task<IActionResult> DeleteMenuItem([FromBody] MenuItemDTO menuItemDTO)
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> DeleteMenuItem(int id)
         {
-            var menuItem = await context.MenuItems.FindAsync(menuItemDTO);
+            var menuItem = await context.MenuItems.FindAsync(id);
             if (menuItem == null)
             {
                 return NotFound();
             }
 
-            menuItem.Active = false;
+            menuItem.Active = true;
             menuItem.LastUpdatedOn = DateTime.Now;
             menuItem.LastUpdatedBy = menuItem.LastUpdatedBy;
             context.MenuItems.Update(menuItem);

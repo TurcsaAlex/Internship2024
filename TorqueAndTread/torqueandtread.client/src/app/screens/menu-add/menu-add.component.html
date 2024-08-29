@@ -4,10 +4,6 @@
 <div class = "container mt-5 text-start">
     <h2>Add Menu Item</h2>
     <form [formGroup]="menuItemForm" (ngSubmit)="onSubmit(successToast)">
-        <div class="mb-3">
-            <label for="menuItemId" class="form-label">Menu Item Id</label>
-            <input type="text" id="menuItemId" class="form-control" formControlName="menuItemId" />
-          </div>
           <div class="mb-3">
             <label for="name" class="form-label">Name</label>
             <input type="text" id="name" class="form-control" formControlName="name" />
@@ -19,7 +15,11 @@
           </div>
           <div class="mb-3">
             <label for="iconClass" class="form-label">Icon Class</label>
-            <input type="text" id="iconClass" class="form-control" formControlName="iconClass" />
+            <select id="iconClass" formControlName="iconClass" class="form-control">
+              <option *ngFor="let icon of fontAwesomeIcons" [value]="icon">
+                <i [ngClass]="icon"></i>{{icon}}
+              </option>
+            </select>
           </div>
           <div class="mb-3">
             <label for="link" class="form-label">Link</label>

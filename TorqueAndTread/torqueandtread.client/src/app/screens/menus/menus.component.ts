@@ -33,16 +33,34 @@ implements OnInit,AfterViewInit{
     }
    
     editMenuItem(menuItemId : number):void{
-    this.menuService.getMenuItem(menuItemId).subscribe((menuItem) => { this.selectedMenuItem = menuItem; this.router.navigateByUrl('/edit-menu-item');})
+    // this.menuService.setMenuItemID(menuItemId);
+      localStorage.setItem('currentMenuItemId',menuItemId.toString());
+      this.menuService.getMenuItem(menuItemId).subscribe({next : (menuItem) => {this.selectedMenuItem = menuItem;
+      this.router.navigateByUrl('/edit-menu-item');
+      }})
+       
  
   }
   
 
   deleteMenuItem(menuItem: MenuItem, template: TemplateRef<any>): void{
-    this.menuService.deleteMenuItem(menuItem.menuItemId).subscribe(() => {this.loadMenuItems();
-    this.toastService.show({ template, classname: 'bg-danger text-light', delay: 5000 ,data:menuItem.name });
-    })
-  }
+    if(menuItem.menuItemId !== undefined)
+    {
+      this.menuService.deleteMenuItem(menuItem.menuItemId).subscribe({
+        next: () =>
+        {
+          const updatedData = this.dataSource.data.filter(item => item.menuItemId !== menuItem.menuItemId);
+          this.dataSource.data = updatedData;
+          this.toastService.show({ template, classname: 'bg-danger text-light',data:`Menu item deleted succesfully`});
+        },
+        error: (err) => { console.error('Failed to delete menu item',err);
+        this.toastService.show({ template, classname: 'bg-danger text-light',data:menuItem.name });
+        }
+      });
+    }else{
+          console.error('Menu item ID is undefined');
+    }
+    }
 
   openDeleteModal(menuItem : MenuItem, modalTemplate : TemplateRef<any>, toastTemplate: TemplateRef<any>): void{
     this.selectedMenuItem = menuItem;
