@@ -1,10 +1,12 @@
 import { Component, OnInit, Input, TemplateRef } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../models/user';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { UserService } from '../../service/user.service';
 import { DatePipe } from '@angular/common';
 import { ToastService } from '../../service/toast.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { WebcamComponent } from './webcam/webcam.component';
 
 @Component({
   selector: 'app-user-edit',
@@ -23,20 +25,34 @@ export class UserEditComponent implements OnInit {
     createdOn: new FormControl({value:this.user?.createdOn || '',disabled:true}, Validators.required),
     lastUpdatedOn: new FormControl({value:this.user?.lastUpdatedOn || '',disabled:true}, Validators.required)
   });
+  private newPicture:boolean=false;
   constructor(
     private datePipe: DatePipe,
     private userService:UserService,
     private router:Router,
-    private toastService:ToastService
+    private toastService:ToastService,
+    private modalService:NgbModal
   ) {}
+
 
   ngOnInit(): void {
     var userId=this.userService.getUserId();
-
+    const reader=new FileReader();
+            reader.addEventListener('load',()=>{
+              this.user!.profilePictureData=reader.result;
+            });
     this.userService.getUser(userId).subscribe(resp=>{
       this.user=resp?resp:null;
       console.log(this.user);
-
+      if(this.user?.profilePicturePath){
+        this.userService.getImage(this.user.profilePicturePath).subscribe(
+          (r:any)=>{
+            if (r) {
+              reader.readAsDataURL(r);
+           }
+          }
+        );
+      }
       this.userForm.patchValue({
         userId: this.user?.userId,
         name: this.user?.name ,
@@ -44,23 +60,44 @@ export class UserEditComponent implements OnInit {
         email: this.user?.email || '',
         active:this.user?.active || false,
         createdOn: this.datePipe.transform(this.user?.createdOn||'',"medium"),
-        lastUpdatedOn: this.datePipe.transform(this.user?.lastUpdatedOn || '',"medium") });
+        lastUpdatedOn: this.datePipe.transform(this.user?.lastUpdatedOn || '',"medium"),
+      });
     });
   }
   
   onSubmit(toastTemplate:TemplateRef<any>): void {
+    const afterUpdate = ()=>{
+      this.toastService.show({template:toastTemplate,classname:'bg-success text-light',data:this.user?.userName});
+      this.router.navigateByUrl("/users");
+    }
     if (this.userForm.valid) {
       const updatedUser: User = this.userForm.value;
+      updatedUser.profilePictureData=this.user!.profilePictureData;
+      updatedUser.profilePicturePath=this.user!.profilePicturePath;
       console.log('User saved', updatedUser);
-      this.userService.updateUser(updatedUser).subscribe(()=>{
-        this.toastService.show({template:toastTemplate,classname:'bg-success text-light',data:this.user?.userName});
-        this.router.navigateByUrl("/users");
-      });
+      if(this.newPicture)
+        this.userService.updateUserWithPicture(updatedUser).subscribe(afterUpdate);
+      else
+        this.userService.updateUser(updatedUser).subscribe(afterUpdate);
     }else{
       alert("Invalid Form");
     }
   }
-
+  openCameraModal(){
+    this.newPicture=true;
+    const modalRef=this.modalService.open(WebcamComponent);
+    modalRef.result.then(
+      (result)=>{
+        if(result!="Close"){
+          this.user!.profilePictureData=result;
+        }else{
+          this.newPicture=false;
+        }
+        console.log(result);
+      }
+    );
+  }
+  
   back(){
     this.router.navigateByUrl('/users');
   }

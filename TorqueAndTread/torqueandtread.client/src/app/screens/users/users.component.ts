@@ -15,7 +15,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   imports: [MatTableModule, MatPaginatorModule, CommonModule],
   standalone:true
 })
-export class UsersComponent implements OnInit, AfterViewInit {
+export class UsersComponent implements OnInit {
   displayedColumns: string[] = ['username', 'name', 'email', 'active', 'createdOn', 'lastUpdatedOn' ,'actions' ];
   dataSource = new MatTableDataSource<User>();
   selectedUser?:User;
@@ -24,9 +24,6 @@ export class UsersComponent implements OnInit, AfterViewInit {
 
   constructor(private userService: UserService, private router: Router,private toastService:ToastService,private modalService:NgbModal) {}
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
 
   ngOnInit(): void {
     this.refreshUsers()
