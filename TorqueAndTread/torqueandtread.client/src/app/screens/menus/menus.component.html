@@ -1,31 +1,77 @@
-<div>
-    <h2>Menu Items</h2>
-    <ul>
-    <li *ngFor="let item of menuItems"> {{item.name}} {{item.link}}
-        <button (click)="selectMenuItem(item)">Edit</button>
-        <button (click)="deleteMenuItem(item.menuItemId)">Delete</button>
-    </li>
-</ul>
+<ng-template #deleteToast let-data>
+	<svg xmlns="http://www.w3.org/2000/svg" fill="#fff" width="24" height="24" viewBox="0 0 24 24">
+		<path
+			d="M10.872 6.831l1.695 3.904 3.654-1.561-1.79 3.426 3.333.954-3.417 1.338 2.231 4.196-4.773-2.582-2.869 2.287.413-3.004-3.792-.726 2.93-1.74-1.885-2.512 3.427.646.843-4.626zm-.786-6.831l-1.665 9.119-6.512-1.228 3.639 4.851-5.548 3.294 7.108 1.361-.834 6.076 5.742-4.577 9.438 5.104-4.288-8.064 6.834-2.677-6.661-1.907 3.25-6.22-6.98 2.982-3.523-8.114z"
+		/>
+	</svg>
+  <span class="'ms-2">Deleted item: {{data}}</span>
+</ng-template>
+<ng-template #deleteModal let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title text-danger" id="modal-basic-title">Delete Menu Item</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+    <h3>Are you sure you want to delete the menu item {{selectedMenuItem?.name}}?</h3>
+	</div>
+	<div class="modal-footer justify-content-between">
+		<button type="button" class="btn btn-outline-secondary" (click)="modal.close('Cancel')">Cancel</button>
+		<button type="button" class="btn btn-outline-danger" (click)="modal.close('Delete')">Delete</button>
+	</div>
+</ng-template>
 
-<div>
-    <h3>{{isEditing ? 'Edit' : 'Add '}} Menu Item</h3>
-    <form (ngSubmit) = "isEditing ? updateMenuItem() : addMenuItem()">
-        <label>
-            Name:
-            <input [(ngModel)]="selectedMenuItem.name" name="name" required />
-        </label>
-        <label>
-            OrderNo:
-            <input [(ngModel)]="selectedMenuItem.orderNo" name="orderNo" type="number" required />
-        </label>
-        <label>
-            Icon Class:
-            <input [(ngModel)]="selectedMenuItem.iconClass" name="iconClass" required />
-        </label>
-        <label>
-            Link:
-            <input [(ngModel)]="selectedMenuItem.link" name="link" required />
-        </label>
-    </form>
-</div>
-</div>
+
+<div class="container">
+    <h2 class="text-start justify-content-start mt-lg-5">Menu Items</h2>
+    <div class="row mb-3">
+        <div class="col text-end">
+          <button class="btn btn-primary" (click)="addMenuItem()">Add</button>
+        </div>
+      </div>
+      <table mat-table [dataSource]="dataSource" class="table table-hover">
+
+        <ng-container matColumnDef="menuItemId">
+            <th mat-header-cell *matHeaderCellDef class="head-text"> ID </th>
+            <td mat-cell *matCellDef="let menuItems"> {{menuItems.menuItemId}} </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef class="head-text"> Name </th>
+        <td mat-cell *matCellDef="let menuItems"> {{menuItems.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="orderNo">
+        <th mat-header-cell *matHeaderCellDef class="head-text"> Order Number </th>
+        <td mat-cell *matCellDef="let menuItems"> {{menuItems.orderNo}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="iconClass">
+        <th mat-header-cell *matHeaderCellDef class="head-text"> Icon Class </th>
+        <td mat-cell *matCellDef="let menuItems">
+          <i [ngClass]="menuItems.iconClass"></i> {{menuItems.iconClass}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="link">
+        <th mat-header-cell *matHeaderCellDef class="head-text"> Link </th>
+        <td mat-cell *matCellDef="let menuItems"> {{menuItems.link}} </td>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef class="head-text">Actions</th>
+        <td mat-cell *matCellDef="let menuItems">
+          <div class="row">
+            <div class="col">
+              <button class="btn btn-primary" (click)="editMenuItem(menuItems.menuItemId)">Edit</button>
+            </div>
+            <div class="col">
+              <button class="btn btn-danger ml-lg-3" [class.disabled]="!menuItems.menuItemId" (click)="openDeleteModal(menuItems, deleteModal, deleteToast)">Delete</button>
+            </div>
+          </div>
+        </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="selectedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: selectedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" ></mat-paginator>
+  </div>
+

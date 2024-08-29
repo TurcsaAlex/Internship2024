@@ -8,31 +8,34 @@ import { MenuItem } from "../screens/menus/menu-item.model";
 })
 export class MenuService{
     private apiUrl = '/api/MenuItem';
-    constructor (private http: HttpClient){}
-    getMenuItems():
-    
-        Observable<MenuItem[]>{
-            return this.http.get<MenuItem[]>(this.apiUrl);
-        }
-    
+    private selectedMenuItemId:number=0;
+    constructor(private http: HttpClient) {}
 
-    getMenuItem(id:number):
-    Observable<MenuItem>{
+    setMenuItemID(id: number): void {
+        this.selectedMenuItemId = id;
+    }
+
+    getMenuItemID(): number {
+        return this.selectedMenuItemId;
+    }
+
+    getMenuItems(): Observable<MenuItem[]> {
+        return this.http.get<MenuItem[]>(this.apiUrl);
+    }
+
+    getMenuItem(id: number): Observable<MenuItem> {
         return this.http.get<MenuItem>(`${this.apiUrl}/${id}`);
     }
 
-    addMenuItem(menuItem : MenuItem):
-    Observable<MenuItem>{
-        return this.http.post<MenuItem>(this.apiUrl,menuItem);
+    addMenuItem(menuItem: MenuItem): Observable<MenuItem> {
+        return this.http.post<MenuItem>(this.apiUrl, menuItem);
     }
 
-    editMenuItem(id:number, menuItem: MenuItem): 
-    Observable<MenuItem>{
-        return this.http.put<MenuItem>(`${this.apiUrl}/${id}`,menuItem);
+    editMenuItem(menuItem: MenuItem): Observable<MenuItem> {
+        return this.http.put<MenuItem>(`${this.apiUrl}/${menuItem.menuItemId}`, menuItem);
     }
 
-    deleteMenuItem(id:number):
-    Observable<MenuItem>{
+    deleteMenuItem(id: number): Observable<MenuItem> {
         return this.http.delete<MenuItem>(`${this.apiUrl}/${id}`);
     }
 }
