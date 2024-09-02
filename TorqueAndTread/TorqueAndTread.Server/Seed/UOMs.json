@@ -1,0 +1,29 @@
+﻿[
+  {
+    "UOMId": -1,
+    "UOMName": "g",
+    "Active": true,
+    "CreatedById": -1,
+    "CreatedOn": "2024-08-19T10:15:30",
+    "LastUpdatedById": -1,
+    "LastUpdatedOn": "2024-08-19T12:00:00"
+  },
+  {
+    "UOMId": -2,
+    "UOMName": "Kg",
+    "Active": true,
+    "CreatedById": -1,
+    "CreatedOn": "2024-08-19T10:15:30",
+    "LastUpdatedById": -1,
+    "LastUpdatedOn": "2024-08-19T12:00:00"
+  },
+  {
+    "UOMId": -3,
+    "UOMName": "Ea",
+    "Active": true,
+    "CreatedById": -1,
+    "CreatedOn": "2024-08-19T10:15:30",
+    "LastUpdatedById": -1,
+    "LastUpdatedOn": "2024-08-19T12:00:00"
+  }
+]

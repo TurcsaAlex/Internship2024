@@ -22,7 +22,12 @@ export class UsersComponent implements OnInit {
   
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private userService: UserService, private router: Router,private toastService:ToastService,private modalService:NgbModal) {}
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private toastService:ToastService,
+    private modalService:NgbModal
+  ) {}
 
 
   ngOnInit(): void {

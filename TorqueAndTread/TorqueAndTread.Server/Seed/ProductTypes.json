@@ -1,0 +1,29 @@
+﻿[
+  {
+    "ProductTypeId": -1,
+    "ProductTypeName": "Raw Material",
+    "Active": true,
+    "CreatedById": -1,
+    "CreatedOn": "2024-08-19T10:15:30",
+    "LastUpdatedById": -1,
+    "LastUpdatedOn": "2024-08-19T12:00:00"
+  },
+  {
+    "ProductTypeId": -2,
+    "ProductTypeName": "Semifinished Good",
+    "Active": true,
+    "CreatedById": -1,
+    "CreatedOn": "2024-08-19T10:15:30",
+    "LastUpdatedById": -1,
+    "LastUpdatedOn": "2024-08-19T12:00:00"
+  },
+  {
+    "ProductTypeId": -3,
+    "ProductTypeName": "Finished Good",
+    "Active": true,
+    "CreatedById": -1,
+    "CreatedOn": "2024-08-19T10:15:30",
+    "LastUpdatedById": -1,
+    "LastUpdatedOn": "2024-08-19T12:00:00"
+  }
+]

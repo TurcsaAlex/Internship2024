@@ -37,6 +37,10 @@ namespace TorqueAndTread.Server.Seed
             modelBuilder.Entity<Role>().HasData(roleSeed);
             var userRoleSeed = LoadUserRoleSeedDataFromFile();
             modelBuilder.Entity<UserRole>().HasData(userRoleSeed);
+            var productTypeSeed = LoadProductTypeSeedDataFromFile();
+            modelBuilder.Entity<ProductType>().HasData(productTypeSeed);
+            var uomSeed=LoadUOMSeedDataFromFile();
+            modelBuilder.Entity<UOM>().HasData(uomSeed);
         }
         private static List<UserSeedObject> LoadUserSeedDataFromFile()
         {
@@ -75,6 +79,33 @@ namespace TorqueAndTread.Server.Seed
             var jsonData = File.ReadAllText(filePath);
             return JsonSerializer.Deserialize<List<UserRoleSeedObject>>(jsonData);
         }
+
+        private static List<ProductTypeSeedObject> LoadProductTypeSeedDataFromFile()
+        {
+            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Seed\\ProductTypes.json");
+
+            if (!File.Exists(filePath))
+            {
+                throw new FileNotFoundException("Seed data file not found", filePath);
+            }
+
+            var jsonData = File.ReadAllText(filePath);
+            return JsonSerializer.Deserialize<List<ProductTypeSeedObject>>(jsonData);
+        }
+
+        private static List<UOMSeedObject> LoadUOMSeedDataFromFile()
+        {
+            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Seed\\UOMs.json");
+
+            if (!File.Exists(filePath))
+            {
+                throw new FileNotFoundException("Seed data file not found", filePath);
+            }
+
+            var jsonData = File.ReadAllText(filePath);
+            return JsonSerializer.Deserialize<List<UOMSeedObject>>(jsonData);
+        }
+
         private static List<User> LoadUserSeedDataFromFile1()
         {
             var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Seed\\Users.json");
