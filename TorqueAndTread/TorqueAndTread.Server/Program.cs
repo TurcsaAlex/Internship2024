@@ -20,7 +20,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c => {
     c.SwaggerDoc("v1", new OpenApiInfo
     {
-        Title = "JWTToken_Auth_API",
+        Title = "Torque & Thread API",
         Version = "v1"
     });
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
@@ -59,6 +59,8 @@ builder.Services.AddScoped<MailSender>();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<RoleService>();
 
+builder.Services.AddTransient<JwtMiddleware>();
+
 
 builder.Services.AddDbContext<TorqueDbContext>(option =>
 
@@ -89,6 +91,7 @@ builder.Services.AddControllers().AddJsonOptions(options =>
     options.JsonSerializerOptions.DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull;
 });
 
+builder.Services.AddMemoryCache();
 
 var app = builder.Build();
 
@@ -121,6 +124,9 @@ app.UseRouting();
 
 app.UseCors("AllowAll");
 
+
+app.UseMiddleware<JwtMiddleware>();
+   
 app.UseAuthentication();
 
 app.UseAuthorization();

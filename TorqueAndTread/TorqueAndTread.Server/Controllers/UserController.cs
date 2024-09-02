@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TorqueAndTread.Server.DTOs;
@@ -7,6 +8,7 @@ namespace TorqueAndTread.Server.Controllers
 {
     [Route("/api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UserController : ControllerBase
     {
         private UserService _userService;

@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Injectable } from '@angular/core';
@@ -32,6 +32,8 @@ import { MenuEditComponent } from './screens/menu-edit/menu-edit.component';
 import { RolesTableComponent } from './screens/user-edit/roles-table/roles-table.component';
 import { WebcamComponent } from './screens/user-edit/webcam/webcam.component';
 import { AddUserRolesComponent } from './screens/user-edit/roles-table/add-user-roles/add-user-roles.component';
+import { AuthInterceptor } from './service/interceptors/auth.interceptor';
+import { TokenInterceptor } from './service/interceptors/token.interceptor';
 
 
 @Injectable({
@@ -76,7 +78,10 @@ export class AppService {
   ],
    providers: [
     provideAnimationsAsync(),
-    MenuService
+    MenuService,
+    {provide: HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true},
+    {provide: HTTP_INTERCEPTORS, useClass:TokenInterceptor, multi:true}
+
   ],
 
    bootstrap: [AppComponent]
