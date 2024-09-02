@@ -29,5 +29,8 @@ namespace TorqueAndTread.Server.Models
         public DateTime LastUpdatedOn { get; set; }
 
         public Container Container { get; set; }
+
+        public IList<Product> Products { get; set; } //the relation for one-to-one for Product
+
     }
 }

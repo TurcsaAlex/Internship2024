@@ -28,7 +28,7 @@ namespace TorqueAndTread.Server.Models
         public User LastUpdatedBy { get; set; }
         [Required]
         public DateTime? LastUpdatedOn { get; set; }
-        public Product Product { get; set; } //the relation for one-to-one for Product
+        public IList<Product> Products { get; set; } //the relation for one-to-one for Product
 
 
 

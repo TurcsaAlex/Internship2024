@@ -1,0 +1,50 @@
+<ng-template #successToast let-data>
+	Product {{data}} Added!
+</ng-template>
+
+<div class="container mt-5 text-start">
+    <h2>Add Product</h2>
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit(successToast)">
+  
+      <div class="mb-3">
+        <label for="name" class="form-label">Product Name</label>
+        <input type="text" id="name" class="form-control" formControlName="name" />
+      </div>
+
+      <div class="mb-3">
+        <label for="productCodeName" class="form-label">Product Code Name</label>
+        <input type="text" id="productCodeName" class="form-control" formControlName="productCodeName" />
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="mb-3">Product Type</div>
+          <button class="btn btn-outline-secondary dropdown-toggle mb-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{productForm.get('productType')?.value?productForm.get('productType')?.value.productTypeName:"Choose Product Type"}}
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li *ngFor="let type of productTypes"><a class="dropdown-item icon-link-hover" (click)="productForm.get('productType')?.setValue(type);">{{type.productTypeName}}</a></li>
+          </ul>  
+        </div>
+        <div class="col">
+          <div class="mb-3">Default UOM</div>
+          <button class="btn btn-outline-secondary dropdown-toggle mb-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{productForm.get('defaultUOM')?.value?productForm.get('defaultUOM')?.value.uomName:"Choose Default UOM"}}
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li *ngFor="let uom of productUOMs"><a class="dropdown-item icon-link-hover" (click)="productForm.get('defaultUOM')?.setValue(uom);">{{uom.uomName}}</a></li>
+          </ul>  
+        </div>
+      </div>
+      
+
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-secondary" (click)="back()">Back</button>
+        </div>
+        <div class="col text-end">
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  

@@ -58,6 +58,7 @@ builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<MailSender>();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<RoleService>();
+builder.Services.AddScoped<ProductService>();
 
 builder.Services.AddTransient<JwtMiddleware>();
 

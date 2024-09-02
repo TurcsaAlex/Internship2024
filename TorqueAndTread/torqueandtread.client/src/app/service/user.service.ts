@@ -56,9 +56,6 @@ export class UserService {
           console.log('Image uploaded successfully:', response);
           user.profilePicturePath = response.filePath;
           return this.http.put<any>(this.baseUrl, user, {
-            headers: {
-              "Authorization": this.getToken()
-            }
           });
         }),
         map((response: any) => {
@@ -72,11 +69,8 @@ export class UserService {
       );
     }
   
-    return this.http.put<any>(this.baseUrl, user, {
-      headers: {
-        "Authorization": this.getToken()
-      }
-    }).pipe(
+    return this.http.put<any>(this.baseUrl, user, {})
+    .pipe(
       map((response: any) => {
         console.log('User updated successfully:', response);
         return response;
@@ -127,11 +121,8 @@ export class UserService {
     formData.append('image', blob, 'captured-image.png');
   
     // Return an observable from the image upload
-    return this.http.post<any>(this.imageUrl + `/upload`, formData, {
-      headers: {
-        "Authorization": this.getToken()
-      }
-    }).pipe(
+    return this.http.post<any>(this.imageUrl + `/upload`, formData, {})
+    .pipe(
       map((response: any) => {
         console.log('Image uploaded successfully:', response);
         return response;

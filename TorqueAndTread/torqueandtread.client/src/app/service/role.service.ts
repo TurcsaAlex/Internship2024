@@ -11,9 +11,6 @@ export class RoleService {
   private userRolebaseUrl="/api/UserRole";
   private rolebaseUrl="/api/Role";
   constructor(private http:HttpClient) { }
-  private getToken(){
-    return ''+ localStorage.getItem("authToken");
-  }
 
 
   getAllByUserId(userId:number){

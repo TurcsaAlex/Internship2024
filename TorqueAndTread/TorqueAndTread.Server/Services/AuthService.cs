@@ -37,7 +37,7 @@ namespace TorqueAndTread.Server.Services
 
             var token = GenerateJSONWebToken(user);
 
-            var tokenList = _cache.Get<List<string>>(TokenListCacheKey) ?? new List<string>();
+            var tokenList = _cache.Get<List<string>>(TokenListCacheKey) ?? [];
 
             // Add the new token to the list
             tokenList.Add(token);

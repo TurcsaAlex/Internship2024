@@ -34,6 +34,8 @@ import { WebcamComponent } from './screens/user-edit/webcam/webcam.component';
 import { AddUserRolesComponent } from './screens/user-edit/roles-table/add-user-roles/add-user-roles.component';
 import { AuthInterceptor } from './service/interceptors/auth.interceptor';
 import { TokenInterceptor } from './service/interceptors/token.interceptor';
+import { ProductsAddComponent } from './screens/products/products-add/products-add.component';
+import { ProductsEditComponent } from './screens/products/products-edit/products-edit.component';
 
 
 @Injectable({
@@ -61,6 +63,8 @@ export class AppService {
     RolesTableComponent,
     WebcamComponent,
     AddUserRolesComponent,
+    ProductsAddComponent,
+    ProductsEditComponent,
   ],
   imports: [
     BrowserModule,
