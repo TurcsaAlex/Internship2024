@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TorqueAndTread.Server.DTOs;
@@ -7,6 +8,7 @@ namespace TorqueAndTread.Server.Controllers
 {
     [Route("/api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UserController : ControllerBase
     {
         private UserService _userService;
@@ -32,7 +34,13 @@ namespace TorqueAndTread.Server.Controllers
         [HttpPut]
         public async Task<IActionResult> UpdateUser([FromBody] UserAbvrDTO userAbvrDTO)
         {
-            await _userService.EditUser(userAbvrDTO, -1);
+            var username = HttpContext.Items["Username"] as string;
+            if (username == null)
+            {
+                return Unauthorized();
+            }
+
+            await _userService.EditUser(userAbvrDTO, username);
             return Ok(new { Message = "success" });
         }
         [HttpPost]

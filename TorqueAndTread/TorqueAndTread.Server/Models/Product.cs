@@ -8,17 +8,12 @@ namespace TorqueAndTread.Server.Models
     {
         [Key]
         public int ProductId { get; set; }
-
+        public string Name { get; set; }
         [Required]
-
-        public string ProductTypeIdName { get; set; }
-
-        [Required]
-
         public string ProductCodeName { get; set; }
 
-        [Required]
 
+        [Required]
         public bool Active { get; set; }
 
         [Required]
@@ -33,14 +28,12 @@ namespace TorqueAndTread.Server.Models
         [Required]
         public DateTime? LastUpdatedOn { get; set; }
 
-        public int ProductTypeId { get; set; }
-
-        
 
         [ForeignKey("ProductTypeId")]
+        public ProductType ProductType { get; set; }
 
-        public ProductType ProductType { get; set; } //navigation for ProductType, one-to-one relation
-
+        [ForeignKey("DefaultUOMId")]
+        public UOM UOM { get; set; }
         public ICollection<ProductBOM> ProductBOMs { get; set; } //navigation for ProductBOM, one-to-many relation
 
     }

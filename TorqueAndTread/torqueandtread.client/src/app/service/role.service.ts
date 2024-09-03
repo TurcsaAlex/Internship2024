@@ -11,17 +11,11 @@ export class RoleService {
   private userRolebaseUrl="/api/UserRole";
   private rolebaseUrl="/api/Role";
   constructor(private http:HttpClient) { }
-  private getToken(){
-    return 'Bearer '+ localStorage.getItem("authToken");
-  }
 
 
   getAllByUserId(userId:number){
-    return this.http.get<any>(this.userRolebaseUrl+"/all/"+userId,{
-      headers:{
-        Authentification:this.getToken()
-      }
-    }).pipe(
+    return this.http.get<any>(this.userRolebaseUrl+"/all/"+userId,{})
+    .pipe(
       map(
         (response: UserRole[]) => {
         console.log(response);
@@ -35,11 +29,8 @@ export class RoleService {
   }
 
   getAll(){
-    return this.http.get<any>(this.rolebaseUrl,{
-      headers:{
-        Authentification:this.getToken()
-      }
-    }).pipe(
+    return this.http.get<any>(this.rolebaseUrl,{})
+    .pipe(
       map(
         (response: Role[]) => {
         console.log(response);
@@ -59,9 +50,7 @@ export class RoleService {
         roleId
       }
       ,{
-      headers:{
-        Authentification:this.getToken()
-      }
+      
     }).pipe(
       map((response: any) => {
         console.log(response);
@@ -72,9 +61,6 @@ export class RoleService {
 
   deleteUserRole(userId:number,roleId:number){
     return this.http.delete<any>(this.userRolebaseUrl,{
-      headers:{
-        Authentification:this.getToken()
-      },
       body:{
         userId,
         roleId

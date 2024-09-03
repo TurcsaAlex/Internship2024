@@ -29,9 +29,9 @@ namespace TorqueAndTread.Server.Services
             var userList = new List<UserAbvrDTO>(activeUsers);
             return userList;
         }
-        public async Task EditUser(UserAbvrDTO user, int updatingUserId)
+        public async Task EditUser(UserAbvrDTO user, string updatingUsername)
         {
-            var whoUpdatesTheUser = _context.Users.FirstOrDefault(u => u.UserId == updatingUserId);
+            var whoUpdatesTheUser = _context.Users.FirstOrDefault(u => u.UserName == updatingUsername);
             if (whoUpdatesTheUser == null) { return; }
 
             var userToUpdate = _context.Users.FirstOrDefault(u => u.UserId == user.UserId);

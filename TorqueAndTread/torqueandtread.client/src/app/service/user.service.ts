@@ -13,7 +13,7 @@ export class UserService {
   private selectedUserId:number=0;
   constructor(private http:HttpClient) { }
   private getToken(){
-    return 'Bearer '+ localStorage.getItem("authToken");
+    return ''+localStorage.getItem("authToken");
   }
 
   setUserId(id:number){
@@ -24,11 +24,7 @@ export class UserService {
   }
 
   getAll(){
-    return this.http.get<any>(this.baseUrl+"/all",{
-      headers:{
-        Authentification:this.getToken()
-      }
-    }).pipe(
+    return this.http.get<any>(this.baseUrl+"/all",{}).pipe(
       map((response: User[]) => {
         console.log(response);
         return response;
@@ -37,11 +33,7 @@ export class UserService {
   }
 
   getUser(id:number){
-    return this.http.get<any>(this.baseUrl+"/"+id,{
-      headers:{
-        Authentification:this.getToken()
-      }
-    }).pipe(
+    return this.http.get<any>(this.baseUrl+"/"+id,{}).pipe(
       map((response: User[]) => {
         return response.at(0);
       })
@@ -50,11 +42,7 @@ export class UserService {
 
   updateUser(user:User){
     console.log(user);
-    return this.http.put<any>(this.baseUrl,user,{
-      headers:{
-        Authentification:this.getToken()
-      }
-    }).pipe(
+    return this.http.put<any>(this.baseUrl,user,{}).pipe(
       map((response: any) => {
         console.log(response);
       })
@@ -68,9 +56,6 @@ export class UserService {
           console.log('Image uploaded successfully:', response);
           user.profilePicturePath = response.filePath;
           return this.http.put<any>(this.baseUrl, user, {
-            headers: {
-              Authentification: this.getToken()
-            }
           });
         }),
         map((response: any) => {
@@ -84,11 +69,8 @@ export class UserService {
       );
     }
   
-    return this.http.put<any>(this.baseUrl, user, {
-      headers: {
-        Authentification: this.getToken()
-      }
-    }).pipe(
+    return this.http.put<any>(this.baseUrl, user, {})
+    .pipe(
       map((response: any) => {
         console.log('User updated successfully:', response);
         return response;
@@ -101,11 +83,7 @@ export class UserService {
   }
   
   createUser(user:User){
-    return this.http.post<any>(this.baseUrl,user,{
-      headers:{
-        Authentification:this.getToken()
-      }
-    }).pipe(
+    return this.http.post<any>(this.baseUrl,user,{}).pipe(
       map((response: any) => {
         console.log(response);
       })
@@ -113,11 +91,7 @@ export class UserService {
   }
 
   deleteUser(id:number){
-    return this.http.delete<any>(this.baseUrl+"/"+id,{
-      headers:{
-        Authentification:this.getToken()
-      }
-    }).pipe(
+    return this.http.delete<any>(this.baseUrl+"/"+id,{}).pipe(
       map((response: any) => {
         console.log(response)
       })
@@ -128,7 +102,7 @@ export class UserService {
   getImage(imagePath:string){
       return this.http.get(this.imageUrl +'/'+ imagePath,{
         headers:{
-          Authentification: this.getToken()
+          "Authorization": this.getToken()
         },
         responseType: "blob"
       }).pipe(
@@ -147,11 +121,8 @@ export class UserService {
     formData.append('image', blob, 'captured-image.png');
   
     // Return an observable from the image upload
-    return this.http.post<any>(this.imageUrl + `/upload`, formData, {
-      headers: {
-        Authentification: this.getToken()
-      }
-    }).pipe(
+    return this.http.post<any>(this.imageUrl + `/upload`, formData, {})
+    .pipe(
       map((response: any) => {
         console.log('Image uploaded successfully:', response);
         return response;

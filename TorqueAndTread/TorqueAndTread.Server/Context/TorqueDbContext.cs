@@ -67,8 +67,16 @@ namespace TorqueAndTread.Server.Context
             modelBuilder.Entity<ActionType>().HasOne(e => e.LastUpdatedBy).WithMany().OnDelete(DeleteBehavior.NoAction);
             modelBuilder.Entity<MenuItemActionRole>().HasOne(e => e.CreatedBy).WithMany().OnDelete(DeleteBehavior.NoAction);
             modelBuilder.Entity<MenuItemActionRole>().HasOne(e => e.LastUpdatedBy).WithMany().OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<User>().HasOne(e => e.CreatedBy).WithMany().OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<User>().HasOne(e => e.LastUpdatedBy).WithMany().OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<UOM>().HasOne(e => e.CreatedBy).WithMany().OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<UOM>().HasOne(e => e.LastUpdatedBy).WithMany().OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Container>().HasOne(e => e.CreatedBy).WithMany().OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Container>().HasOne(e => e.LastUpdatedBy).WithMany().OnDelete(DeleteBehavior.NoAction);
 
-            modelBuilder.Entity<Product>().HasOne(p => p.ProductType).WithOne(pt => pt.Product).HasForeignKey<Product>(p => p.ProductTypeId);
+
+
+            //modelBuilder.Entity<Product>().HasOne(p => p.ProductType).WithMany(pt => pt.Products).HasForeignKey<Product>(p => p.ProductTypeId);
 
             modelBuilder.Entity<Product>().Property(p => p.ProductCodeName).IsRequired();
 
@@ -76,6 +84,8 @@ namespace TorqueAndTread.Server.Context
 
             modelBuilder.Entity<Product>().HasOne(e => e.CreatedBy).WithMany().OnDelete(DeleteBehavior.NoAction);
             modelBuilder.Entity<Product>().HasOne(e => e.LastUpdatedBy).WithMany().OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Product>().HasOne(e => e.UOM).WithMany().OnDelete(DeleteBehavior.NoAction);
+
 
             modelBuilder.Entity<Product>().Property(p => p.CreatedOn).IsRequired();
 
