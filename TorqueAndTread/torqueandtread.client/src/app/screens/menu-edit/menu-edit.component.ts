@@ -51,6 +51,7 @@ export class MenuEditComponent implements OnInit {
       });
     }
   }
+  
   onSubmit(toastTemplate: TemplateRef<any>): void {
     const formValues = this.menuItemForm.value;
     if (this.menuItemForm.valid) {

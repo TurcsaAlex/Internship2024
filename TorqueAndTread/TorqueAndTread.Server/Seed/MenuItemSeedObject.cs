@@ -1,6 +1,6 @@
-﻿namespace TorqueAndTread.Server.DTOs
+﻿namespace TorqueAndTread.Server.Seed
 {
-    public class MenuItemDTO
+    public class MenuItemSeedObject
     {
         public int MenuItemId { get; set; }
         public string Name { get; set; }
@@ -8,11 +8,10 @@
         public string IconClass { get; set; }
         public string Link { get; set; }
         public bool Active { get; set; }
-
         public int CreatedById { get; set; }
         public DateTime CreatedOn { get; set; }
-        public DateTime LastUpdatedOn { get; set; }
 
-        public List<RoleDTO> Roles { get; set; }
+        public int LastUpdatedById { get; set; }
+        public DateTime LastUpdatedOn { get; set; }
     }
 }

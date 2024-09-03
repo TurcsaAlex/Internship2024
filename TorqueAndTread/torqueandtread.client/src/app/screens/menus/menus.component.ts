@@ -17,7 +17,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class MenusComponent 
 implements OnInit,AfterViewInit{
-  selectedColumns : string[] = ['menuItemId', 'name', 'orderNo', 'iconClass', 'link', 'actions'];
+  selectedColumns : string[] = ['name', 'orderNo', 'iconClass', 'link', 'createdOn','lastUpdatedOn', 'actions'];
     isEditing: boolean = false;
     dataSource = new MatTableDataSource<MenuItem>();
     selectedMenuItem?: MenuItem;

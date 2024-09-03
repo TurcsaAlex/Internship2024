@@ -4,6 +4,10 @@
 .head-text{
     color: white;
 }
+.table-head-text
+{
+    color:white;
+}
 
 table.mat-table th.mat-mdc-header-cell,
 table.mat-table td.mat-mdc--cell{

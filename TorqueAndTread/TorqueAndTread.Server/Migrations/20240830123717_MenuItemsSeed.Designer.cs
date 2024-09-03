@@ -12,8 +12,8 @@ using TorqueAndTread.Server.Context;
 namespace TorqueAndTread.Server.Migrations
 {
     [DbContext(typeof(TorqueDbContext))]
-    [Migration("20240827092424_UserPFP")]
-    partial class UserPFP
+    [Migration("20240830123717_MenuItemsSeed")]
+    partial class MenuItemsSeed
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -195,6 +195,47 @@ namespace TorqueAndTread.Server.Migrations
                     b.HasIndex("LastUpdatedById");
 
                     b.ToTable("MenuItems");
+
+                    b.HasData(
+                        new
+                        {
+                            MenuItemId = -1,
+                            Active = true,
+                            CreatedById = -1,
+                            CreatedOn = new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified),
+                            IconClass = "",
+                            LastUpdatedById = -1,
+                            LastUpdatedOn = new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            Link = "",
+                            Name = "aleluia",
+                            OrderNo = 1
+                        },
+                        new
+                        {
+                            MenuItemId = -2,
+                            Active = true,
+                            CreatedById = -1,
+                            CreatedOn = new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified),
+                            IconClass = "",
+                            LastUpdatedById = -1,
+                            LastUpdatedOn = new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            Link = "",
+                            Name = "mergemenuitems",
+                            OrderNo = 1
+                        },
+                        new
+                        {
+                            MenuItemId = -3,
+                            Active = true,
+                            CreatedById = -1,
+                            CreatedOn = new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified),
+                            IconClass = "",
+                            LastUpdatedById = -1,
+                            LastUpdatedOn = new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            Link = "",
+                            Name = "am creat acest meniu",
+                            OrderNo = 1
+                        });
                 });
 
             modelBuilder.Entity("TorqueAndTread.Server.Models.MenuItemActionRole", b =>
@@ -651,6 +692,78 @@ namespace TorqueAndTread.Server.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("UserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = -1,
+                            RoleId = -1,
+                            Active = true,
+                            CreatedById = -1,
+                            CreatedOn = new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified),
+                            LastUpdatedById = -1,
+                            LastUpdatedOn = new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            UserId = -1,
+                            RoleId = -2,
+                            Active = true,
+                            CreatedById = -1,
+                            CreatedOn = new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified),
+                            LastUpdatedById = -1,
+                            LastUpdatedOn = new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            UserId = -1,
+                            RoleId = -3,
+                            Active = true,
+                            CreatedById = -1,
+                            CreatedOn = new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified),
+                            LastUpdatedById = -1,
+                            LastUpdatedOn = new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            UserId = -2,
+                            RoleId = -1,
+                            Active = true,
+                            CreatedById = -1,
+                            CreatedOn = new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified),
+                            LastUpdatedById = -1,
+                            LastUpdatedOn = new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            UserId = -2,
+                            RoleId = -2,
+                            Active = true,
+                            CreatedById = -1,
+                            CreatedOn = new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified),
+                            LastUpdatedById = -1,
+                            LastUpdatedOn = new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            UserId = -2,
+                            RoleId = -3,
+                            Active = true,
+                            CreatedById = -1,
+                            CreatedOn = new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified),
+                            LastUpdatedById = -1,
+                            LastUpdatedOn = new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            UserId = -3,
+                            RoleId = -1,
+                            Active = true,
+                            CreatedById = -1,
+                            CreatedOn = new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified),
+                            LastUpdatedById = -1,
+                            LastUpdatedOn = new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("TorqueAndTread.Server.Models.ActionType", b =>

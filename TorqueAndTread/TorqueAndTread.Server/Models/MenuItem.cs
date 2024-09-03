@@ -21,6 +21,7 @@ namespace TorqueAndTread.Server.Models
 
         [Required]
         public bool Active { get; set; }
+       
         [Required]
         [ForeignKey("CreatedById")]
         public User CreatedBy { get; set; }

@@ -12,8 +12,8 @@ using TorqueAndTread.Server.Context;
 namespace TorqueAndTread.Server.Migrations
 {
     [DbContext(typeof(TorqueDbContext))]
-    [Migration("20240828064944_UserRolesSeed")]
-    partial class UserRolesSeed
+    [Migration("20240830065854_ProfilePicture")]
+    partial class ProfilePicture
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

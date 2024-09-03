@@ -32,6 +32,7 @@ import { MenuEditComponent } from './screens/menu-edit/menu-edit.component';
 import { RolesTableComponent } from './screens/user-edit/roles-table/roles-table.component';
 import { WebcamComponent } from './screens/user-edit/webcam/webcam.component';
 import { AddUserRolesComponent } from './screens/user-edit/roles-table/add-user-roles/add-user-roles.component';
+import { AddMenuitemsRolesComponent } from './add-menuitems-roles/add-menuitems-roles.component';
 
 
 @Injectable({
@@ -59,6 +60,7 @@ export class AppService {
     RolesTableComponent,
     WebcamComponent,
     AddUserRolesComponent,
+    AddMenuitemsRolesComponent,
   ],
   imports: [
     BrowserModule,
