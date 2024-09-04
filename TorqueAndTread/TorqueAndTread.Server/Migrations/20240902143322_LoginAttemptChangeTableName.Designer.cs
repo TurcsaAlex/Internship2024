@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TorqueAndTread.Server.Context;
 
@@ -11,9 +12,11 @@ using TorqueAndTread.Server.Context;
 namespace TorqueAndTread.Server.Migrations
 {
     [DbContext(typeof(TorqueDbContext))]
-    partial class TorqueDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240902143322_LoginAttemptChangeTableName")]
+    partial class LoginAttemptChangeTableName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,7 +58,7 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasIndex("LastUpdatedById");
 
-                    b.ToTable("ActionType", (string)null);
+                    b.ToTable("ActionType");
                 });
 
             modelBuilder.Entity("TorqueAndTread.Server.Models.BOM", b =>
@@ -94,7 +97,7 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasIndex("LastUpdatedById");
 
-                    b.ToTable("BOMs", (string)null);
+                    b.ToTable("BOMs");
                 });
 
             modelBuilder.Entity("TorqueAndTread.Server.Models.Container", b =>
@@ -144,7 +147,7 @@ namespace TorqueAndTread.Server.Migrations
                     b.HasIndex("UOMId")
                         .IsUnique();
 
-                    b.ToTable("Containers", (string)null);
+                    b.ToTable("Containers");
                 });
 
             modelBuilder.Entity("TorqueAndTread.Server.Models.LoginAttempt", b =>
@@ -173,10 +176,6 @@ namespace TorqueAndTread.Server.Migrations
                     b.Property<int>("LoginAttemptResult")
                         .HasColumnType("int");
 
-                    b.Property<string>("LoginMessage")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int?>("UserId")
                         .HasColumnType("int");
 
@@ -192,7 +191,7 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("LoginAttempts", (string)null);
+                    b.ToTable("LoginAttempts");
                 });
 
             modelBuilder.Entity("TorqueAndTread.Server.Models.MenuItem", b =>
@@ -239,7 +238,7 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasIndex("LastUpdatedById");
 
-                    b.ToTable("MenuItems", (string)null);
+                    b.ToTable("MenuItems");
                 });
 
             modelBuilder.Entity("TorqueAndTread.Server.Models.MenuItemActionRole", b =>
@@ -289,7 +288,7 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("MenuItemActionRole", (string)null);
+                    b.ToTable("MenuItemActionRole");
                 });
 
             modelBuilder.Entity("TorqueAndTread.Server.Models.MenuItemRole", b =>
@@ -331,7 +330,7 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("MenuItemRoles", (string)null);
+                    b.ToTable("MenuItemRoles");
                 });
 
             modelBuilder.Entity("TorqueAndTread.Server.Models.Product", b =>
@@ -386,7 +385,7 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasIndex("UOMId");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("TorqueAndTread.Server.Models.ProductBOM", b =>
@@ -431,7 +430,7 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductBOMs", (string)null);
+                    b.ToTable("ProductBOMs");
                 });
 
             modelBuilder.Entity("TorqueAndTread.Server.Models.ProductType", b =>
@@ -467,7 +466,7 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasIndex("LastUpdatedById");
 
-                    b.ToTable("ProductTypes", (string)null);
+                    b.ToTable("ProductTypes");
 
                     b.HasData(
                         new
@@ -535,7 +534,7 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasIndex("LastUpdatedById");
 
-                    b.ToTable("Roles", (string)null);
+                    b.ToTable("Roles");
 
                     b.HasData(
                         new
@@ -603,7 +602,7 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasIndex("LastUpdatedById");
 
-                    b.ToTable("UOMs", (string)null);
+                    b.ToTable("UOMs");
 
                     b.HasData(
                         new
@@ -690,7 +689,7 @@ namespace TorqueAndTread.Server.Migrations
                     b.HasIndex("UserName", "Email")
                         .IsUnique();
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
 
                     b.HasData(
                         new
@@ -768,7 +767,7 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("UserRoles", (string)null);
+                    b.ToTable("UserRoles");
 
                     b.HasData(
                         new
