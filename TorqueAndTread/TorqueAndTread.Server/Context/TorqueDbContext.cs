@@ -26,6 +26,9 @@ namespace TorqueAndTread.Server.Context
         public DbSet<UOM> UOMs { get; set; }
 
         public DbSet<Container> Containers { get; set; }
+
+        public DbSet<LoginAttempt> LoginAttempts { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().HasMany(e => e.Roles).WithMany(e => e.Users)
@@ -71,7 +74,8 @@ namespace TorqueAndTread.Server.Context
             modelBuilder.Entity<UOM>().HasOne(e => e.LastUpdatedBy).WithMany().OnDelete(DeleteBehavior.NoAction);
             modelBuilder.Entity<Container>().HasOne(e => e.CreatedBy).WithMany().OnDelete(DeleteBehavior.NoAction);
             modelBuilder.Entity<Container>().HasOne(e => e.LastUpdatedBy).WithMany().OnDelete(DeleteBehavior.NoAction);
-
+            modelBuilder.Entity<LoginAttempt>().HasOne(e => e.CreatedBy).WithMany().OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<LoginAttempt>().HasOne(e => e.LastUpdatedBy).WithMany().OnDelete(DeleteBehavior.NoAction);
 
 
             //modelBuilder.Entity<Product>().HasOne(p => p.ProductType).WithMany(pt => pt.Products).HasForeignKey<Product>(p => p.ProductTypeId);
@@ -138,7 +142,9 @@ namespace TorqueAndTread.Server.Context
             modelBuilder.Entity<UOM>().HasOne(u => u.Container).WithOne(c => c.UOM).HasForeignKey<Container>(c => c.UOMId);
 
 
+            //LoginResult
 
+            modelBuilder.Entity<LoginAttempt>().HasOne(u => u.User).WithMany();
 
             //seeding
 

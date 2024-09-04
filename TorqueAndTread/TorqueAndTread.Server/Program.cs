@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
@@ -7,6 +7,7 @@ using System.Text;
 using TorqueAndTread.Server.Context;
 using TorqueAndTread.Server.Helpers;
 using TorqueAndTread.Server.Services;
+
 
 
 
@@ -59,6 +60,7 @@ builder.Services.AddScoped<MailSender>();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<RoleService>();
 builder.Services.AddScoped<ProductService>();
+builder.Services.AddScoped<LoginAttemptService>();
 
 builder.Services.AddTransient<JwtMiddleware>();
 
@@ -66,7 +68,8 @@ builder.Services.AddTransient<JwtMiddleware>();
 builder.Services.AddDbContext<TorqueDbContext>(option =>
 
 {
-    option.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerConnStr"));
+    option
+    .UseSqlServer(builder.Configuration.GetConnectionString("SqlServerConnStr"));
 });
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -137,6 +140,7 @@ app.MapControllers();
 app.UseEndpoints(endpoints =>endpoints.MapControllers());
 
 app.MapFallbackToFile("/index.html");
+
 
 app.Run();
 
