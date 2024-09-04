@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using TorqueAndTread.Server.DTOs;
 using TorqueAndTread.Server.Services;
@@ -9,6 +10,7 @@ namespace TorqueAndTread.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UserRoleController : ControllerBase
     {
         private RoleService _roleService;
@@ -27,7 +29,7 @@ namespace TorqueAndTread.Server.Controllers
         [HttpPost]
         public async Task<IActionResult> PostUserRole(PostUserRoleDTO userRoleDTO)
         {
-            _roleService.PostUserRole(userRoleDTO,-1);
+            await _roleService.PostUserRole(userRoleDTO,-1);
             return Ok(new { message = "success" });
         }
 
@@ -35,7 +37,7 @@ namespace TorqueAndTread.Server.Controllers
         [HttpDelete]
         public async Task<IActionResult> DeleteUserRole(PostUserRoleDTO userRoleDTO)
         {
-            _roleService.DeleteUserRole(userRoleDTO, -1);
+            await _roleService.DeleteUserRole(userRoleDTO, -1);
             return Ok(new { message = "success" });
         }
     }

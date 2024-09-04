@@ -8,6 +8,10 @@ namespace TorqueAndTread.Server.DTOs
     {
         public string Name { get; set; }
 
+        public int UserId { get; set; }
+        public int RoleId { get; set; }
+
+
         public bool Active { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime LastUpdatedOn { get; set; }
@@ -17,6 +21,8 @@ namespace TorqueAndTread.Server.DTOs
             Active = userRole.Active;
             CreatedOn = userRole.CreatedOn;
             LastUpdatedOn = userRole.LastUpdatedOn;
+            RoleId = userRole.RoleId;
+            UserId = userRole.UserId;
         }
         public UserRolesDTO(){}
     }

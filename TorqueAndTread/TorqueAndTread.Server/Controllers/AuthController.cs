@@ -29,7 +29,15 @@ namespace TorqueAndTread.Server.Controllers
         [Authorize]
         public async Task<IActionResult> Test()
         {
-            return Ok(new { Message = "Ok" });
+            var username = HttpContext.Items["Username"] as string;
+
+            if (string.IsNullOrEmpty(username))
+            {
+                return Unauthorized("Username not found in token");
+            }
+
+            // Your logic here
+            return Ok(new { Username = username });
         }
 
         [HttpPost("login", Name ="LoginUser")]

@@ -14,6 +14,8 @@ import { UserEditComponent } from './screens/user-edit/user-edit.component';
 import { UserAddComponent } from './screens/user-add/user-add.component';
 import { MenuAddComponent } from './screens/menu-add/menu-add.component';
 import { MenuEditComponent } from './screens/menu-edit/menu-edit.component';
+import { ProductsAddComponent } from './screens/products/products-add/products-add.component';
+import { ProductsEditComponent } from './screens/products/products-edit/products-edit.component';
 
 const routes: Routes = [
   {path:"",redirectTo:"login",pathMatch:"full"},
@@ -30,6 +32,8 @@ const routes: Routes = [
   {path: 'policy',component:PolicyComponent},
   {path: 'add-menu-item', component:MenuAddComponent},
   {path: 'edit-menu-item', component:MenuEditComponent},
+  {path: 'add-product', component:ProductsAddComponent},
+  {path: 'edit-product', component:ProductsEditComponent},
   {path:"**",component:PageNotFoundComponent},
 ];
 
