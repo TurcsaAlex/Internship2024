@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TorqueAndTread.Server.Context;
 
@@ -11,9 +12,11 @@ using TorqueAndTread.Server.Context;
 namespace TorqueAndTread.Server.Migrations
 {
     [DbContext(typeof(TorqueDbContext))]
-    partial class TorqueDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240905095301_ContainerTypeSeed")]
+    partial class ContainerTypeSeed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -113,7 +116,7 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.Property<string>("ContainerCode")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ContainerTypeId")
                         .HasColumnType("int");
@@ -137,18 +140,15 @@ namespace TorqueAndTread.Server.Migrations
                     b.Property<int?>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Quantity")
+                    b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UOMId")
+                    b.Property<int>("UOMId")
                         .HasColumnType("int");
 
                     b.HasKey("ContainerId");
 
                     b.HasIndex("BOMId");
-
-                    b.HasIndex("ContainerCode")
-                        .IsUnique();
 
                     b.HasIndex("ContainerTypeId");
 
@@ -214,7 +214,7 @@ namespace TorqueAndTread.Server.Migrations
                         {
                             ContainerTypeId = -2,
                             Active = true,
-                            ContainerTypeName = "Palet",
+                            ContainerTypeName = "Box",
                             CreatedById = -1,
                             CreatedOn = new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified),
                             LastUpdatedById = -1,
@@ -444,7 +444,7 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.Property<string>("ProductCodeName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ProductTypeId")
                         .HasColumnType("int");
@@ -461,9 +461,6 @@ namespace TorqueAndTread.Server.Migrations
                     b.HasIndex("DefaultUOMId");
 
                     b.HasIndex("LastUpdatedById");
-
-                    b.HasIndex("ProductCodeName")
-                        .IsUnique();
 
                     b.HasIndex("ProductTypeId");
 
@@ -994,7 +991,9 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasOne("TorqueAndTread.Server.Models.UOM", "UOM")
                         .WithMany("Container")
-                        .HasForeignKey("UOMId");
+                        .HasForeignKey("UOMId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("BOM");
 

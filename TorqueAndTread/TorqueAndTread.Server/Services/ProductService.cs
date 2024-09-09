@@ -32,6 +32,16 @@ namespace TorqueAndTread.Server.Services
 
             return products.ToList();
         }
+        public async Task<IList<string>> GetAllProductCodes()
+        {
+            var products = _dbContext.Products
+                .Where(p => p.Active == true)
+                .Select(p => p.ProductCodeName
+                );
+
+            return products.ToList();
+        }
+
         public async Task<ProductDTO> GetProduct(int productId)
         {
             var products = _dbContext.Products
@@ -126,7 +136,7 @@ namespace TorqueAndTread.Server.Services
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task<IList<ProductTypeDTO>> getAllProductTypes() {
+        public async Task<IList<ProductTypeDTO>> GetAllProductTypes() {
             var products = _dbContext.ProductTypes
                 .Where(p => p.Active == true)
                 .Select(p => new ProductTypeDTO()

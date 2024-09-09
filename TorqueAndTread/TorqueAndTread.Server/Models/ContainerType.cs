@@ -1,16 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace TorqueAndTread.Server.Models
 {
-    public class UOM
+    public class ContainerType
     {
         [Key]
-        public int UOMId { get; set; }
+        public int ContainerTypeId { get; set; }
 
         [Required]
 
-        public string UOMName { get; set; }
+        public string ContainerTypeName { get; set; }
 
         [Required]
 
@@ -26,11 +26,7 @@ namespace TorqueAndTread.Server.Models
         [ForeignKey("LastUpdatedById")]
         public User LastUpdatedBy { get; set; }
         [Required]
-        public DateTime LastUpdatedOn { get; set; }
-
-        public IList<Container> Container { get; set; }
-
-        public IList<Product> Products { get; set; } //the relation for one-to-one for Product
-
+        public DateTime? LastUpdatedOn { get; set; }
+        public IList<Container> Containers { get; set; }
     }
 }

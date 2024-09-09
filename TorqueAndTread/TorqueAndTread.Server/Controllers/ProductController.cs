@@ -22,10 +22,16 @@ namespace TorqueAndTread.Server.Controllers
             var products = await _productService.GetAllProducts();
             return Ok(products);
         }
+        [HttpGet("codes")]
+        public async Task<IActionResult> GetAllProductCodes()
+        {
+            var products = await _productService.GetAllProductCodes();
+            return Ok(products);
+        }
         [HttpGet("types")]
         public async Task<IActionResult> GetAllProductTypes()
         {
-            var productTypes = await _productService.getAllProductTypes();
+            var productTypes = await _productService.GetAllProductTypes();
             return Ok(productTypes);
         }
         [HttpGet("UOM")]

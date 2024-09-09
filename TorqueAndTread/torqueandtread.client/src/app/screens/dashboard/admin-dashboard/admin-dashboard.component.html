@@ -14,7 +14,7 @@
   </div>
   </div>
   <div class="row">
-  <div class="col-xl-4 col-md-4 mb-4">
+  <div class="col-xl-4 col-md-6 mb-4">
   <app-chart [chart]="{type: 'doughnut',
                    title: 'Login Attempts',
                    labels: [['Successfull'], ['Unsuccessfull']],
@@ -22,9 +22,9 @@
                    legend: true,  options: {rotation: 180, circumference: 360
   }}"></app-chart>
   </div>
-  <div class="col-xl-4 col-md-4 mb-4">
+  <div class="col-xl-4 col-md-6 mb-4">
     <app-chart [chart]="{
-        type:'pie',
+        type:'doughnut',
         title:'Users',
         labels: roleNames,
         data:[{data:roleNumbers}],
@@ -32,7 +32,6 @@
         
     }"></app-chart>
 </div>
-<button type="button" class="btn btn-primary col-xl-4 col-md-4 mb-4" (click)="export()">Create Report</button>
   
 
 </div>

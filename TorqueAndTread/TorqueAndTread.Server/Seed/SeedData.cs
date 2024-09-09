@@ -41,6 +41,8 @@ namespace TorqueAndTread.Server.Seed
             modelBuilder.Entity<ProductType>().HasData(productTypeSeed);
             var uomSeed=LoadUOMSeedDataFromFile();
             modelBuilder.Entity<UOM>().HasData(uomSeed);
+            var containerTypeSeed = LoadContainerTypeSeedDataFromFile();
+            modelBuilder.Entity<ContainerType>().HasData(containerTypeSeed);
         }
         private static List<UserSeedObject> LoadUserSeedDataFromFile()
         {
@@ -104,6 +106,19 @@ namespace TorqueAndTread.Server.Seed
 
             var jsonData = File.ReadAllText(filePath);
             return JsonSerializer.Deserialize<List<UOMSeedObject>>(jsonData);
+        }
+
+        private static List<ContainerTypeSeedObject> LoadContainerTypeSeedDataFromFile()
+        {
+            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Seed\\ContainerType.json");
+
+            if (!File.Exists(filePath))
+            {
+                throw new FileNotFoundException("Seed data file not found", filePath);
+            }
+
+            var jsonData = File.ReadAllText(filePath);
+            return JsonSerializer.Deserialize<List<ContainerTypeSeedObject>>(jsonData);
         }
 
         private static List<User> LoadUserSeedDataFromFile1()

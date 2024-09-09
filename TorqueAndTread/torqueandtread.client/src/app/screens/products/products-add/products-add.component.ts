@@ -39,12 +39,12 @@ export class ProductsAddComponent implements OnInit{
 
   onSubmit(toastTemplate:TemplateRef<any>): void {
     if (this.productForm.valid) {
-      const createdUser: Product = this.productForm.value;
-      createdUser.uomId=createdUser.defaultUOM.uomId;
-      createdUser.productTypeId=createdUser.productType.productTypeId;
-      console.log('User saved', createdUser);
-      this.productService.createProduct(createdUser).subscribe(()=>{
-        this.toastService.show({template:toastTemplate,classname:'bg-success text-light',data:createdUser.name});
+      const createdProduct: Product = this.productForm.value;
+      createdProduct.uomId=createdProduct.defaultUOM.uomId;
+      createdProduct.productTypeId=createdProduct.productType.productTypeId;
+      console.log('Product saved', createdProduct);
+      this.productService.createProduct(createdProduct).subscribe(()=>{
+        this.toastService.show({template:toastTemplate,classname:'bg-success text-light',data:createdProduct.name});
         console.log("ok")
         this.router.navigateByUrl("/products");
       });
