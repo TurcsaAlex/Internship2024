@@ -29,6 +29,7 @@ namespace TorqueAndTread.Server.Context
 
         public DbSet<LoginAttempt> LoginAttempts { get; set; }
 
+        public DbSet<ContainerType> ContainerTypes { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().HasMany(e => e.Roles).WithMany(e => e.Users)
@@ -77,12 +78,17 @@ namespace TorqueAndTread.Server.Context
             modelBuilder.Entity<LoginAttempt>().HasOne(e => e.CreatedBy).WithMany().OnDelete(DeleteBehavior.NoAction);
             modelBuilder.Entity<LoginAttempt>().HasOne(e => e.LastUpdatedBy).WithMany().OnDelete(DeleteBehavior.NoAction);
 
+            modelBuilder.Entity<ContainerType>().HasOne(e => e.CreatedBy).WithMany().OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<ContainerType>().HasOne(e => e.LastUpdatedBy).WithMany().OnDelete(DeleteBehavior.NoAction);
+
 
             //modelBuilder.Entity<Product>().HasOne(p => p.ProductType).WithMany(pt => pt.Products).HasForeignKey<Product>(p => p.ProductTypeId);
 
             modelBuilder.Entity<Product>().Property(p => p.ProductCodeName).IsRequired();
 
             modelBuilder.Entity<Product>().Property(p => p.Active).IsRequired();
+
+            modelBuilder.Entity<Product>().HasIndex(p => p.ProductCodeName).IsUnique();
 
             modelBuilder.Entity<Product>().HasOne(e => e.CreatedBy).WithMany().OnDelete(DeleteBehavior.NoAction);
             modelBuilder.Entity<Product>().HasOne(e => e.LastUpdatedBy).WithMany().OnDelete(DeleteBehavior.NoAction);
@@ -137,14 +143,14 @@ namespace TorqueAndTread.Server.Context
 
             modelBuilder.Entity<BOM>().HasMany(b => b.Containers).WithOne(c => c.BOM).HasForeignKey(c => c.BOMId);
 
-            //Required fields for UOM
-
-            modelBuilder.Entity<UOM>().HasOne(u => u.Container).WithOne(c => c.UOM).HasForeignKey<Container>(c => c.UOMId);
-
 
             //LoginResult
 
             modelBuilder.Entity<LoginAttempt>().HasOne(u => u.User).WithMany();
+
+            //Container
+
+            modelBuilder.Entity<Container>().HasIndex(c=>c.ContainerCode).IsUnique();
 
             //seeding
 

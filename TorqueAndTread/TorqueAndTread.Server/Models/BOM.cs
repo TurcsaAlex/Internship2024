@@ -10,18 +10,14 @@ namespace TorqueAndTread.Server.Models
         public int BOMId { get; set; }
 
         [Required]
-
         public string BOMName { get; set; }
-
-        [Required]
-
-        public int MaterialIdBOMCode { get; set; }
+        public Nullable<int> MaterialId { get; set; }
+        public string BOMCode { get; set; }
 
         [Required]
         public bool Active { get; set; }
 
         [Required]
-
         [ForeignKey("CreatedById")]
         public User CreatedBy { get; set; }
         [Required]
@@ -30,9 +26,9 @@ namespace TorqueAndTread.Server.Models
         [ForeignKey("LastUpdatedById")]
         public User LastUpdatedBy { get; set; }
         public DateTime? LastUpdatedOn { get; set; }
-
         public ICollection<ProductBOM> ProductBOM { get; set; } // the relation for one-to-many with ProductBOM 
-
         public ICollection<Container> Containers { get; set; } // the relation one-to-many with BOM
+        [ForeignKey("MaterialId")]
+        public Product Material { get; set; }
     }
 }

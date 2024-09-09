@@ -1,0 +1,20 @@
+﻿[
+  {
+    "ContainerTypeId": -1,
+    "ContainerTypeName": "Box",
+    "Active": true,
+    "CreatedById": -1,
+    "CreatedOn": "2024-08-19T10:15:30",
+    "LastUpdatedById": -1,
+    "LastUpdatedOn": "2024-08-19T12:00:00"
+  },
+  {
+    "ContainerTypeId": -2,
+    "ContainerTypeName": "Palet",
+    "Active": true,
+    "CreatedById": -1,
+    "CreatedOn": "2024-08-19T10:15:30",
+    "LastUpdatedById": -1,
+    "LastUpdatedOn": "2024-08-19T12:00:00"
+  }
+]

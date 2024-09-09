@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, TemplateRef } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { User } from '../../models/user';
 import { Router } from '@angular/router';
+import { User } from '../../models/user';
 import { UserService } from '../../service/user.service';
 import { ToastService } from '../../service/toast.service';
 

@@ -25,7 +25,6 @@ import { UserEditComponent } from './screens/user-edit/user-edit.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { UserAddComponent } from './screens/user-add/user-add.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastsContainer } from './toast-container/toast-container.component';
 import { MenuAddComponent } from './screens/menu-add/menu-add.component';
@@ -40,6 +39,9 @@ import { ProductsEditComponent } from './screens/products/products-edit/products
 import { ChartComponent } from './components/chart/chart.component';
 import { DashboardComponent } from './screens/dashboard/dashboard.component';
 import { AdminDashboardComponent } from './screens/dashboard/admin-dashboard/admin-dashboard.component';
+import { ContainerAddComponent } from './screens/containers/container-add/container-add.component';
+import { ContainerEditComponent } from './screens/containers/container-edit/container-edit.component';
+import { UserAddComponent } from './screens/user-add/user-add.component';
 
 
 @Injectable({
@@ -71,6 +73,8 @@ export class AppService {
     ProductsEditComponent,
     DashboardComponent,
     AdminDashboardComponent,
+    ContainerAddComponent,
+    ContainerEditComponent,
   ],
   imports: [
     BrowserModule,

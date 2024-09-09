@@ -61,6 +61,7 @@ builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<RoleService>();
 builder.Services.AddScoped<ProductService>();
 builder.Services.AddScoped<LoginAttemptService>();
+builder.Services.AddScoped<ContainerService>();
 
 builder.Services.AddTransient<JwtMiddleware>();
 
