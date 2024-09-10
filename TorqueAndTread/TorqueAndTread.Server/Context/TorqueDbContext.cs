@@ -51,6 +51,8 @@ namespace TorqueAndTread.Server.Context
             //modelBuilder.Entity<UserRole>().HasOne(ur => ur.Role).WithMany(r => r.UserRoles)
             //    .HasForeignKey(ur => ur.RoleId);
             modelBuilder.Entity<UserRole>().HasKey(ur =>new{ ur.UserId, ur.RoleId });
+            modelBuilder.Entity<ProductBOM>().HasKey(ur => new { ur.ProductId, ur.BOMId });
+
 
             modelBuilder.Entity<ActionType>().HasMany(e => e.MenuItems).WithMany(e => e.ActionTypes)
                 .UsingEntity<MenuItemActionRole>(

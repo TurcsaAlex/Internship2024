@@ -1,0 +1,69 @@
+<ng-template #deleteToast let-data>
+	<svg xmlns="http://www.w3.org/2000/svg" fill="#fff" width="24" height="24" viewBox="0 0 24 24">
+		<path
+			d="M10.872 6.831l1.695 3.904 3.654-1.561-1.79 3.426 3.333.954-3.417 1.338 2.231 4.196-4.773-2.582-2.869 2.287.413-3.004-3.792-.726 2.93-1.74-1.885-2.512 3.427.646.843-4.626zm-.786-6.831l-1.665 9.119-6.512-1.228 3.639 4.851-5.548 3.294 7.108 1.361-.834 6.076 5.742-4.577 9.438 5.104-4.288-8.064 6.834-2.677-6.661-1.907 3.25-6.22-6.98 2.982-3.523-8.114z"
+		/>
+	</svg>
+	BOM {{data}} Deleted!
+</ng-template>
+
+<ng-template #deleteModal let-modal let-bom="bom">
+	<div class="modal-header">
+		<h4 class="modal-title text-danger" id="modal-basic-title">Alert!</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+    <h3>Are you sure you want to delete BOM {{selectedBOM?.bomName}}?</h3>
+	</div>
+	<div class="modal-footer justify-content-between">
+		<button type="button" class="btn btn-outline-secondary" (click)="modal.close('Back')">Back</button>
+		<button type="button" class="btn btn-outline-danger" (click)="modal.close('Delete')">Yes</button>
+	</div>
+</ng-template>
+
+
+<div class="container">
+  <h1 class="text-start justify-content-start mt-lg-5">BOMs</h1>
+
+    <div class="row mb-3">
+      <div class="col text-end">
+        <button class="btn btn-primary" routerLink="/add-bom">Add</button>
+      </div>
+    </div>
+  <table mat-table [dataSource]="dataSource" class="table table-hover">
+
+    <ng-container matColumnDef="bomName">
+      <th mat-header-cell *matHeaderCellDef class="table-head-text"> BOM Name </th>
+      <td mat-cell *matCellDef="let bom"> {{bom.bomName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="bomCode">
+      <th mat-header-cell *matHeaderCellDef class="table-head-text"> BOM Code </th>
+      <td mat-cell *matCellDef="let bom"> {{bom.bomCode}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="materialCode">
+        <th mat-header-cell *matHeaderCellDef class="table-head-text"> Material product Code </th>
+        <td mat-cell *matCellDef="let bom"> {{bom.materialCode}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef class="table-head-text">Actions</th>
+      <td mat-cell *matCellDef="let bom">
+        <div class="row">
+          <div class="col">
+            <button class="btn btn-primary" (click)="editBOM(bom)">Edit</button>
+          </div>
+          <div class="col">
+            <button class="btn btn-danger ml-lg-3" (click)="openDeleteModal(bom,deleteModal,deleteToast)" [disabled]="!bom.active">Delete</button>
+          </div>
+        </div>
+      </td>
+  </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" ></mat-paginator>
+</div>
+  

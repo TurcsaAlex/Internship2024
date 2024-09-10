@@ -91,7 +91,7 @@ namespace TorqueAndTread.Server.Services
             userObj.LastUpdatedOn = DateTime.UtcNow;
             userObj.CreatedBy = active0User;
             userObj.LastUpdatedBy = active0User;
-            userObj.Active = true;
+            userObj.Active = false;
             await _authContext.Users.AddAsync(userObj);
             var saveResp = await _authContext.SaveChangesAsync();
             _mailSender.SendActivationMail(userObj.Email);

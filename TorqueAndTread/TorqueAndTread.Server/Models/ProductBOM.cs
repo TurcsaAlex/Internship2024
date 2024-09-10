@@ -4,17 +4,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace TorqueAndTread.Server.Models
 {
     public class ProductBOM
-    {
-
-        [Key]
-        public int ProductBOMId { get; set; }
+    { 
 
         [Required]
         public int ProductId { get; set; }
-
-
         [Required]
-
         public int BOMId { get; set; }
 
         [Required]

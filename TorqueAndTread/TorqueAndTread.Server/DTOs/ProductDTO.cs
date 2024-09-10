@@ -16,6 +16,7 @@ namespace TorqueAndTread.Server.DTOs
         public DateTime? LastUpdatedOn { get; set; }
         public string ProductTypeName { get; set; } 
         public string UOMName { get; set; }
+        public Nullable<int> Quantity { get; set; }
 
     }
 }
