@@ -105,7 +105,7 @@ export class AppService {
     UsersComponent,
     NgbModule,
     ToastsContainer,
-    ChartComponent
+    ChartComponent,
     RolesComponent
   ],
    providers: [
