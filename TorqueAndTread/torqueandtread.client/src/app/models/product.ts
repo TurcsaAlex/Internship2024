@@ -11,6 +11,7 @@ export type Product = {
     defaultUOM:any;
     productTypeId:number;
     uomId:number;
+    quantity:number|null;
 };
 
 export type ProductType={

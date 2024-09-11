@@ -2,6 +2,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Injectable } from '@angular/core';
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,7 +25,6 @@ import { UserEditComponent } from './screens/user-edit/user-edit.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { UserAddComponent } from './screens/user-add/user-add.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastsContainer } from './toast-container/toast-container.component';
 import { MenuAddComponent } from './screens/menu-add/menu-add.component';
@@ -36,6 +36,18 @@ import { AuthInterceptor } from './service/interceptors/auth.interceptor';
 import { TokenInterceptor } from './service/interceptors/token.interceptor';
 import { ProductsAddComponent } from './screens/products/products-add/products-add.component';
 import { ProductsEditComponent } from './screens/products/products-edit/products-edit.component';
+import { ChartComponent } from './components/chart/chart.component';
+import { DashboardComponent } from './screens/dashboard/dashboard.component';
+import { AdminDashboardComponent } from './screens/dashboard/admin-dashboard/admin-dashboard.component';
+import { ContainerAddComponent } from './screens/containers/container-add/container-add.component';
+import { ContainerEditComponent } from './screens/containers/container-edit/container-edit.component';
+import { UserAddComponent } from './screens/user-add/user-add.component';
+import { BomsComponent } from './screens/boms/boms.component';
+import { BomAddComponent } from './screens/boms/bom-add/bom-add.component';
+import { BomEditComponent } from './screens/boms/bom-edit/bom-edit.component';
+import { MaterialsTableComponent } from './screens/boms/bom-edit/materials-table/materials-table.component';
+import { MaterialAddComponent } from './screens/boms/bom-edit/materials-table/material-add/material-add.component';
+import { MaterialEditComponent } from './screens/boms/bom-edit/materials-table/material-edit/material-edit.component';
 import { RoletableComponent } from './screens/menu-edit/roletable/roletable.component';
 import { AddmenuitemsroleComponent } from './screens/menu-edit/roletable/addmenuitemsrole/addmenuitemsrole.component';
 
@@ -67,6 +79,16 @@ export class AppService {
     AddUserRolesComponent,
     ProductsAddComponent,
     ProductsEditComponent,
+    DashboardComponent,
+    AdminDashboardComponent,
+    ContainerAddComponent,
+    ContainerEditComponent,
+    BomsComponent,
+    BomAddComponent,
+    BomEditComponent,
+    MaterialsTableComponent,
+    MaterialAddComponent,
+    MaterialEditComponent,
     RoletableComponent,
     AddmenuitemsroleComponent,
   ],
@@ -83,14 +105,15 @@ export class AppService {
     UsersComponent,
     NgbModule,
     ToastsContainer,
+    ChartComponent
     RolesComponent
   ],
    providers: [
     provideAnimationsAsync(),
     MenuService,
     {provide: HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true},
-    {provide: HTTP_INTERCEPTORS, useClass:TokenInterceptor, multi:true}
-
+    {provide: HTTP_INTERCEPTORS, useClass:TokenInterceptor, multi:true},
+    provideCharts(withDefaultRegisterables())
   ],
 
    bootstrap: [AppComponent]

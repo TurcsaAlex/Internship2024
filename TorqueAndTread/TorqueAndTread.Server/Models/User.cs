@@ -42,6 +42,7 @@ namespace TorqueAndTread.Server.Models
             UserName = registerDTO.UserName;
             Password = registerDTO.Password;
             Email = registerDTO.Email;
+            ProfilePicturePath = "";
         }
 
         public User(UserCreateDTO createDTO)

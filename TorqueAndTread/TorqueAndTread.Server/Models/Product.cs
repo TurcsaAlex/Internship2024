@@ -34,6 +34,9 @@ namespace TorqueAndTread.Server.Models
 
         [ForeignKey("DefaultUOMId")]
         public UOM UOM { get; set; }
+        public Nullable<int> ContainerId { get; set; }
+        [ForeignKey("ContainerId")]
+        public  Container Container { get; set; }
         public ICollection<ProductBOM> ProductBOMs { get; set; } //navigation for ProductBOM, one-to-many relation
 
     }

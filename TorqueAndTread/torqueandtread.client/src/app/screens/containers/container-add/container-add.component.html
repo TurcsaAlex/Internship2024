@@ -1,0 +1,57 @@
+<ng-template #successToast let-data>
+	Container {{data}} Added!
+</ng-template>
+
+<div class="container mt-5 text-start">
+    <h2>Add Container</h2>
+    <form [formGroup]="containerForm" (ngSubmit)="onSubmit(successToast)">
+  
+      <div class="mb-3">
+        <label for="name" class="form-label">Container Name</label>
+        <input type="text" id="name" class="form-control" formControlName="name" />
+      </div>
+      <div class="mb-3">
+        <label for="containerCode" class="form-label">Container Code</label>
+        <input type="text" id="containerCode" class="form-control" formControlName="containerCode" />
+      </div>
+      <div class="mb-3">Container Type</div>
+          <button class="btn btn-outline-secondary dropdown-toggle mb-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{containerForm.get('containerType')?.value?containerForm.get('containerType')?.value.containerTypeName:"Choose Container Type"}}
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li *ngFor="let type of containerTypes"><a class="dropdown-item icon-link-hover" (click)="containerForm.get('containerType')?.setValue(type);">{{type.containerTypeName}}</a></li>
+          </ul>
+        <div class="mb-3">Product</div>
+        <div class="dropdown mb-3">
+          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{selectedProduct?selectedProduct.productCodeName:"Select Product if applicable"}}
+          </button>
+          <ul class="dropdown-menu">
+            @for(product of products;track product){
+            <li><a class="dropdown-item icon-link-hover" (click)="selectProduct(product)">{{product.productCodeName}}</a></li>
+            }
+          </ul>
+        </div>
+        @if(selectedProduct){
+          <label for="quantity" class="form-label">Container quantity</label>
+          <div class="mb-3 input-group">
+            <input type="number" min="0" id="quantity" class="form-control" formControlName="quantity" />
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {{containerForm.get('defaultUOM')?.value?containerForm.get('defaultUOM')?.value.uomName:"Choose UOM"}}
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li *ngFor="let uom of containerUOMs"><a class="dropdown-item icon-link-hover" (click)="containerForm.get('defaultUOM')?.setValue(uom);">{{uom.uomName}}</a></li>
+              </ul>  
+          </div>    
+        }
+      <div class="row">
+        <div class="col">
+          <button class="btn btn-secondary" (click)="back()">Back</button>
+        </div>
+        <div class="col text-end">
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  

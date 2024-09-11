@@ -11,11 +11,17 @@ import { ProductionordersComponent } from './screens/productionorders/production
 import { PolicyComponent } from './screens/policy/policy.component'
 import { RolesComponent } from './screens/roles/roles.component';
 import { UserEditComponent } from './screens/user-edit/user-edit.component';
-import { UserAddComponent } from './screens/user-add/user-add.component';
 import { MenuAddComponent } from './screens/menu-add/menu-add.component';
 import { MenuEditComponent } from './screens/menu-edit/menu-edit.component';
 import { ProductsAddComponent } from './screens/products/products-add/products-add.component';
 import { ProductsEditComponent } from './screens/products/products-edit/products-edit.component';
+import { DashboardComponent } from './screens/dashboard/dashboard.component';
+import { ContainerAddComponent } from './screens/containers/container-add/container-add.component';
+import { UserAddComponent } from './screens/user-add/user-add.component';
+import { ContainerEditComponent } from './screens/containers/container-edit/container-edit.component';
+import { BomsComponent } from './screens/boms/boms.component';
+import { BomAddComponent } from './screens/boms/bom-add/bom-add.component';
+import { BomEditComponent } from './screens/boms/bom-edit/bom-edit.component';
 
 const routes: Routes = [
   {path:"",redirectTo:"login",pathMatch:"full"},
@@ -34,6 +40,12 @@ const routes: Routes = [
   {path: 'edit-menu-item', component:MenuEditComponent},
   {path: 'add-product', component:ProductsAddComponent},
   {path: 'edit-product', component:ProductsEditComponent},
+  {path: 'dashboard',component:DashboardComponent},
+  {path: 'add-container', component:ContainerAddComponent},
+  {path: 'edit-container', component:ContainerEditComponent},
+  {path: 'boms', component:BomsComponent},
+  {path: 'add-bom', component:BomAddComponent},
+  {path: 'edit-bom', component:BomEditComponent},
   {path:"**",component:PageNotFoundComponent},
 ];
 

@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
@@ -10,6 +10,7 @@ using TorqueAndTread.Server.Services;
 
 
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -17,7 +18,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c => {
+builder.Services.AddSwaggerGen(c =>
+{
     c.SwaggerDoc("v1", new OpenApiInfo
     {
         Title = "Torque & Thread API",
@@ -59,6 +61,10 @@ builder.Services.AddScoped<MailSender>();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<RoleService>();
 builder.Services.AddScoped<ProductService>();
+builder.Services.AddScoped<LoginAttemptService>();
+builder.Services.AddScoped<ContainerService>();
+builder.Services.AddScoped<BOMService>();
+builder.Services.AddScoped<ProductBOMService>();
 
 builder.Services.AddTransient<JwtMiddleware>();
 
@@ -66,7 +72,8 @@ builder.Services.AddTransient<JwtMiddleware>();
 builder.Services.AddDbContext<TorqueDbContext>(option =>
 
 {
-    option.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerConnStr"));
+    option
+    .UseSqlServer(builder.Configuration.GetConnectionString("SqlServerConnStr"));
 });
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -104,13 +111,13 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
     app.UseSwagger();
-  app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", " Your API V1"));
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", " Your API V1"));
 
 }
 else
 {
-  app.UseExceptionHandler("/Home/Error");
-  app.UseHsts();
+    app.UseExceptionHandler("/Home/Error");
+    app.UseHsts();
 }
 
 app.UseHttpsRedirection();
@@ -127,16 +134,17 @@ app.UseCors("AllowAll");
 
 
 app.UseMiddleware<JwtMiddleware>();
-   
+
 app.UseAuthentication();
 
 app.UseAuthorization();
 
 app.MapControllers();
 
-app.UseEndpoints(endpoints =>endpoints.MapControllers());
+app.UseEndpoints(endpoints => endpoints.MapControllers());
 
 app.MapFallbackToFile("/index.html");
+
 
 app.Run();
 

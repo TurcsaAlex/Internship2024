@@ -1,5 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using TorqueAndTread.Server.DTOs;
 
 namespace TorqueAndTread.Server.Models
 {
@@ -8,23 +10,13 @@ namespace TorqueAndTread.Server.Models
 
         [Key]
         public int ContainerId { get; set; }
-
         [Required]
-        public int BOMId { get; set; }
-
-        [Required]
-        public int UOMId { get; set; }
-
-        [Required]
-
         public string Name { get; set; }
+        public Nullable<int> Quantity { get; set; }
+        public string ContainerCode { get; set; }
+
 
         [Required]
-        public int Quantity { get; set; }
-
-
-        [Required]
-
         public bool Active { get; set; }
 
         [Required]
@@ -39,8 +31,24 @@ namespace TorqueAndTread.Server.Models
         [Required]
         public DateTime LastUpdatedOn { get; set; }
 
+        public Nullable<int> BOMId { get; set; }
+        public Nullable<int> UOMId { get; set; }
         public BOM BOM { get; set; }
+        [ForeignKey("UOMId")]
         public UOM UOM { get; set; }
-
+        public Nullable<int> ProductId { get; set; }
+        [ForeignKey("ProductId")]
+        public Product Product { get; set; }
+        public ContainerType ContainerType { get; set; }
+        public Container()
+        {
+            
+        }
+        public Container(ContainerCreateDTO containerDTO)
+        {
+            Name = containerDTO.Name;
+            Quantity = containerDTO.Quantity;
+            ContainerCode = containerDTO.ContainerCode;
+        }
     }
 }

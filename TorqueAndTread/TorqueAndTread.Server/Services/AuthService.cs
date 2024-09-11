@@ -29,11 +29,30 @@ namespace TorqueAndTread.Server.Services
         {
             //_mailSender.SendTest();
             var user = await _authContext.Users.FirstOrDefaultAsync(x => x.UserName == userObj.UserName);
+            var loginAttempt = GenerateEmptyLoginAttempt();
             if (user == null)
+            {
+                loginAttempt.LoginMessage = "User Not Found";
+                loginAttempt.LoginAttemptResult = LoginAttemptResultEnum.UNSUCCESSFULL;
+                loginAttempt.Username = userObj.UserName;
+                await _authContext.LoginAttempts.AddAsync(loginAttempt);
+                await _authContext.SaveChangesAsync();
+
                 return new AuthDTO(404);
+            }
+                
 
             if (!PasswordHasher.VerifyPassword(userObj.Password, user.Password))
-                return new AuthDTO(500);
+            {
+                loginAttempt.LoginMessage = "Wrong Password";
+                loginAttempt.LoginAttemptResult = LoginAttemptResultEnum.UNSUCCESSFULL;
+                loginAttempt.Username = userObj.UserName;
+                loginAttempt.User = user;
+                await _authContext.LoginAttempts.AddAsync(loginAttempt);
+                await _authContext.SaveChangesAsync();
+
+                return new AuthDTO(500); 
+            }
 
             var token = GenerateJSONWebToken(user);
 
@@ -47,7 +66,12 @@ namespace TorqueAndTread.Server.Services
             {
                 SlidingExpiration = TimeSpan.FromMinutes(30)
             });
-
+            loginAttempt.LoginMessage = "Success!";
+            loginAttempt.LoginAttemptResult = LoginAttemptResultEnum.SUCCESSFULL;
+            loginAttempt.Username = userObj.UserName;
+            loginAttempt.User = user;
+            await _authContext.LoginAttempts.AddAsync(loginAttempt);
+            await _authContext.SaveChangesAsync();
             return new AuthDTO(200, token);
         }
 
@@ -67,7 +91,7 @@ namespace TorqueAndTread.Server.Services
             userObj.LastUpdatedOn = DateTime.UtcNow;
             userObj.CreatedBy = active0User;
             userObj.LastUpdatedBy = active0User;
-            userObj.Active = true;
+            userObj.Active = false;
             await _authContext.Users.AddAsync(userObj);
             var saveResp = await _authContext.SaveChangesAsync();
             _mailSender.SendActivationMail(userObj.Email);
@@ -151,6 +175,18 @@ namespace TorqueAndTread.Server.Services
             }
 
             return cacheMenuItems;
+        }
+        private LoginAttempt GenerateEmptyLoginAttempt()
+        {
+            var searchUser = _authContext.Users.Where(u => u.UserId == -1);
+            var active0User = searchUser.First();
+            return new LoginAttempt(){
+                CreatedBy = active0User,
+                LastUpdatedBy = active0User,
+                CreatedOn = DateTime.Now,
+                LastUpdatedOn = DateTime.Now,
+                Active = true,
+            };
         }
     }
 }
