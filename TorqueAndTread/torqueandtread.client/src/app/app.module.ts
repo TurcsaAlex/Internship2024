@@ -36,7 +36,9 @@ import { AuthInterceptor } from './service/interceptors/auth.interceptor';
 import { TokenInterceptor } from './service/interceptors/token.interceptor';
 import { ProductsAddComponent } from './screens/products/products-add/products-add.component';
 import { ProductsEditComponent } from './screens/products/products-edit/products-edit.component';
-import { AddMenuitemsRolesComponent } from './add-menuitems-roles/add-menuitems-roles.component';
+import { RoletableComponent } from './screens/menu-edit/roletable/roletable.component';
+import { AddmenuitemsroleComponent } from './screens/menu-edit/roletable/addmenuitemsrole/addmenuitemsrole.component';
+
 
 
 @Injectable({
@@ -56,7 +58,6 @@ export class AppService {
     ContainersComponent,
     ProductionordersComponent,
     PolicyComponent,
-    RolesComponent,
     UserEditComponent,
     UserAddComponent,
     MenuAddComponent,
@@ -66,7 +67,8 @@ export class AppService {
     AddUserRolesComponent,
     ProductsAddComponent,
     ProductsEditComponent,
-    AddMenuitemsRolesComponent,
+    RoletableComponent,
+    AddmenuitemsroleComponent,
   ],
   imports: [
     BrowserModule,
@@ -81,6 +83,7 @@ export class AppService {
     UsersComponent,
     NgbModule,
     ToastsContainer,
+    RolesComponent
   ],
    providers: [
     provideAnimationsAsync(),

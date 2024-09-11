@@ -1,3 +1,5 @@
+import { Role } from "../../models/role";
+
 export interface MenuItem{
     menuItemId:number;
     name: string;
@@ -6,4 +8,5 @@ export interface MenuItem{
     link : string;
     createdOn:string;
     lastUpdatedOn:string;
+    roles : Role[];
 }

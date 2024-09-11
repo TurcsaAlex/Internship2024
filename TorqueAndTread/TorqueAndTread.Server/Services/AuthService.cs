@@ -78,9 +78,11 @@ namespace TorqueAndTread.Server.Services
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
+       
             var claims = new[]
             {
-                new Claim("username",userInfo.UserName)
+                new Claim("username",userInfo.UserName),
+                new Claim("userId",userInfo.UserId.ToString())
             };
 
             var token = new JwtSecurityToken(_config["Jwt:Issuer"],
@@ -90,6 +92,65 @@ namespace TorqueAndTread.Server.Services
               signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        private List<MenuItemDTO> GetUserMenuItemsForUser(string token)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var jwtToken = tokenHandler.ReadJwtToken(token);
+
+            var userIdClaims = jwtToken.Claims.FirstOrDefault(c => c.Type == "userId");
+
+            if(userIdClaims == null)
+            {
+                throw new Exception("User ID not found in token");
+            }
+
+            int userId = int.Parse(userIdClaims.Value); 
+            var menuItems = _authContext.MenuItems.Include(mi => mi.MenuItemRoles).ThenInclude(mr => mr.Role).Where(mi => mi.MenuItemRoles.Any( mr => mr.Role.UserRoles.Any(ur =>ur.UserId == userId))).ToList(); //get all MenuItemRoles associated to current user by UserRoles and MenuItemRoles 
+
+            var menuItemDTOs = menuItems.Select( mi => new MenuItemDTO
+            {
+                MenuItemId = mi.MenuItemId,
+                Name = mi.Name,
+                Link = mi.Link,
+                IconClass = mi.IconClass,
+                Roles = mi.MenuItemRoles.Select(mr => new RoleDTO
+                {
+                    RoleId = mr.RoleId,
+                    Name = mr.Role.Name,
+                }).ToList()
+            }).ToList();
+
+            return menuItemDTOs;
+        }
+
+        public List<MenuItemDTO> GetMenuItemsForUserWithCache(string token)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var jwtToken = tokenHandler.ReadJwtToken(token);
+
+
+            var userIdClaims = jwtToken.Claims.FirstOrDefault(c => c.Type == "userId");
+
+            if (userIdClaims == null)
+            {
+                throw new Exception("User ID not found in token");
+            }
+
+            int userId = int.Parse(userIdClaims.Value);
+            string cacheKey = $"MenuItemsForUser_ {userId}";
+
+            if(!_cache.TryGetValue(cacheKey, out List<MenuItemDTO> cacheMenuItems)) //verify if menus are stored in cache
+            {
+                cacheMenuItems = GetUserMenuItemsForUser(token); // if not in cache, we obtain them from database
+                _cache.Set(cacheKey, cacheMenuItems, new MemoryCacheEntryOptions
+                {
+                    SlidingExpiration = TimeSpan.FromMinutes(60)
+                });
+            }
+
+            return cacheMenuItems;
         }
     }
 }

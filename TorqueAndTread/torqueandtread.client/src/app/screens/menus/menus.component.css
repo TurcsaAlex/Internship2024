@@ -8,13 +8,7 @@
 {
     color:white;
 }
-
-table.mat-table th.mat-mdc-header-cell,
-table.mat-table td.mat-mdc--cell{
-    text-align: center;
-    padding: 8px 12px;
-}
-
-table.mat-table .mat-column-menuItemId, table.mat-table.mat-column-name, table.mat-table .mat-column-orderNo,table.mat-table .mat-column-iconClass, table.mat-table .mat-column-link,table.mat-table .mat-column-actions{
-    white-space: nowrap;
+.col{
+    border: 2px;
+    border-color: grey;
 }

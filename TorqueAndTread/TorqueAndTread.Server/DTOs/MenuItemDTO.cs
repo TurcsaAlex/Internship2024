@@ -13,6 +13,6 @@
         public DateTime CreatedOn { get; set; }
         public DateTime LastUpdatedOn { get; set; }
 
-        public List<RoleDTO> Roles { get; set; }
+        public List<RoleDTO>? Roles { get; set; }
     }
 }

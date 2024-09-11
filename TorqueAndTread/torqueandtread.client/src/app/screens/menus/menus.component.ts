@@ -83,10 +83,11 @@ implements OnInit,AfterViewInit{
     this.router.navigateByUrl('/add-menu-item');
   }
   
-  private loadMenuItems(): void {
+   loadMenuItems(): void {
     this.menuService.getMenuItems().subscribe({
       next:(menuItems) => {
         this.dataSource.data = menuItems;
+        console.log("ce are menuitems: ", menuItems);
         this.dataSource.paginator = this.paginator;
       },
       error: (err) => {

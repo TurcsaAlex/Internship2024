@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
+  isNavbarShown: boolean = false;
 
+  toggleNavbar(): void {
+    this.isNavbarShown = !this.isNavbarShown
+  }
 }

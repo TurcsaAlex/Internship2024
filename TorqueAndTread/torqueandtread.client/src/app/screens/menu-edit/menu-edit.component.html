@@ -34,6 +34,11 @@
             <label for="link" class="form-label">Link</label>
             <input type="text" id="link" class="form-control" formControlName="link" />
           </div>
+
+          <div class="mb-5">
+            <app-roletable [menuItemId]="menuItemId"></app-roletable>
+          </div>
+
           <div class="row">
             <div class="col">
               <button class="btn btn-secondary" (click)="back()">Back</button>

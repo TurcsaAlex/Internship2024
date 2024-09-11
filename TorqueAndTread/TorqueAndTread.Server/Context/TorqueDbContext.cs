@@ -55,6 +55,8 @@ namespace TorqueAndTread.Server.Context
                 j => j.HasOne(t => t.MenuItem).WithMany(p => p.MenuItemActionRoles),
                 j => j.HasOne(t => t.ActionType).WithMany(p => p.MenuItemActionRoles));
 
+            modelBuilder.Entity<MenuItem>().HasMany(m => m.Roles).WithMany(r => r.MenuItems);
+
             modelBuilder.Entity<Role>().HasOne(e => e.CreatedBy).WithMany().OnDelete(DeleteBehavior.NoAction);
             modelBuilder.Entity<Role>().HasOne(e => e.LastUpdatedBy).WithMany().OnDelete(DeleteBehavior.NoAction);
             modelBuilder.Entity<UserRole>().HasOne(e => e.CreatedBy).WithMany().OnDelete(DeleteBehavior.NoAction);

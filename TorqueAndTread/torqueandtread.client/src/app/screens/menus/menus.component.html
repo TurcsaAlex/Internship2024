@@ -68,7 +68,7 @@
               <button class="btn btn-primary" (click)="editMenuItem(menuItems.menuItemId)">Edit</button>
             </div>
             <div class="col">
-              <button class="btn btn-danger ml-lg-3" [class.disabled]="!menuItems.menuItemId" (click)="openDeleteModal(menuItems, deleteModal, deleteToast)">Delete</button>
+              <button class="btn btn-danger ml-lg-3" (click)="openDeleteModal(menuItems, deleteModal, deleteToast)" [class.disabled]="!menuItems.menuItemId">Delete</button>
             </div>
           </div>
         </td>

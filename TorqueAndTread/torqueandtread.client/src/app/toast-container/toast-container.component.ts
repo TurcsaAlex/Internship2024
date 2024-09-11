@@ -4,7 +4,7 @@ import { NgTemplateOutlet } from '@angular/common';
 import { NgbToastModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastService } from '../service/toast.service';
 
-@Component({
+@Component ({
 	selector: 'app-toasts',
 	standalone: true,
 	imports: [NgbToastModule, NgTemplateOutlet],

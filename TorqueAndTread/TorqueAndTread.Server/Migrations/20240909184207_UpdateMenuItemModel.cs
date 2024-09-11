@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TorqueAndTread.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class ProfilePicture : Migration
+    public partial class UpdateMenuItemModel : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -37,14 +37,12 @@ namespace TorqueAndTread.Server.Migrations
                         name: "FK_Users_Users_CreatedById",
                         column: x => x.CreatedById,
                         principalTable: "Users",
-                        principalColumn: "UserId",
-                        onDelete: ReferentialAction.NoAction);
+                        principalColumn: "UserId");
                     table.ForeignKey(
                         name: "FK_Users_Users_LastUpdatedById",
                         column: x => x.LastUpdatedById,
                         principalTable: "Users",
-                        principalColumn: "UserId",
-                        onDelete: ReferentialAction.NoAction);
+                        principalColumn: "UserId");
                 });
 
             migrationBuilder.CreateTable(
@@ -211,47 +209,9 @@ namespace TorqueAndTread.Server.Migrations
                         name: "FK_UOMs_Users_CreatedById",
                         column: x => x.CreatedById,
                         principalTable: "Users",
-                        principalColumn: "UserId",
-                        onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
-                        name: "FK_UOMs_Users_LastUpdatedById",
-                        column: x => x.LastUpdatedById,
-                        principalTable: "Users",
-                        principalColumn: "UserId",
-                        onDelete: ReferentialAction.NoAction);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Products",
-                columns: table => new
-                {
-                    ProductId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductTypeIdName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProductCodeName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Active = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedById = table.Column<int>(type: "int", nullable: false),
-                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    LastUpdatedById = table.Column<int>(type: "int", nullable: false),
-                    LastUpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ProductTypeId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Products", x => x.ProductId);
-                    table.ForeignKey(
-                        name: "FK_Products_ProductTypes_ProductTypeId",
-                        column: x => x.ProductTypeId,
-                        principalTable: "ProductTypes",
-                        principalColumn: "ProductTypeId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Products_Users_CreatedById",
-                        column: x => x.CreatedById,
-                        principalTable: "Users",
                         principalColumn: "UserId");
                     table.ForeignKey(
-                        name: "FK_Products_Users_LastUpdatedById",
+                        name: "FK_UOMs_Users_LastUpdatedById",
                         column: x => x.LastUpdatedById,
                         principalTable: "Users",
                         principalColumn: "UserId");
@@ -421,14 +381,60 @@ namespace TorqueAndTread.Server.Migrations
                         name: "FK_Containers_Users_CreatedById",
                         column: x => x.CreatedById,
                         principalTable: "Users",
-                        principalColumn: "UserId",
-                        onDelete: ReferentialAction.NoAction);
+                        principalColumn: "UserId");
                     table.ForeignKey(
                         name: "FK_Containers_Users_LastUpdatedById",
                         column: x => x.LastUpdatedById,
                         principalTable: "Users",
-                        principalColumn: "UserId",
-                        onDelete: ReferentialAction.NoAction);
+                        principalColumn: "UserId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Products",
+                columns: table => new
+                {
+                    ProductId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProductCodeName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Active = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedById = table.Column<int>(type: "int", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastUpdatedById = table.Column<int>(type: "int", nullable: false),
+                    LastUpdatedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ProductTypeId = table.Column<int>(type: "int", nullable: false),
+                    DefaultUOMId = table.Column<int>(type: "int", nullable: false),
+                    UOMId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.ProductId);
+                    table.ForeignKey(
+                        name: "FK_Products_ProductTypes_ProductTypeId",
+                        column: x => x.ProductTypeId,
+                        principalTable: "ProductTypes",
+                        principalColumn: "ProductTypeId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Products_UOMs_DefaultUOMId",
+                        column: x => x.DefaultUOMId,
+                        principalTable: "UOMs",
+                        principalColumn: "UOMId");
+                    table.ForeignKey(
+                        name: "FK_Products_UOMs_UOMId",
+                        column: x => x.UOMId,
+                        principalTable: "UOMs",
+                        principalColumn: "UOMId");
+                    table.ForeignKey(
+                        name: "FK_Products_Users_CreatedById",
+                        column: x => x.CreatedById,
+                        principalTable: "Users",
+                        principalColumn: "UserId");
+                    table.ForeignKey(
+                        name: "FK_Products_Users_LastUpdatedById",
+                        column: x => x.LastUpdatedById,
+                        principalTable: "Users",
+                        principalColumn: "UserId");
                 });
 
             migrationBuilder.CreateTable(
@@ -479,6 +485,26 @@ namespace TorqueAndTread.Server.Migrations
                 values: new object[] { -1, true, -1, new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified), "admin@admin.com", -1, new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified), "Administrator", "", "", "admin" });
 
             migrationBuilder.InsertData(
+                table: "MenuItems",
+                columns: new[] { "MenuItemId", "Active", "CreatedById", "CreatedOn", "IconClass", "LastUpdatedById", "LastUpdatedOn", "Link", "Name", "OrderNo" },
+                values: new object[,]
+                {
+                    { -3, true, -1, new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified), "", -1, new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified), "", "am creat acest meniu", 1 },
+                    { -2, true, -1, new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified), "", -1, new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified), "", "mergemenuitems", 1 },
+                    { -1, true, -1, new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified), "", -1, new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified), "", "aleluia", 1 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ProductTypes",
+                columns: new[] { "ProductTypeId", "Active", "CreatedById", "CreatedOn", "LastUpdatedById", "LastUpdatedOn", "ProductTypeName" },
+                values: new object[,]
+                {
+                    { -3, true, -1, new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified), -1, new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified), "Finished Good" },
+                    { -2, true, -1, new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified), -1, new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified), "Semifinished Good" },
+                    { -1, true, -1, new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified), -1, new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified), "Raw Material" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Roles",
                 columns: new[] { "RoleId", "Active", "CreatedById", "CreatedOn", "LastUpdatedById", "LastUpdatedOn", "Name" },
                 values: new object[,]
@@ -486,6 +512,16 @@ namespace TorqueAndTread.Server.Migrations
                     { -3, true, -1, new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified), -1, new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified), "Supervisor" },
                     { -2, true, -1, new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified), -1, new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified), "Operator" },
                     { -1, true, -1, new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified), -1, new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified), "Administrator" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "UOMs",
+                columns: new[] { "UOMId", "Active", "CreatedById", "CreatedOn", "LastUpdatedById", "LastUpdatedOn", "UOMName" },
+                values: new object[,]
+                {
+                    { -3, true, -1, new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified), -1, new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified), "Ea" },
+                    { -2, true, -1, new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified), -1, new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified), "Kg" },
+                    { -1, true, -1, new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified), -1, new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified), "g" }
                 });
 
             migrationBuilder.InsertData(
@@ -633,6 +669,11 @@ namespace TorqueAndTread.Server.Migrations
                 column: "CreatedById");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Products_DefaultUOMId",
+                table: "Products",
+                column: "DefaultUOMId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Products_LastUpdatedById",
                 table: "Products",
                 column: "LastUpdatedById");
@@ -640,8 +681,12 @@ namespace TorqueAndTread.Server.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Products_ProductTypeId",
                 table: "Products",
-                column: "ProductTypeId",
-                unique: true);
+                column: "ProductTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_UOMId",
+                table: "Products",
+                column: "UOMId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductTypes_CreatedById",
@@ -724,9 +769,6 @@ namespace TorqueAndTread.Server.Migrations
                 name: "UserRoles");
 
             migrationBuilder.DropTable(
-                name: "UOMs");
-
-            migrationBuilder.DropTable(
                 name: "ActionType");
 
             migrationBuilder.DropTable(
@@ -743,6 +785,9 @@ namespace TorqueAndTread.Server.Migrations
 
             migrationBuilder.DropTable(
                 name: "ProductTypes");
+
+            migrationBuilder.DropTable(
+                name: "UOMs");
 
             migrationBuilder.DropTable(
                 name: "Users");
