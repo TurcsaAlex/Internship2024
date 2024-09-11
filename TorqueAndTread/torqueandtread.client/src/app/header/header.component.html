@@ -48,6 +48,16 @@
                 </a>
             </li>
         </ul>
+        <div class="dropdown">
+            <a class="dropdown-toggle nav-item" id="dropdownProfileButton" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-person-circle nav-link"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownProfileButton">
+              <li><a class="dropdown-item" (click)="logout();">Profile</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" (click)="logout();">Logout</a></li>
+            </ul>
+          </div>
     </div>
 </nav>
 

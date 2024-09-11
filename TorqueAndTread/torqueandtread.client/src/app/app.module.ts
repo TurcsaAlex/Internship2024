@@ -48,6 +48,7 @@ import { BomEditComponent } from './screens/boms/bom-edit/bom-edit.component';
 import { MaterialsTableComponent } from './screens/boms/bom-edit/materials-table/materials-table.component';
 import { MaterialAddComponent } from './screens/boms/bom-edit/materials-table/material-add/material-add.component';
 import { MaterialEditComponent } from './screens/boms/bom-edit/materials-table/material-edit/material-edit.component';
+import { UserProfileComponent } from './screens/user-profile/user-profile.component';
 
 
 @Injectable({
@@ -87,6 +88,7 @@ export class AppService {
     MaterialsTableComponent,
     MaterialAddComponent,
     MaterialEditComponent,
+    UserProfileComponent,
   ],
   imports: [
     BrowserModule,
