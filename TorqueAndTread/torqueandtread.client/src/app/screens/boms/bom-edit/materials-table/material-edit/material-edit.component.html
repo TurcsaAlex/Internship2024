@@ -1,0 +1,44 @@
+<div class="modal-header">
+    <h4 class="modal-title">Edit Material Quantity</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Close')"></button>
+</div>
+
+<div class="modal-body">
+    <div class="container my-4">
+        <div class="row mb-3">
+            <div class="col-6">
+                <label class="text-muted">Product Name</label>
+                <div class="fw-bold">{{product.name}}</div>
+            </div>
+            <div class="col-6">
+                <label class="text-muted">Product Code</label>
+                <div class="fw-bold">{{product.productCodeName}}</div>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-6">
+                <label class="text-muted">Product Type</label>
+                <div class="fw-bold">{{product.productTypeName}}</div>
+            </div>
+            <div class="col-6">
+                <label class="text-muted">Created On</label>
+                <div class="fw-bold">{{product.createdOn | date:'medium'}}</div>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-6">
+                <label class="text-muted">Last Updated On</label>
+                <div class="fw-bold">{{product.lastUpdatedOn | date:'medium'}}</div>
+            </div>
+            <div class="col-6">
+                <label for="quantity" class="text-muted">Quantity</label>
+                <input type="number" min="0" id="quantity" class="form-control" [(ngModel)]="product.quantity" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-footer justify-content-between">
+    <button type="button" class="btn btn-secondary" (click)="activeModal.close('Close')">Close</button>
+    <button type="button" class="btn btn-primary" (click)="activeModal.close(quantity)">Save</button>
+</div>

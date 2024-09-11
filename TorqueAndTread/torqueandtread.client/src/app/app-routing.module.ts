@@ -19,6 +19,9 @@ import { DashboardComponent } from './screens/dashboard/dashboard.component';
 import { ContainerAddComponent } from './screens/containers/container-add/container-add.component';
 import { UserAddComponent } from './screens/user-add/user-add.component';
 import { ContainerEditComponent } from './screens/containers/container-edit/container-edit.component';
+import { BomsComponent } from './screens/boms/boms.component';
+import { BomAddComponent } from './screens/boms/bom-add/bom-add.component';
+import { BomEditComponent } from './screens/boms/bom-edit/bom-edit.component';
 
 const routes: Routes = [
   {path:"",redirectTo:"login",pathMatch:"full"},
@@ -40,6 +43,9 @@ const routes: Routes = [
   {path: 'dashboard',component:DashboardComponent},
   {path: 'add-container', component:ContainerAddComponent},
   {path: 'edit-container', component:ContainerEditComponent},
+  {path: 'boms', component:BomsComponent},
+  {path: 'add-bom', component:BomAddComponent},
+  {path: 'edit-bom', component:BomEditComponent},
   {path:"**",component:PageNotFoundComponent},
 ];
 

@@ -42,6 +42,12 @@ import { AdminDashboardComponent } from './screens/dashboard/admin-dashboard/adm
 import { ContainerAddComponent } from './screens/containers/container-add/container-add.component';
 import { ContainerEditComponent } from './screens/containers/container-edit/container-edit.component';
 import { UserAddComponent } from './screens/user-add/user-add.component';
+import { BomsComponent } from './screens/boms/boms.component';
+import { BomAddComponent } from './screens/boms/bom-add/bom-add.component';
+import { BomEditComponent } from './screens/boms/bom-edit/bom-edit.component';
+import { MaterialsTableComponent } from './screens/boms/bom-edit/materials-table/materials-table.component';
+import { MaterialAddComponent } from './screens/boms/bom-edit/materials-table/material-add/material-add.component';
+import { MaterialEditComponent } from './screens/boms/bom-edit/materials-table/material-edit/material-edit.component';
 
 
 @Injectable({
@@ -75,6 +81,12 @@ export class AppService {
     AdminDashboardComponent,
     ContainerAddComponent,
     ContainerEditComponent,
+    BomsComponent,
+    BomAddComponent,
+    BomEditComponent,
+    MaterialsTableComponent,
+    MaterialAddComponent,
+    MaterialEditComponent,
   ],
   imports: [
     BrowserModule,
