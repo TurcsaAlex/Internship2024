@@ -54,10 +54,14 @@ namespace TorqueAndTread.Server.Context
             modelBuilder.Entity<ProductBOM>().HasKey(ur => new { ur.ProductId, ur.BOMId });
 
 
+            modelBuilder.Entity<MenuItemRole>().HasKey(mr => mr.MenuItemRoleId);
+
             modelBuilder.Entity<ActionType>().HasMany(e => e.MenuItems).WithMany(e => e.ActionTypes)
                 .UsingEntity<MenuItemActionRole>(
                 j => j.HasOne(t => t.MenuItem).WithMany(p => p.MenuItemActionRoles),
                 j => j.HasOne(t => t.ActionType).WithMany(p => p.MenuItemActionRoles));
+
+            modelBuilder.Entity<MenuItem>().HasMany(m => m.Roles).WithMany(r => r.MenuItems);
 
             modelBuilder.Entity<Role>().HasOne(e => e.CreatedBy).WithMany().OnDelete(DeleteBehavior.NoAction);
             modelBuilder.Entity<Role>().HasOne(e => e.LastUpdatedBy).WithMany().OnDelete(DeleteBehavior.NoAction);
@@ -158,17 +162,17 @@ namespace TorqueAndTread.Server.Context
 
             SeedData.Initialize(modelBuilder);
         }
-        private List<UserSeedObject> LoadUserSeedDataFromFile()
-        {
-            var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Seed\\Users.json");
+        //private List<UserSeedObject> LoadUserSeedDataFromFile()
+        //{
+        //    var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Seed\\Users.json");
 
-            if (!File.Exists(filePath))
-            {
-                throw new FileNotFoundException("Seed data file not found", filePath);
-            }
+        //    if (!File.Exists(filePath))
+        //    {
+        //        throw new FileNotFoundException("Seed data file not found", filePath);
+        //    }
 
-            var jsonData = File.ReadAllText(filePath);
-            return JsonSerializer.Deserialize<List<UserSeedObject>>(jsonData);
-        }
+        //    var jsonData = File.ReadAllText(filePath);
+        //    return JsonSerializer.Deserialize<List<UserSeedObject>>(jsonData);
+        //}
     }
 }

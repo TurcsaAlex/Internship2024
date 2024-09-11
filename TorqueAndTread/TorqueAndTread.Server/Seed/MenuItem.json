@@ -1,0 +1,41 @@
+[
+  {
+    "MenuItemId": -1,
+    "Name": "aleluia",
+    "OrderNo": 1,
+    "IconClass": "",
+    "Link": "",
+    "Active": true,
+    "CreatedById": -1,
+    "CreatedOn": "2024-08-19T10:15:30",
+    "LastUpdatedById": -1,
+    "LastUpdatedOn": "2024-08-19T12:00:00"
+
+  },
+  {
+    "MenuItemId": -2,
+    "Name": "mergemenuitems",
+    "OrderNo": 1,
+    "IconClass": "",
+    "Link": "",
+    "Active": true,
+    "CreatedById": -1,
+    "CreatedOn": "2024-08-19T10:15:30",
+    "LastUpdatedById": -1,
+    "LastUpdatedOn": "2024-08-19T12:00:00"
+
+  },
+  {
+    "MenuItemId": -3,
+    "Name": "am creat acest meniu",
+    "OrderNo": 1,
+    "IconClass": "",
+    "Link": "",
+    "Active": true,
+    "CreatedById": -1,
+    "CreatedOn": "2024-08-19T10:15:30",
+    "LastUpdatedById": -1,
+    "LastUpdatedOn": "2024-08-19T12:00:00"
+
+  }
+]

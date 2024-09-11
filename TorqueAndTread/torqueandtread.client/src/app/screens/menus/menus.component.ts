@@ -17,7 +17,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class MenusComponent 
 implements OnInit,AfterViewInit{
-  selectedColumns : string[] = ['menuItemId', 'name', 'orderNo', 'iconClass', 'link', 'actions'];
+  selectedColumns : string[] = ['name', 'orderNo', 'iconClass', 'link', 'createdOn','lastUpdatedOn', 'actions'];
     isEditing: boolean = false;
     dataSource = new MatTableDataSource<MenuItem>();
     selectedMenuItem?: MenuItem;
@@ -83,10 +83,11 @@ implements OnInit,AfterViewInit{
     this.router.navigateByUrl('/add-menu-item');
   }
   
-  private loadMenuItems(): void {
+   loadMenuItems(): void {
     this.menuService.getMenuItems().subscribe({
       next:(menuItems) => {
         this.dataSource.data = menuItems;
+        console.log("ce are menuitems: ", menuItems);
         this.dataSource.paginator = this.paginator;
       },
       error: (err) => {

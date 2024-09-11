@@ -34,6 +34,7 @@
 
   <ItemGroup>
     <Folder Include="Files\uploads\" />
+    <Folder Include="Migrations\" />
     <Folder Include="wwwroot\uploads\" />
   </ItemGroup>
 

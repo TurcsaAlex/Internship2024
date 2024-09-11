@@ -1,0 +1,29 @@
+<div class="modal-header">
+    <h4 class="modal-title">Add Menu Item Roles</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Close')"></button>
+  </div>
+  
+  <div class="modal-body">
+    <div class="container text-center my-4">
+      <div *ngIf="roles.length === 0">
+        <h3>No More Roles To Add</h3>
+      </div>
+      <div *ngIf="roles.length > 0">
+        <h3>Choose Role To Add</h3>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{selectedRole ? selectedRole.name : "Choose Role"}}
+          </button>
+          <ul class="dropdown-menu">
+            <li *ngFor="let role of roles"><a class="dropdown-item icon-link-hover" (click)="selectedRole = role">{{ role.name }}</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal-footer justify-content-between">
+    <button type="button" class="btn btn-secondary" (click)="activeModal.close('Close')">Close</button>
+    <button type="button" class="btn btn-success" (click)="activeModal.close(selectedRole)" [disabled]="!selectedRole">Save</button>
+  </div>
+

@@ -13,8 +13,14 @@ export class HeaderComponent {
     private router:Router
   ){}
 
-  logout(){
-    this.authService.logout();
-    this.router.navigateByUrl("/login");
-  }
+    logout(){
+      this.authService.logout();
+      this.router.navigateByUrl("/login");
+    }
+    isNavbarShown = false;
+
+    toggleNavbar(): void {
+      this.isNavbarShown = !this.isNavbarShown
+    }
+
 }

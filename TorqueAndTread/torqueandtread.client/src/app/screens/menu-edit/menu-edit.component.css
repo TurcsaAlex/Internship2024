@@ -1,0 +1,7 @@
+.dropdown-item-custom{
+    font-size: 13px;
+    font-weight:400;
+    text-transform: none;
+    align-items: center;
+    padding: 5px 10px;
+}

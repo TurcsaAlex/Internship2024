@@ -21,7 +21,7 @@ export class MenuAddComponent implements OnInit{
     private toastService: ToastService,
     private router: Router,
     private iconService: IconService){
-      this.menuItemForm = this.formBuilder.group({
+    this.menuItemForm = this.formBuilder.group({
         name:['',Validators.required],
         orderNo:['',Validators.required],
         iconClass:[''],
@@ -36,14 +36,17 @@ export class MenuAddComponent implements OnInit{
     onSubmit(toastTemplate:TemplateRef<any>){
       if(this.menuItemForm.valid){
       const formData: MenuItem = this.menuItemForm.value;
+      console.log('form data: ', formData);
       this.menuService.addMenuItem(formData).subscribe({
-        next: () => {
+        next: (addMenuITems) => {
+          console.log('added menu item: ', addMenuITems);
           this.toastService.show({
             template: toastTemplate,
             classname: 'bg-success text-light',
             data: { name: formData.name, action: 'added' }
           });
           this.router.navigate(['/menus']);
+        
         },
         error: (err) => {
           console.error('Failed to add menu item', err);
@@ -58,6 +61,7 @@ export class MenuAddComponent implements OnInit{
       alert('Please fill out the form before submitting');
     }
   }
+
 
 back(){
   this.router.navigateByUrl('/menus');

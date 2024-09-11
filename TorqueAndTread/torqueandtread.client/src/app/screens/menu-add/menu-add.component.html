@@ -1,5 +1,5 @@
 <ng-template #successToast let-data>
-	Menu {{data}} Edited!
+	Menu {{data.name}} Added!
 </ng-template>
 <div class = "container mt-5 text-start">
     <h2>Add Menu Item</h2>
@@ -15,12 +15,20 @@
           </div>
           <div class="mb-3">
             <label for="iconClass" class="form-label">Icon Class</label>
-            <select id="iconClass" formControlName="iconClass" class="form-control">
-              <option *ngFor="let icon of fontAwesomeIcons" [value]="icon">
-                <i [ngClass]="icon"></i>{{icon}}
-              </option>
-            </select>
-
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" id="iconClass" formControlName="iconClass" placeholder="Select Icon" aria-label="Select Icon">
+              <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toogle="dropdown" aria-label="Icon Dropdown">
+                <i [class]="menuItemForm.controls['iconClass'].value"></i>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li *ngFor="let icon of fontAwesomeIcons">
+                  <button type="button" class="dropdown-item d-flex align-items-center dropdown-item-custom" (click)="menuItemForm.controls['iconClass'].setValue(icon)">
+                    <i [class]="icon"></i>
+                    <span class="icon-text-ms-2">{{icon}}</span>
+                  </button>
+                </li>
+              </ul>
+            </div>
           </div>
           <div class="mb-3">
             <label for="link" class="form-label">Link</label>

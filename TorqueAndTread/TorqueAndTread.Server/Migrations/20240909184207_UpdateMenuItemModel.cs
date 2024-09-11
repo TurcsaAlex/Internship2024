@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TorqueAndTread.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class UpdateMenuItemModel : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -483,6 +483,16 @@ namespace TorqueAndTread.Server.Migrations
                 table: "Users",
                 columns: new[] { "UserId", "Active", "CreatedById", "CreatedOn", "Email", "LastUpdatedById", "LastUpdatedOn", "Name", "Password", "ProfilePicturePath", "UserName" },
                 values: new object[] { -1, true, -1, new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified), "admin@admin.com", -1, new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified), "Administrator", "", "", "admin" });
+
+            migrationBuilder.InsertData(
+                table: "MenuItems",
+                columns: new[] { "MenuItemId", "Active", "CreatedById", "CreatedOn", "IconClass", "LastUpdatedById", "LastUpdatedOn", "Link", "Name", "OrderNo" },
+                values: new object[,]
+                {
+                    { -3, true, -1, new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified), "", -1, new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified), "", "am creat acest meniu", 1 },
+                    { -2, true, -1, new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified), "", -1, new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified), "", "mergemenuitems", 1 },
+                    { -1, true, -1, new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified), "", -1, new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified), "", "aleluia", 1 }
+                });
 
             migrationBuilder.InsertData(
                 table: "ProductTypes",

@@ -49,6 +49,9 @@ import { MaterialsTableComponent } from './screens/boms/bom-edit/materials-table
 import { MaterialAddComponent } from './screens/boms/bom-edit/materials-table/material-add/material-add.component';
 import { MaterialEditComponent } from './screens/boms/bom-edit/materials-table/material-edit/material-edit.component';
 import { UserProfileComponent } from './screens/user-profile/user-profile.component';
+import { RoletableComponent } from './screens/menu-edit/roletable/roletable.component';
+import { AddmenuitemsroleComponent } from './screens/menu-edit/roletable/addmenuitemsrole/addmenuitemsrole.component';
+
 
 
 @Injectable({
@@ -68,7 +71,6 @@ export class AppService {
     ContainersComponent,
     ProductionordersComponent,
     PolicyComponent,
-    RolesComponent,
     UserEditComponent,
     UserAddComponent,
     MenuAddComponent,
@@ -89,6 +91,8 @@ export class AppService {
     MaterialAddComponent,
     MaterialEditComponent,
     UserProfileComponent,
+    RoletableComponent,
+    AddmenuitemsroleComponent,
   ],
   imports: [
     BrowserModule,
@@ -103,7 +107,8 @@ export class AppService {
     UsersComponent,
     NgbModule,
     ToastsContainer,
-    ChartComponent
+    ChartComponent,
+    RolesComponent
   ],
    providers: [
     provideAnimationsAsync(),

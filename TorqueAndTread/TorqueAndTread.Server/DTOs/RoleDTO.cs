@@ -17,7 +17,7 @@ namespace TorqueAndTread.Server.DTOs
         {
             RoleId=role.RoleId;
             Name=role.Name;
-            Active=role.Active;
+            Active=true;
             CreatedOn = role.CreatedOn;
             LastUpdatedOn = role.LastUpdatedOn;
         }

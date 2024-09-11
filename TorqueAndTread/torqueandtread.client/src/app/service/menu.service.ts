@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { MenuItem } from "../screens/menus/menu-item.model";
 
@@ -20,7 +20,9 @@ export class MenuService{
     }
 
     getMenuItems(): Observable<MenuItem[]> {
-        return this.http.get<MenuItem[]>(this.apiUrl);
+        const token = localStorage.getItem('authToken');
+        const headers = new HttpHeaders().set('Authorization',`Bearer ${token}`);
+        return this.http.get<MenuItem[]>(this.apiUrl, {headers});
     }
 
     getMenuItem(id: number): Observable<MenuItem> {
@@ -30,7 +32,6 @@ export class MenuService{
     addMenuItem(menuItem: MenuItem): Observable<MenuItem> {
         return this.http.post<MenuItem>(this.apiUrl, menuItem);
     }
-
     editMenuItem(menuItem: MenuItem): Observable<MenuItem> {
         return this.http.put<MenuItem>(`${this.apiUrl}/${menuItem.menuItemId}`, menuItem);
     }

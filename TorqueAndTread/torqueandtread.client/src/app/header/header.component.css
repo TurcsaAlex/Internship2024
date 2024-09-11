@@ -1,0 +1,25 @@
+.offcanvas-body-small{
+    padding: 10px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.offcanvas-small{
+    width: 200px !important;
+}
+.navbar-nav .nav-item{
+    text-align: left;
+}
+
+
+
+@media(min-width: 992px)
+{
+    
+    .navbar-nav .ml-auto{
+        margin-left: 0;
+        text-align: left;
+    }
+    .navbar .nav-link{
+    margin-left: 20px;
+}}
