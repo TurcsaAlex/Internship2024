@@ -23,12 +23,16 @@ export class AuthService {
       map((response: any) => {
         console.log(response);
         localStorage.setItem('authToken',`Bearer ${response.token}`);
+        localStorage.setItem('menuItems', JSON.stringify(response.menuItems));
+        localStorage.setItem('roles', response.roles.join(','));
         return response;
       })
     );
   }
   logout(): void {
     localStorage.removeItem('authToken');
+    localStorage.removeItem('menuItems');
+    localStorage.removeItem('roles');
   }
 
   isAuthenticated(): boolean {

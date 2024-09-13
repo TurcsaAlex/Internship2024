@@ -60,7 +60,10 @@ namespace TorqueAndTread.Server.Controllers
                     Roles = m.Roles.Select(r=> new RoleDTO
                     {
                         RoleId = r.RoleId,
-                        Name=r.Name
+                        Name=r.Name,
+                        Active = r.Active,
+                        LastUpdatedOn = r.LastUpdatedOn,
+                        CreatedOn = r.CreatedOn
                     }).ToList()
                 }).ToListAsync();
             return Ok(menuItems);
@@ -178,7 +181,7 @@ namespace TorqueAndTread.Server.Controllers
         public async Task<IActionResult> PutMenuItem(int id, [FromBody] MenuItemDTO menuItemDTO)
         {
 
-            var existingMenuItem = context.MenuItems.Include(m=>m.MenuItemRoles).Include(m=> m.CreatedBy).FirstOrDefault(m=>m.MenuItemId == id);
+            var existingMenuItem = context.MenuItems.Include(m=>m.MenuItemRoles).Include(m=> m.Roles).FirstOrDefault(m=>m.MenuItemId == id);
             if (existingMenuItem == null)
             {
                 return NotFound();
@@ -203,16 +206,19 @@ namespace TorqueAndTread.Server.Controllers
 
 
             var existingRoleIds = existingMenuItem.MenuItemRoles.Select(mr => mr.RoleId).ToList();
-            var newRoleIds = menuItemDTO.Roles.Select( r=> r.RoleId).ToList(); 
+            var newRoleIds = menuItemDTO.Roles.Select(r=> r.RoleId).ToList();
+            Console.WriteLine($"Received roles count: , {menuItemDTO.Roles?.Count ?? 0}");
 
             var rolesToAdd = newRoleIds.Except(existingRoleIds).ToList();
 
             foreach (var roleId in rolesToAdd)
             {
-                var role = await context.Roles.FindAsync(roleId);
-                if (role != null) 
-                {
-                  
+                Console.WriteLine($"adding role {roleId} to MenuItem");
+                
+                    var role = await context.Roles.FindAsync(roleId);
+                    if (role != null)
+                    {
+
                         var menuItemRole = new MenuItemRole
                         {
                             MenuItemId = existingMenuItem.MenuItemId,
@@ -224,8 +230,13 @@ namespace TorqueAndTread.Server.Controllers
                             Active = true
                         };
                         existingMenuItem.MenuItemRoles.Add(menuItemRole);
-                    
-                }
+
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Role with Id {roleId} not found");
+                    }
+                
             }
 
             //delete roles that are not associated

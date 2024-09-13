@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { MenuItem } from '../../menus/menu-item.model';
+import { MenuService } from '../../../service/menu.service';
 import { Role } from '../../../models/role'; 
 import { MatPaginator } from '@angular/material/paginator';
 import { AddmenuitemsroleComponent } from './addmenuitemsrole/addmenuitemsrole.component';
@@ -24,7 +24,8 @@ export class RoletableComponent implements AfterViewInit, OnChanges{
 
   constructor(
     private roleService: RoleService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private menuService: MenuService,
   ) {}
   
 
@@ -58,6 +59,7 @@ export class RoletableComponent implements AfterViewInit, OnChanges{
   openAddModal() {
     console.log('opening modal with menuitemid: ', this.menuItemId);
     if(this.menuItemId !== null && this.menuItemId !== undefined){
+
       const modalRef = this.modalService.open(AddmenuitemsroleComponent);
     modalRef.componentInstance.roleIds = this.dataSource.data.map(r => r.roleId);
     modalRef.componentInstance.menuItemId = this.menuItemId;
@@ -65,6 +67,7 @@ export class RoletableComponent implements AfterViewInit, OnChanges{
       (result) => {
         console.log('modal result:', result);
         if (result !== 'Close' && this.menuItemId) {
+          console.log('MenuItemID:', this.menuItemId);
           console.log('add role with id:', result.roleId);
           this.roleService.addRoleToMenuItem(this.menuItemId, result.roleId).subscribe({
             next: () => {
@@ -88,7 +91,7 @@ export class RoletableComponent implements AfterViewInit, OnChanges{
   deleteRole(roleId: number) {
     if(this.menuItemId)
       {
-        console.log('vezi de e sters roleid: ',this.menuItemId, roleId);
+        console.log('dau delete la:', roleId, 'din menu item id:',this.menuItemId);
         this.roleService.removeRoleFromMenuItem(this.menuItemId, roleId).subscribe({
           next: () => {
             this.refreshRoles();

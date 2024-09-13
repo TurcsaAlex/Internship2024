@@ -54,7 +54,10 @@ namespace TorqueAndTread.Server.Context
             modelBuilder.Entity<ProductBOM>().HasKey(ur => new { ur.ProductId, ur.BOMId });
 
 
-            modelBuilder.Entity<MenuItemRole>().HasKey(mr => mr.MenuItemRoleId);
+            modelBuilder.Entity<MenuItemRole>().HasKey(mr => new { mr.MenuItemId, mr.RoleId });
+            modelBuilder.Entity<MenuItemRole>().HasOne(mr => mr.MenuItem).WithMany(m => m.MenuItemRoles).HasForeignKey(mr=> mr.MenuItemId);
+            modelBuilder.Entity<MenuItemRole>().HasOne(mr => mr.Role).WithMany(r => r.MenuItemRoles).HasForeignKey(mr=> mr.RoleId);
+            modelBuilder.Entity<MenuItemRole>().Property(mr => mr.MenuItemRoleId).ValueGeneratedOnAdd();
 
             modelBuilder.Entity<ActionType>().HasMany(e => e.MenuItems).WithMany(e => e.ActionTypes)
                 .UsingEntity<MenuItemActionRole>(

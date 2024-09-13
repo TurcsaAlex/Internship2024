@@ -49,7 +49,7 @@ namespace TorqueAndTread.Server.Controllers
             switch (authResp.Code)
             {
                 case 200:
-                    return Ok(new { Token =authResp.Token });
+                    return Ok(authResp);
                 case 404:
                     return NotFound(new { Message = "User not found" });
                 case 500:

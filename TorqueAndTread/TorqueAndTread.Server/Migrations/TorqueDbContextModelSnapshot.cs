@@ -89,7 +89,7 @@ namespace TorqueAndTread.Server.Migrations
                     b.Property<DateTime?>("LastUpdatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("MaterialId")
+                    b.Property<int>("MaterialId")
                         .HasColumnType("int");
 
                     b.HasKey("BOMId");
@@ -325,42 +325,107 @@ namespace TorqueAndTread.Server.Migrations
                     b.HasData(
                         new
                         {
-                            MenuItemId = -1,
+                            MenuItemId = 1,
                             Active = true,
                             CreatedById = -1,
                             CreatedOn = new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified),
                             IconClass = "",
                             LastUpdatedById = -1,
                             LastUpdatedOn = new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            Link = "",
-                            Name = "aleluia",
+                            Link = "/dashboard",
+                            Name = "Dashboard",
                             OrderNo = 1
                         },
                         new
                         {
-                            MenuItemId = -2,
+                            MenuItemId = 2,
                             Active = true,
                             CreatedById = -1,
                             CreatedOn = new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified),
-                            IconClass = "",
+                            IconClass = "fas fa-bars",
                             LastUpdatedById = -1,
                             LastUpdatedOn = new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            Link = "",
-                            Name = "mergemenuitems",
-                            OrderNo = 1
+                            Link = "/menus",
+                            Name = "Menus",
+                            OrderNo = 2
                         },
                         new
                         {
-                            MenuItemId = -3,
+                            MenuItemId = 3,
                             Active = true,
                             CreatedById = -1,
                             CreatedOn = new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified),
-                            IconClass = "",
+                            IconClass = "fas fa-users",
                             LastUpdatedById = -1,
                             LastUpdatedOn = new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            Link = "",
-                            Name = "am creat acest meniu",
-                            OrderNo = 1
+                            Link = "/users",
+                            Name = "Users",
+                            OrderNo = 3
+                        },
+                        new
+                        {
+                            MenuItemId = 4,
+                            Active = true,
+                            CreatedById = -1,
+                            CreatedOn = new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified),
+                            IconClass = "fas fa-user-tag",
+                            LastUpdatedById = -1,
+                            LastUpdatedOn = new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            Link = "/roles",
+                            Name = "Roles",
+                            OrderNo = 4
+                        },
+                        new
+                        {
+                            MenuItemId = 5,
+                            Active = true,
+                            CreatedById = -1,
+                            CreatedOn = new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified),
+                            IconClass = "fas fa-box",
+                            LastUpdatedById = -1,
+                            LastUpdatedOn = new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            Link = "/products",
+                            Name = "Products",
+                            OrderNo = 5
+                        },
+                        new
+                        {
+                            MenuItemId = 6,
+                            Active = true,
+                            CreatedById = -1,
+                            CreatedOn = new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified),
+                            IconClass = "fas fa-boxes",
+                            LastUpdatedById = -1,
+                            LastUpdatedOn = new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            Link = "/containers",
+                            Name = "Containers",
+                            OrderNo = 6
+                        },
+                        new
+                        {
+                            MenuItemId = 7,
+                            Active = true,
+                            CreatedById = -1,
+                            CreatedOn = new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified),
+                            IconClass = "fas fa-list-alt",
+                            LastUpdatedById = -1,
+                            LastUpdatedOn = new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            Link = "/boms",
+                            Name = "BOMs",
+                            OrderNo = 7
+                        },
+                        new
+                        {
+                            MenuItemId = 8,
+                            Active = true,
+                            CreatedById = -1,
+                            CreatedOn = new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified),
+                            IconClass = "fas fa-industry",
+                            LastUpdatedById = -1,
+                            LastUpdatedOn = new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            Link = "/productionorders",
+                            Name = "Production Orders",
+                            OrderNo = 8
                         });
                 });
 
@@ -1000,7 +1065,9 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasOne("TorqueAndTread.Server.Models.Product", "Material")
                         .WithMany()
-                        .HasForeignKey("MaterialId");
+                        .HasForeignKey("MaterialId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("CreatedBy");
 

@@ -47,7 +47,7 @@ namespace TorqueAndTread.Server.Controllers
         public async Task<IActionResult> AddRoleToMenuItem(int id, [FromBody] int roleId)
         {
             Console.WriteLine($"Received menuItemId : {id}, roleId: {roleId}");
-            var menuItem = await context.MenuItems.Include(m => m.Roles).FirstOrDefaultAsync(m => m.MenuItemId == id);
+            var menuItem = await context.MenuItems.Include(m => m.MenuItemRoles).FirstOrDefaultAsync(m => m.MenuItemId == id);
             if (menuItem == null)
             {
                 return NotFound(new { message = "Menu item not found" });
@@ -59,7 +59,7 @@ namespace TorqueAndTread.Server.Controllers
                 return NotFound(new { message = "Role not found" });
             }
 
-            if (menuItem.Roles.Any(r => r.RoleId == roleId))
+            if (menuItem.MenuItemRoles.Any(mr => mr.RoleId == roleId))
             {
                 return BadRequest(new { message = "Role is already associated with this menu item" });
             }
@@ -81,11 +81,10 @@ namespace TorqueAndTread.Server.Controllers
                 Active = true,
             };
 
-            context.MenuItemRoles.Add(menuItemRole); 
+            context.MenuItemRoles.Add(menuItemRole);
+            await context.SaveChangesAsync();
             try
             {
-                
-                await context.SaveChangesAsync();
                 return Ok(new { message = "Role added" });
             }
             catch
@@ -98,26 +97,25 @@ namespace TorqueAndTread.Server.Controllers
         [HttpDelete("{id}/roles/{roleId}")]
         public async Task<IActionResult> RemoveRoleFromMenuItem(int id, int roleId)
         {
-            var menuItem = context.MenuItems.Include(m => m.Roles).FirstOrDefault(m => m.MenuItemId == id);
+            var menuItem = context.MenuItems.Include(m =>m.MenuItemRoles).FirstOrDefault(m => m.MenuItemId == id);
             if (menuItem == null)
-            {
-                return NotFound(new { message = "Menu item not found" });
-            }
-
-            var role = context.MenuItemRoles.FirstOrDefault(mr => mr.MenuItemId == id && mr.RoleId == roleId); 
-            if (role == null)
             {
                 return NotFound(new { message = "Role not found on this menu item" });
             }
-            else
-            {
 
-                role.LastUpdatedOn = DateTime.UtcNow;
-                role.LastUpdatedBy = menuItem.LastUpdatedBy;
-                role.Active = false;
+            
+
+                menuItem.LastUpdatedOn = DateTime.UtcNow;
+                menuItem.LastUpdatedBy = menuItem.LastUpdatedBy;
+                menuItem.Active = false;
+     
+            var role = menuItem.MenuItemRoles.FirstOrDefault(m => m.RoleId == roleId);
+            if (role == null)
+            {
+                return NotFound(new {message = "Role not found on this menu item"});
             }
            
-            context.MenuItemRoles.Remove(role);
+              menuItem.MenuItemRoles.Remove(role);
             try
             {
                 await context.SaveChangesAsync();

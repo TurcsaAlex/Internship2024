@@ -1,4 +1,6 @@
-﻿namespace TorqueAndTread.Server.DTOs
+﻿using TorqueAndTread.Server.Models;
+
+namespace TorqueAndTread.Server.DTOs
 {
     public class MenuItemDTO
     {
@@ -13,6 +15,16 @@
         public DateTime CreatedOn { get; set; }
         public DateTime LastUpdatedOn { get; set; }
 
-        public List<RoleDTO>? Roles { get; set; }
+        public List<RoleDTO> Roles { get; set; }
+
+        //public MenuItemDTO(MenuItem menuItem)
+        //{
+        //    MenuItemId = menuItem.MenuItemId;
+        //    Name = menuItem.Name;
+        //    IconClass = menuItem.IconClass;
+        //    Link = menuItem.Link;
+        //    Active = menuItem.Active;
+        //}
+      
     }
 }
