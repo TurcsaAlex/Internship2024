@@ -48,6 +48,7 @@ import { BomEditComponent } from './screens/boms/bom-edit/bom-edit.component';
 import { MaterialsTableComponent } from './screens/boms/bom-edit/materials-table/materials-table.component';
 import { MaterialAddComponent } from './screens/boms/bom-edit/materials-table/material-add/material-add.component';
 import { MaterialEditComponent } from './screens/boms/bom-edit/materials-table/material-edit/material-edit.component';
+import { UserProfileComponent } from './screens/user-profile/user-profile.component';
 import { RoletableComponent } from './screens/menu-edit/roletable/roletable.component';
 import { AddmenuitemsroleComponent } from './screens/menu-edit/roletable/addmenuitemsrole/addmenuitemsrole.component';
 
@@ -89,6 +90,7 @@ export class AppService {
     MaterialsTableComponent,
     MaterialAddComponent,
     MaterialEditComponent,
+    UserProfileComponent,
     RoletableComponent,
     AddmenuitemsroleComponent,
   ],

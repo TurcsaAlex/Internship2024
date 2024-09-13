@@ -49,7 +49,7 @@ namespace TorqueAndTread.Server.Controllers
             switch (authResp.Code)
             {
                 case 200:
-                    return Ok(new { Token =authResp.Token });
+                    return Ok(authResp);
                 case 404:
                     return NotFound(new { Message = "User not found" });
                 case 500:
@@ -57,6 +57,14 @@ namespace TorqueAndTread.Server.Controllers
                 default:
                     return Problem();
             }
+        }
+        [HttpPost("logout", Name = "LogoutUser")]
+        public async Task<IActionResult> Logout([FromBody] TokenDTO token)
+        {
+            if (token == null)
+                return BadRequest();
+            await _authService.Logout(token.Token);
+            return Ok();
         }
 
         [HttpPost("register",Name ="RegisterUser")]

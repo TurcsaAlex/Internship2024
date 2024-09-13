@@ -28,7 +28,7 @@ export class LoginComponent {
       this.auth.login(
         { username: username, password: password })
         .subscribe({
-        next:(r)=>this.router.navigateByUrl("/dashboard"),
+        next:(r)=>{},
         error:(r)=>{console.log(r);alert("Invalid Login!")
         }
       });

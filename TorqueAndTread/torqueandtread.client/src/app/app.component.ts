@@ -19,7 +19,9 @@ export class AppComponent implements OnInit {
   public forecasts: WeatherForecast[] = [];
 
   constructor(private http: HttpClient) {}
-
+  pictureEventReciever(event:Event){
+    debugger
+  }
   ngOnInit() {
     //this.getForecasts();
   }

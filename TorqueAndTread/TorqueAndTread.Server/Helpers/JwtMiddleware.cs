@@ -33,11 +33,14 @@ public class JwtMiddleware:IMiddleware
             var handler = new JwtSecurityTokenHandler();
             var jwtToken = handler.ReadJwtToken(token);
             var username = jwtToken.Claims.FirstOrDefault(c => c.Type == "username")?.Value;
+            var userId = jwtToken.Claims.FirstOrDefault(c => c.Type == "userId")?.Value;
+
 
             if (!string.IsNullOrEmpty(username))
             {
                 // Add the username to HttpContext for later use
                 context.Items["Username"] = username;
+                context.Items["UserId"] = userId;
             }
 
         }
