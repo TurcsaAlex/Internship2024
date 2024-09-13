@@ -39,6 +39,14 @@ export class UserService {
       })
     );
   }
+  getCurrentUser(){
+    return this.http.get<any>(this.baseUrl+"/current",{}).pipe(
+      map((response: User) => {
+        return response;
+      }),
+      catchError((e)=> throwError(()=>new Error(e)))
+    );
+  }
 
   updateUser(user:User){
     console.log(user);

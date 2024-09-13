@@ -31,6 +31,20 @@ namespace TorqueAndTread.Server.Controllers
             return Ok(user);
         }
 
+        [HttpGet("current")]
+        public async Task<IActionResult> GetCurrentUser()
+        {
+            var username = HttpContext.Items["Username"] as string;
+            var userId = int.Parse(HttpContext.Items["UserId"] as string);
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+
+            var userDTO = await _userService.GetUser(userId);
+            return Ok(userDTO.First());
+        }
+
         [HttpPut]
         public async Task<IActionResult> UpdateUser([FromBody] UserAbvrDTO userAbvrDTO)
         {

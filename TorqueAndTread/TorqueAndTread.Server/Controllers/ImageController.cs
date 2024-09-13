@@ -63,5 +63,20 @@ namespace TorqueAndTread.Server.Controllers
             var contentType = "image/" + Path.GetExtension(fileName).TrimStart('.');
             return File(image, contentType);
         }
+        [HttpGet("base64/{fileName}")]
+        public IActionResult GetImageByNameBase64(string fileName)
+        {
+            var uploadsFolder = Path.Combine(_environment.ContentRootPath, "Files\\uploads");
+            var filePath = Path.Combine(uploadsFolder, fileName);
+
+            if (!System.IO.File.Exists(filePath))
+            {
+                return NotFound("Image not found.");
+            }
+
+            var image = System.IO.File.ReadAllBytes(filePath);
+            string base64Image = Convert.ToBase64String(image);
+            return Ok(new { Image=base64Image });
+        }
     }
 }
