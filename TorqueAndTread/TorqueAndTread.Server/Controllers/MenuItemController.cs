@@ -177,7 +177,6 @@ namespace TorqueAndTread.Server.Controllers
 
 
         [HttpPut("{id}")]
-
         public async Task<IActionResult> PutMenuItem(int id, [FromBody] MenuItemDTO menuItemDTO)
         {
 
@@ -211,46 +210,46 @@ namespace TorqueAndTread.Server.Controllers
 
             var rolesToAdd = newRoleIds.Except(existingRoleIds).ToList();
 
-            foreach (var roleId in rolesToAdd)
-            {
-                Console.WriteLine($"adding role {roleId} to MenuItem");
+            //foreach (var roleId in rolesToAdd)
+            //{
+            //    Console.WriteLine($"adding role {roleId} to MenuItem");
                 
-                    var role = await context.Roles.FindAsync(roleId);
-                    if (role != null)
-                    {
+            //        var role = await context.Roles.FindAsync(roleId);
+            //        if (role != null)
+            //        {
 
-                        var menuItemRole = new MenuItemRole
-                        {
-                            MenuItemId = existingMenuItem.MenuItemId,
-                            RoleId = roleId,
-                            CreatedBy = currentUser,
-                            CreatedOn = DateTime.UtcNow,
-                            LastUpdatedBy = currentUser,
-                            LastUpdatedOn = DateTime.UtcNow,
-                            Active = true
-                        };
-                        existingMenuItem.MenuItemRoles.Add(menuItemRole);
+            //            var menuItemRole = new MenuItemRole
+            //            {
+            //                MenuItemId = existingMenuItem.MenuItemId,
+            //                RoleId = roleId,
+            //                CreatedBy = currentUser,
+            //                CreatedOn = DateTime.UtcNow,
+            //                LastUpdatedBy = currentUser,
+            //                LastUpdatedOn = DateTime.UtcNow,
+            //                Active = true
+            //            };
+            //            existingMenuItem.MenuItemRoles.Add(menuItemRole);
 
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Role with Id {roleId} not found");
-                    }
+            //        }
+            //        else
+            //        {
+            //            Console.WriteLine($"Role with Id {roleId} not found");
+            //        }
                 
-            }
+            //}
 
             //delete roles that are not associated
 
-            var rolesToRemove = existingRoleIds.Except(newRoleIds).ToList();
-            foreach (var roleId in rolesToRemove)
-            {
-                var menuItemRole = existingMenuItem.MenuItemRoles.FirstOrDefault(mr => mr.RoleId == roleId);
-                if(menuItemRole != null)
-                {
-                    existingMenuItem.MenuItemRoles.Remove(menuItemRole);
-                }
+            //var rolesToRemove = existingRoleIds.Except(newRoleIds).ToList();
+            //foreach (var roleId in rolesToRemove)
+            //{
+            //    var menuItemRole = existingMenuItem.MenuItemRoles.FirstOrDefault(mr => mr.RoleId == roleId);
+            //    if(menuItemRole != null)
+            //    {
+            //        existingMenuItem.MenuItemRoles.Remove(menuItemRole);
+            //    }
                 
-            }
+            //}
 
             try
             {

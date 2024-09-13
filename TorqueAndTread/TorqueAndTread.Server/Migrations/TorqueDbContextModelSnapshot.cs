@@ -55,7 +55,7 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasIndex("LastUpdatedById");
 
-                    b.ToTable("ActionType");
+                    b.ToTable("ActionType", (string)null);
                 });
 
             modelBuilder.Entity("TorqueAndTread.Server.Models.BOM", b =>
@@ -100,7 +100,7 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasIndex("MaterialId");
 
-                    b.ToTable("BOMs");
+                    b.ToTable("BOMs", (string)null);
                 });
 
             modelBuilder.Entity("TorqueAndTread.Server.Models.Container", b =>
@@ -166,7 +166,7 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasIndex("UOMId");
 
-                    b.ToTable("Containers");
+                    b.ToTable("Containers", (string)null);
                 });
 
             modelBuilder.Entity("TorqueAndTread.Server.Models.ContainerType", b =>
@@ -203,7 +203,7 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasIndex("LastUpdatedById");
 
-                    b.ToTable("ContainerTypes");
+                    b.ToTable("ContainerTypes", (string)null);
 
                     b.HasData(
                         new
@@ -273,7 +273,7 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("LoginAttempts");
+                    b.ToTable("LoginAttempts", (string)null);
                 });
 
             modelBuilder.Entity("TorqueAndTread.Server.Models.MenuItem", b =>
@@ -320,7 +320,7 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasIndex("LastUpdatedById");
 
-                    b.ToTable("MenuItems");
+                    b.ToTable("MenuItems", (string)null);
 
                     b.HasData(
                         new
@@ -476,7 +476,7 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("MenuItemActionRole");
+                    b.ToTable("MenuItemActionRole", (string)null);
                 });
 
             modelBuilder.Entity("TorqueAndTread.Server.Models.MenuItemRole", b =>
@@ -518,7 +518,7 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("MenuItemRoles");
+                    b.ToTable("MenuItemRoles", (string)null);
                 });
 
             modelBuilder.Entity("TorqueAndTread.Server.Models.Product", b =>
@@ -581,7 +581,7 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasIndex("UOMId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("TorqueAndTread.Server.Models.ProductBOM", b =>
@@ -618,7 +618,7 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasIndex("LastUpdatedById");
 
-                    b.ToTable("ProductBOMs");
+                    b.ToTable("ProductBOMs", (string)null);
                 });
 
             modelBuilder.Entity("TorqueAndTread.Server.Models.ProductType", b =>
@@ -654,7 +654,7 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasIndex("LastUpdatedById");
 
-                    b.ToTable("ProductTypes");
+                    b.ToTable("ProductTypes", (string)null);
 
                     b.HasData(
                         new
@@ -722,7 +722,7 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasIndex("LastUpdatedById");
 
-                    b.ToTable("Roles");
+                    b.ToTable("Roles", (string)null);
 
                     b.HasData(
                         new
@@ -790,7 +790,7 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasIndex("LastUpdatedById");
 
-                    b.ToTable("UOMs");
+                    b.ToTable("UOMs", (string)null);
 
                     b.HasData(
                         new
@@ -877,7 +877,7 @@ namespace TorqueAndTread.Server.Migrations
                     b.HasIndex("UserName", "Email")
                         .IsUnique();
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
 
                     b.HasData(
                         new
@@ -955,7 +955,7 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("UserRoles");
+                    b.ToTable("UserRoles", (string)null);
 
                     b.HasData(
                         new

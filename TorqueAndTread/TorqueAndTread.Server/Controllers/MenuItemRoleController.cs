@@ -81,17 +81,17 @@ namespace TorqueAndTread.Server.Controllers
                 Active = true,
             };
 
-            context.MenuItemRoles.Add(menuItemRole);
+            await context.MenuItemRoles.AddAsync(menuItemRole);
             await context.SaveChangesAsync();
             try
             {
                 return Ok(new { message = "Role added" });
-            }
-            catch
+            }catch
             {
                 return BadRequest();
             }
 
+            
         }
 
         [HttpDelete("{id}/roles/{roleId}")]
