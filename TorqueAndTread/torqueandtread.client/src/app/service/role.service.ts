@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import { Role, UserRole } from '../models/role';
 import { MenuItem } from '../screens/menus/menu-item.model';
+import { MenuService } from './menu.service';
+import { JsonPipe } from '@angular/common';
 
 
 @Injectable({
@@ -14,7 +16,9 @@ export class RoleService {
   private rolebaseUrl="/api/Role";
   private menuItemRoleBaseUrl = "/api/MenuItem";
   
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,
+    private menuService: MenuService
+  ) { }
 
   
   getAllByUserId(userId:number){
@@ -81,7 +85,7 @@ export class RoleService {
   {
     return this.http.get<any>(`${this.menuItemRoleBaseUrl}/${menuItemId}`)
       .pipe(map((response: MenuItem) => {
-        console.log(response.roles);
+        console.log('Roles returned from API: ', response.roles);
         return response.roles;
       }), 
       catchError((e) => {
@@ -108,13 +112,33 @@ export class RoleService {
   );
   }
 
+  updateMenuItemsWithRoles( menuItemId : number, menuItemDTO : any){
+    const headers = new HttpHeaders().set('Content-Type','application/json');
+    return this.http.put<any>(`/api/MenuItem/${menuItemId}`, menuItemDTO, {headers}).pipe(
+      map((response: any) => {
+        console.log(response);
+        return response;
+      }),
+      catchError((e)=> throwError(() => console.log(e)))
+    );
+  }
+
   removeRoleFromMenuItem(menuItemId: number, roleId: number){
-    return this.http.delete<any>(`/api/MenuItemRole/${menuItemId}/roles/${roleId}`).pipe(map((response:any)=> {
+    const headers = new HttpHeaders().set('Content-Type','application/json');
+    return this.http.delete<any>(`/api/MenuItemRole/${menuItemId}/roles/${roleId}`,{headers}).pipe(map((response:any)=> {
       console.log(response);
       return response;
     }),
     catchError((e) => throwError(()=> console.log(e)))
   );
+  }
+
+  refreshMenuItems(){
+    this.menuService.getMenuItems().subscribe({
+      next: (menuItems) => {
+        localStorage.setItem('menuItems', JSON.stringify(menuItems));
+      }
+    })
   }
 }
 

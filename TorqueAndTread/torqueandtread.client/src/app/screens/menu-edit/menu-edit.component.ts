@@ -90,6 +90,8 @@ loadRoles(){
     this.roleService.getRolesByMenuItemId(this.menuItemId).subscribe({next:(roles) =>
     {
       this.menuItemRoles = roles;
+      console.log('Menu item roles loaded:', this.menuItemRoles);
+
     },
     error: (err) => {
       console.error('Failed to load roles for menu item', err);
@@ -121,11 +123,12 @@ removeRole(roleId: number){
 }
   onSubmit(toastTemplate: TemplateRef<any>): void {
     const formValues = this.menuItemForm.value;
-    if (this.menuItemForm.valid) {
+    console.log('Menu Item Roles: ', this.menuItemRoles);
+    if (this.menuItemForm.valid && this.menuItemId !== null) {
       const menuItemUpdate: MenuItem = { menuItemId: this.currentMenuItemId!,
                                         ...formValues,
                                         roles: this.menuItemRoles};
-        this.menuService.editMenuItem(menuItemUpdate).subscribe({
+        this.roleService.updateMenuItemsWithRoles(this.currentMenuItemId!,menuItemUpdate).subscribe({
           next: (updateMenuItem) => {
             this.menuItemRoles = updateMenuItem.roles;
             this.toastService.show({

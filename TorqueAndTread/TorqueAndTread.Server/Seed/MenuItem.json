@@ -1,41 +1,99 @@
 [
   {
-    "MenuItemId": -1,
-    "Name": "aleluia",
+    "MenuItemId": 1,
+    "Name": "Dashboard",
     "OrderNo": 1,
     "IconClass": "",
-    "Link": "",
+    "Link": "/dashboard",
     "Active": true,
     "CreatedById": -1,
     "CreatedOn": "2024-08-19T10:15:30",
     "LastUpdatedById": -1,
     "LastUpdatedOn": "2024-08-19T12:00:00"
-
   },
   {
-    "MenuItemId": -2,
-    "Name": "mergemenuitems",
-    "OrderNo": 1,
-    "IconClass": "",
-    "Link": "",
+    "MenuItemId": 2,
+    "Name": "Menus",
+    "OrderNo": 2,
+    "IconClass": "fas fa-bars",
+    "Link": "/menus",
     "Active": true,
     "CreatedById": -1,
     "CreatedOn": "2024-08-19T10:15:30",
     "LastUpdatedById": -1,
     "LastUpdatedOn": "2024-08-19T12:00:00"
-
   },
   {
-    "MenuItemId": -3,
-    "Name": "am creat acest meniu",
-    "OrderNo": 1,
-    "IconClass": "",
-    "Link": "",
+    "MenuItemId": 3,
+    "Name": "Users",
+    "OrderNo": 3,
+    "IconClass": "fas fa-users",
+    "Link": "/users",
     "Active": true,
     "CreatedById": -1,
     "CreatedOn": "2024-08-19T10:15:30",
     "LastUpdatedById": -1,
     "LastUpdatedOn": "2024-08-19T12:00:00"
-
+  },
+  {
+    "MenuItemId": 4,
+    "Name": "Roles",
+    "OrderNo": 4,
+    "IconClass": "fas fa-user-tag",
+    "Link": "/roles",
+    "Active": true,
+    "CreatedById": -1,
+    "CreatedOn": "2024-08-19T10:15:30",
+    "LastUpdatedById": -1,
+    "LastUpdatedOn": "2024-08-19T12:00:00"
+  },
+  {
+    "MenuItemId": 5,
+    "Name": "Products",
+    "OrderNo": 5,
+    "IconClass": "fas fa-box",
+    "Link": "/products",
+    "Active": true,
+    "CreatedById": -1,
+    "CreatedOn": "2024-08-19T10:15:30",
+    "LastUpdatedById": -1,
+    "LastUpdatedOn": "2024-08-19T12:00:00"
+  },
+  {
+    "MenuItemId": 6,
+    "Name": "Containers",
+    "OrderNo": 6,
+    "IconClass": "fas fa-boxes",
+    "Link": "/containers",
+    "Active": true,
+    "CreatedById": -1,
+    "CreatedOn": "2024-08-19T10:15:30",
+    "LastUpdatedById": -1,
+    "LastUpdatedOn": "2024-08-19T12:00:00"
+  },
+  {
+    "MenuItemId": 7,
+    "Name": "BOMs",
+    "OrderNo": 7,
+    "IconClass": "fas fa-list-alt",
+    "Link": "/boms",
+    "Active": true,
+    "CreatedById": -1,
+    "CreatedOn": "2024-08-19T10:15:30",
+    "LastUpdatedById": -1,
+    "LastUpdatedOn": "2024-08-19T12:00:00"
+  },
+  {
+    "MenuItemId": 8,
+    "Name": "Production Orders",
+    "OrderNo": 8,
+    "IconClass": "fas fa-industry",
+    "Link": "/productionorders",
+    "Active": true,
+    "CreatedById": -1,
+    "CreatedOn": "2024-08-19T10:15:30",
+    "LastUpdatedById": -1,
+    "LastUpdatedOn": "2024-08-19T12:00:00"
   }
 ]
+  

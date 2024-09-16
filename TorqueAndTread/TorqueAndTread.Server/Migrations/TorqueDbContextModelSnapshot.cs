@@ -55,7 +55,7 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasIndex("LastUpdatedById");
 
-                    b.ToTable("ActionType");
+                    b.ToTable("ActionType", (string)null);
                 });
 
             modelBuilder.Entity("TorqueAndTread.Server.Models.BOM", b =>
@@ -89,7 +89,7 @@ namespace TorqueAndTread.Server.Migrations
                     b.Property<DateTime?>("LastUpdatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("MaterialId")
+                    b.Property<int>("MaterialId")
                         .HasColumnType("int");
 
                     b.HasKey("BOMId");
@@ -100,7 +100,7 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasIndex("MaterialId");
 
-                    b.ToTable("BOMs");
+                    b.ToTable("BOMs", (string)null);
                 });
 
             modelBuilder.Entity("TorqueAndTread.Server.Models.Container", b =>
@@ -166,7 +166,7 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasIndex("UOMId");
 
-                    b.ToTable("Containers");
+                    b.ToTable("Containers", (string)null);
                 });
 
             modelBuilder.Entity("TorqueAndTread.Server.Models.ContainerType", b =>
@@ -203,7 +203,7 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasIndex("LastUpdatedById");
 
-                    b.ToTable("ContainerTypes");
+                    b.ToTable("ContainerTypes", (string)null);
 
                     b.HasData(
                         new
@@ -273,7 +273,7 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("LoginAttempts");
+                    b.ToTable("LoginAttempts", (string)null);
                 });
 
             modelBuilder.Entity("TorqueAndTread.Server.Models.MenuItem", b =>
@@ -320,47 +320,112 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasIndex("LastUpdatedById");
 
-                    b.ToTable("MenuItems");
+                    b.ToTable("MenuItems", (string)null);
 
                     b.HasData(
                         new
                         {
-                            MenuItemId = -1,
+                            MenuItemId = 1,
                             Active = true,
                             CreatedById = -1,
                             CreatedOn = new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified),
                             IconClass = "",
                             LastUpdatedById = -1,
                             LastUpdatedOn = new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            Link = "",
-                            Name = "aleluia",
+                            Link = "/dashboard",
+                            Name = "Dashboard",
                             OrderNo = 1
                         },
                         new
                         {
-                            MenuItemId = -2,
+                            MenuItemId = 2,
                             Active = true,
                             CreatedById = -1,
                             CreatedOn = new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified),
-                            IconClass = "",
+                            IconClass = "fas fa-bars",
                             LastUpdatedById = -1,
                             LastUpdatedOn = new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            Link = "",
-                            Name = "mergemenuitems",
-                            OrderNo = 1
+                            Link = "/menus",
+                            Name = "Menus",
+                            OrderNo = 2
                         },
                         new
                         {
-                            MenuItemId = -3,
+                            MenuItemId = 3,
                             Active = true,
                             CreatedById = -1,
                             CreatedOn = new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified),
-                            IconClass = "",
+                            IconClass = "fas fa-users",
                             LastUpdatedById = -1,
                             LastUpdatedOn = new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified),
-                            Link = "",
-                            Name = "am creat acest meniu",
-                            OrderNo = 1
+                            Link = "/users",
+                            Name = "Users",
+                            OrderNo = 3
+                        },
+                        new
+                        {
+                            MenuItemId = 4,
+                            Active = true,
+                            CreatedById = -1,
+                            CreatedOn = new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified),
+                            IconClass = "fas fa-user-tag",
+                            LastUpdatedById = -1,
+                            LastUpdatedOn = new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            Link = "/roles",
+                            Name = "Roles",
+                            OrderNo = 4
+                        },
+                        new
+                        {
+                            MenuItemId = 5,
+                            Active = true,
+                            CreatedById = -1,
+                            CreatedOn = new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified),
+                            IconClass = "fas fa-box",
+                            LastUpdatedById = -1,
+                            LastUpdatedOn = new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            Link = "/products",
+                            Name = "Products",
+                            OrderNo = 5
+                        },
+                        new
+                        {
+                            MenuItemId = 6,
+                            Active = true,
+                            CreatedById = -1,
+                            CreatedOn = new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified),
+                            IconClass = "fas fa-boxes",
+                            LastUpdatedById = -1,
+                            LastUpdatedOn = new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            Link = "/containers",
+                            Name = "Containers",
+                            OrderNo = 6
+                        },
+                        new
+                        {
+                            MenuItemId = 7,
+                            Active = true,
+                            CreatedById = -1,
+                            CreatedOn = new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified),
+                            IconClass = "fas fa-list-alt",
+                            LastUpdatedById = -1,
+                            LastUpdatedOn = new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            Link = "/boms",
+                            Name = "BOMs",
+                            OrderNo = 7
+                        },
+                        new
+                        {
+                            MenuItemId = 8,
+                            Active = true,
+                            CreatedById = -1,
+                            CreatedOn = new DateTime(2024, 8, 19, 10, 15, 30, 0, DateTimeKind.Unspecified),
+                            IconClass = "fas fa-industry",
+                            LastUpdatedById = -1,
+                            LastUpdatedOn = new DateTime(2024, 8, 19, 12, 0, 0, 0, DateTimeKind.Unspecified),
+                            Link = "/productionorders",
+                            Name = "Production Orders",
+                            OrderNo = 8
                         });
                 });
 
@@ -411,7 +476,7 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("MenuItemActionRole");
+                    b.ToTable("MenuItemActionRole", (string)null);
                 });
 
             modelBuilder.Entity("TorqueAndTread.Server.Models.MenuItemRole", b =>
@@ -453,7 +518,7 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("MenuItemRoles");
+                    b.ToTable("MenuItemRoles", (string)null);
                 });
 
             modelBuilder.Entity("TorqueAndTread.Server.Models.Product", b =>
@@ -516,7 +581,7 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasIndex("UOMId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("TorqueAndTread.Server.Models.ProductBOM", b =>
@@ -553,7 +618,7 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasIndex("LastUpdatedById");
 
-                    b.ToTable("ProductBOMs");
+                    b.ToTable("ProductBOMs", (string)null);
                 });
 
             modelBuilder.Entity("TorqueAndTread.Server.Models.ProductType", b =>
@@ -589,7 +654,7 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasIndex("LastUpdatedById");
 
-                    b.ToTable("ProductTypes");
+                    b.ToTable("ProductTypes", (string)null);
 
                     b.HasData(
                         new
@@ -657,7 +722,7 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasIndex("LastUpdatedById");
 
-                    b.ToTable("Roles");
+                    b.ToTable("Roles", (string)null);
 
                     b.HasData(
                         new
@@ -725,7 +790,7 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasIndex("LastUpdatedById");
 
-                    b.ToTable("UOMs");
+                    b.ToTable("UOMs", (string)null);
 
                     b.HasData(
                         new
@@ -812,7 +877,7 @@ namespace TorqueAndTread.Server.Migrations
                     b.HasIndex("UserName", "Email")
                         .IsUnique();
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
 
                     b.HasData(
                         new
@@ -890,7 +955,7 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("UserRoles");
+                    b.ToTable("UserRoles", (string)null);
 
                     b.HasData(
                         new
@@ -1000,7 +1065,9 @@ namespace TorqueAndTread.Server.Migrations
 
                     b.HasOne("TorqueAndTread.Server.Models.Product", "Material")
                         .WithMany()
-                        .HasForeignKey("MaterialId");
+                        .HasForeignKey("MaterialId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("CreatedBy");
 

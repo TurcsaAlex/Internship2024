@@ -69,6 +69,8 @@ namespace TorqueAndTread.Server.Services
 
             var token = GenerateJSONWebToken(user);
 
+            
+
             var tokenList = _cache.Get<List<string>>(TokenListCacheKey) ?? [];
 
             // Add the new token to the list
@@ -85,7 +87,25 @@ namespace TorqueAndTread.Server.Services
             loginAttempt.User = user;
             await _authContext.LoginAttempts.AddAsync(loginAttempt);
             await _authContext.SaveChangesAsync();
-            return new AuthDTO(200, token, user.ProfilePicturePath);
+            
+
+            var userRoles = _authContext.UserRoles.Where(ur => ur.UserId == user.UserId).Select(ur => new RoleDTO(ur.Role)).ToList(); // obtain roles of user and map to RoleDTO
+            var menuItems = GetUserMenuItemsForRole(user.UserId); // obtain menus associated to roles of the user
+
+            return new AuthDTO(200, token, menuItems, userRoles, user.ProfilePicturePath);
+        }
+        private LoginAttempt GenerateEmptyLoginAttempt()
+        {
+            var searchUser = _authContext.Users.Where(u => u.UserId == -1);
+            var active0User = searchUser.First();
+            return new LoginAttempt()
+            {
+                CreatedBy = active0User,
+                LastUpdatedBy = active0User,
+                CreatedOn = DateTime.Now,
+                LastUpdatedOn = DateTime.Now,
+                Active = true,
+            };
         }
 
         public bool HasToken(string token) {
@@ -107,7 +127,7 @@ namespace TorqueAndTread.Server.Services
             userObj.Active = false;
             await _authContext.Users.AddAsync(userObj);
             var saveResp = await _authContext.SaveChangesAsync();
-            _mailSender.SendActivationMail(userObj.Email);
+            //_mailSender.SendActivationMail(userObj.Email);
             return saveResp;
         }
         private string GenerateJSONWebToken(User userInfo)
@@ -131,75 +151,86 @@ namespace TorqueAndTread.Server.Services
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        private List<MenuItemDTO> GetUserMenuItemsForUser(string token)
+        //private List<MenuItemDTO> GetUserMenuItemsForUser(string token)
+        //{
+        //    var tokenHandler = new JwtSecurityTokenHandler();
+        //    var jwtToken = tokenHandler.ReadJwtToken(token);
+
+        //    var userIdClaims = jwtToken.Claims.FirstOrDefault(c => c.Type == "userId");
+
+        //    if (userIdClaims == null)
+        //    {
+        //        throw new Exception("User ID not found in token");
+        //    }
+
+        //    int userId = int.Parse(userIdClaims.Value);
+        //    var menuItems = _authContext.MenuItems.Include(mi => mi.MenuItemRoles).ThenInclude(mr => mr.Role).Where(mi => mi.MenuItemRoles.Any(mr => mr.Role.UserRoles.Any(ur => ur.UserId == userId))).ToList(); //get all MenuItemRoles associated to current user by UserRoles and MenuItemRoles 
+
+        //    var menuItemDTOs = menuItems.Select(mi => new MenuItemDTO
+        //    {
+        //        MenuItemId = mi.MenuItemId,
+        //        Name = mi.Name,
+        //        Link = mi.Link,
+        //        IconClass = mi.IconClass,
+        //        Roles = mi.MenuItemRoles.Select(mr => new RoleDTO
+        //        {
+        //            RoleId = mr.RoleId,
+        //            Name = mr.Role.Name,
+        //        }).ToList()
+        //    }).ToList();
+
+        //    return menuItemDTOs;
+        //}
+
+        private List<MenuItemDTO> GetUserMenuItemsForRole(int userId)
         {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var jwtToken = tokenHandler.ReadJwtToken(token);
+            var userRoles = _authContext.UserRoles.Where(ur => ur.UserId == userId && ur.Active == true).Select(ur => ur.RoleId).ToList();
 
-            var userIdClaims = jwtToken.Claims.FirstOrDefault(c => c.Type == "userId");
-
-            if(userIdClaims == null)
-            {
-                throw new Exception("User ID not found in token");
-            }
-
-            int userId = int.Parse(userIdClaims.Value); 
-            var menuItems = _authContext.MenuItems.Include(mi => mi.MenuItemRoles).ThenInclude(mr => mr.Role).Where(mi => mi.MenuItemRoles.Any( mr => mr.Role.UserRoles.Any(ur =>ur.UserId == userId))).ToList(); //get all MenuItemRoles associated to current user by UserRoles and MenuItemRoles 
-
-            var menuItemDTOs = menuItems.Select( mi => new MenuItemDTO
-            {
-                MenuItemId = mi.MenuItemId,
-                Name = mi.Name,
-                Link = mi.Link,
-                IconClass = mi.IconClass,
-                Roles = mi.MenuItemRoles.Select(mr => new RoleDTO
+            //var x = _authContext.MenuItemRoles.Include(mr => mr.MenuItem).ToList();
+            var menuItemsList = _authContext.MenuItemRoles.Include(mr => mr.MenuItem).Where(mr => userRoles.Contains(mr.RoleId)) //can change contains with any
+                .Select(mr => new MenuItemDTO
                 {
-                    RoleId = mr.RoleId,
-                    Name = mr.Role.Name,
-                }).ToList()
-            }).ToList();
+                    MenuItemId = mr.MenuItem.MenuItemId,
+                    Name = mr.MenuItem.Name,
+                    IconClass = mr.MenuItem.IconClass,
+                    Link = mr.MenuItem.Link,
+                    Active = mr.MenuItem.Active,
+                    CreatedOn = mr.MenuItem.CreatedOn,
+                    LastUpdatedOn = mr.MenuItem.LastUpdatedOn
+                }).Distinct() // eliminate duplicates
+                .ToList();
 
-            return menuItemDTOs;
-        }
-
-        public List<MenuItemDTO> GetMenuItemsForUserWithCache(string token)
-        {
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var jwtToken = tokenHandler.ReadJwtToken(token);
-
-
-            var userIdClaims = jwtToken.Claims.FirstOrDefault(c => c.Type == "userId");
-
-            if (userIdClaims == null)
-            {
-                throw new Exception("User ID not found in token");
-            }
-
-            int userId = int.Parse(userIdClaims.Value);
-            string cacheKey = $"MenuItemsForUser_ {userId}";
-
-            if(!_cache.TryGetValue(cacheKey, out List<MenuItemDTO> cacheMenuItems)) //verify if menus are stored in cache
-            {
-                cacheMenuItems = GetUserMenuItemsForUser(token); // if not in cache, we obtain them from database
-                _cache.Set(cacheKey, cacheMenuItems, new MemoryCacheEntryOptions
-                {
-                    SlidingExpiration = TimeSpan.FromMinutes(60)
-                });
-            }
-
-            return cacheMenuItems;
-        }
-        private LoginAttempt GenerateEmptyLoginAttempt()
-        {
-            var searchUser = _authContext.Users.Where(u => u.UserId == -1);
-            var active0User = searchUser.First();
-            return new LoginAttempt(){
-                CreatedBy = active0User,
-                LastUpdatedBy = active0User,
-                CreatedOn = DateTime.Now,
-                LastUpdatedOn = DateTime.Now,
-                Active = true,
-            };
+            return menuItemsList;
         }
     }
-}
+
+        //public List<MenuItemDTO> GetMenuItemsForUserWithCache(string token)
+        //{
+        //    var tokenHandler = new JwtSecurityTokenHandler();
+        //    var jwtToken = tokenHandler.ReadJwtToken(token);
+
+
+        //    var userIdClaims = jwtToken.Claims.FirstOrDefault(c => c.Type == "userId");
+
+        //    if (userIdClaims == null)
+        //    {
+        //        throw new Exception("User ID not found in token");
+        //    }
+
+        //    int userId = int.Parse(userIdClaims.Value);
+        //    string cacheKey = $"MenuItemsForUser_ {userId}";
+
+        //    if(!_cache.TryGetValue(cacheKey, out List<MenuItemDTO> cacheMenuItems)) //verify if menus are stored in cache
+        //    {
+        //        cacheMenuItems = GetUserMenuItemsForUser(token); // if not in cache, we obtain them from database
+        //        _cache.Set(cacheKey, cacheMenuItems, new MemoryCacheEntryOptions
+        //        {
+        //            SlidingExpiration = TimeSpan.FromMinutes(60)
+        //        });
+        //    }
+
+        //    return cacheMenuItems;
+        //}
+       
+    }
+

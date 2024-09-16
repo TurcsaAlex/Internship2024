@@ -22,8 +22,8 @@ export class HeaderComponent implements OnInit {
   ) {
     // this.profilePictureSource = localStorage.getItem('currentUserPfp');
     this.authService.loginObservable.subscribe((profilePictureData)=>{
-      console.log(6);
-      this.profilePictureSource=profilePictureData;
+
+      this.profilePictureSource=localStorage.getItem('currentUserPfp');
       if(localStorage.getItem("authToken")){
         this.loggedIn=true;
       }else {
@@ -40,27 +40,17 @@ export class HeaderComponent implements OnInit {
     //     this.ngOnInit();
     //   }
     // });
-    window.onstorage=(e)=>{
-     debugger; 
-    }
-    window.addEventListener('storage',()=>{
-      debugger;
-    });
-
-    
   }
   
   ngOnInit(): void {
+    this.loadMenuItems();
     this.authService.loginObservable.subscribe((profilePictureData)=>{
-      console.log(6);
       this.profilePictureSource=profilePictureData;
       this.cdRef.detectChanges();
+      this.profilePictureSource = localStorage.getItem('currentUserPfp');
+      console.log(this.profilePictureSource);
     });
-    this.authService.loginEvent.subscribe((r)=>{
-      console.log(7);
-      this.cdRef.detectChanges();
-    });
-    this.profilePictureSource = localStorage.getItem('currentUserPfp');
+    
   }
 
   logout() {
@@ -68,10 +58,16 @@ export class HeaderComponent implements OnInit {
       next: () => {
         this.profilePictureSource = null;
         this.loggedIn=false;
+        this.menuItems=[];
         this.router.navigateByUrl('/login');
+       
       }
     });
   }
+
+
+  menuItems : any[] = [];
+
 
   toggleNavbar(): void {
     this.isNavbarShown = !this.isNavbarShown;
@@ -84,4 +80,14 @@ export class HeaderComponent implements OnInit {
 
   pictureEventReciever(event:Event){
   }
+
+
+  loadMenuItems(){
+    const menuItems = localStorage.getItem('menuItems');
+    console.log(menuItems);
+    if(menuItems){
+      this.menuItems = JSON.parse(menuItems);
+    }
+  }
+
 }
