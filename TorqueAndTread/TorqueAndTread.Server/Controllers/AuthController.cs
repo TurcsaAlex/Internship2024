@@ -58,6 +58,14 @@ namespace TorqueAndTread.Server.Controllers
                     return Problem();
             }
         }
+        [HttpPost("logout", Name = "LogoutUser")]
+        public async Task<IActionResult> Logout([FromBody] TokenDTO token)
+        {
+            if (token == null)
+                return BadRequest();
+            await _authService.Logout(token.Token);
+            return Ok();
+        }
 
         [HttpPost("register",Name ="RegisterUser")]
         public async Task<IActionResult> RegisterUser([FromBody] RegisterDTO registerDTO)

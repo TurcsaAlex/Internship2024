@@ -25,6 +25,19 @@ namespace TorqueAndTread.Server.Services
             _mailSender = mailSender;
             _cache = cache;
         }
+        public async Task Logout(string token)
+        {
+            var tokenList = _cache.Get<List<string>>(TokenListCacheKey) ?? [];
+            if (!tokenList.Any()) return;
+            // Add the new token to the list
+            tokenList.Remove(token);
+
+            // Update the cache with the new list
+            _cache.Set(TokenListCacheKey, tokenList, new MemoryCacheEntryOptions
+            {
+                SlidingExpiration = TimeSpan.FromMinutes(30)
+            });
+        }
         public async Task<AuthDTO> Authenticate(LoginDTO userObj)
         {
             //_mailSender.SendTest();
@@ -79,7 +92,7 @@ namespace TorqueAndTread.Server.Services
             var userRoles = _authContext.UserRoles.Where(ur => ur.UserId == user.UserId).Select(ur => new RoleDTO(ur.Role)).ToList(); // obtain roles of user and map to RoleDTO
             var menuItems = GetUserMenuItemsForRole(user.UserId); // obtain menus associated to roles of the user
 
-            return new AuthDTO(200, token, menuItems, userRoles);
+            return new AuthDTO(200, token, menuItems, userRoles, user.ProfilePicturePath);
         }
         private LoginAttempt GenerateEmptyLoginAttempt()
         {

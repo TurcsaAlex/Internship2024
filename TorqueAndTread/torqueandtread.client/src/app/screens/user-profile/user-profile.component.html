@@ -1,0 +1,38 @@
+<div class="modal-header">
+    <h4 class="modal-title">User Details</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Close')"></button>
+  </div>
+  
+  <div class="modal-body">
+    <div class="container my-4">
+      <div class="row mb-3">
+        <div class="col-6">
+          <label class="text-muted" for="name">Name</label>
+          <input type="text" name="name" id="name" [(ngModel)]="name">
+        </div>
+        <div class="col-6">
+          <label class="text-muted">Username</label>
+          <div class="fw-bold">{{ user?.userName }}</div>
+        </div>
+      </div>
+      
+      <div class="row mb-3">
+        <div class="col-12 text-center">
+          <label class="text-muted">Profile Picture</label>
+          <div class="fw-bold mb-3">
+            <img *ngIf="user?.profilePictureData; else noImage" [src]="user?.profilePictureData" alt="Profile Picture" class="img-fluid rounded" style="max-width: 300px; height: auto;" />
+            <ng-template #noImage>
+                <i class="fas fa-user me-2"></i>
+            </ng-template>
+          </div>
+          <button type="button" class="btn btn-primary" (click)="openCameraModal()">Take Picture</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal-footer justify-content-between">
+    <button type="button" class="btn btn-secondary" (click)="activeModal.close('Close')">Close</button>
+    <button type="button" class="btn btn-success" (click)="submitUpdate()">Save</button>
+  </div>
+  
