@@ -1,65 +1,36 @@
-<nav class="navbar  navbar-dark bg-dark text-light fixed-top justify-content-start">
-    <a class="navbar-brand" routerLink="/menus">
-        <i class="fas fa-car"></i>Torque and Tread
-    </a>
-    <div class="d-none d-lg-flex ml-auto align-items-end">
-<!--      
-        <a class="nav-link p-2 m-1" routerLink="/menus">
-            <i class="fas fa-bars me-2"></i>Menus
+<nav class="navbar navbar-dark bg-dark text-light fixed-top">
+    <div class= "container-fluid d-flex justify-content-start">
+        <div class="d-flex align-items-start">
+        <a class="navbar-brand" routerLink="/menus">
+            <i class="fas fa-car"></i>Torque and Tread
         </a>
-      
-        <a class="nav-link p-2 m-1" routerLink="/users">
-            <i class="fas fa-users me-2"></i>Users
-        </a>
-       
-        <a class="nav-link p-2 m-1" routerLink="/roles">
-            <i class="fas fa-user-tag me-2"></i>Roles
-        </a>
-        
-        <a class="nav-link p-2 m-1" routerLink="/products">
-            <i class="fas fa-box me-2"></i>Products
-        </a>
-        
-        <a class="nav-link p-2 m-1" routerLink="/containers">
-            <i class="fas fa-boxes me-2"></i>Containers
-        </a>
-        <a class="nav-link p-2 m-1" routerLink="/boms">
-            <i class="fas fa-list-alt me-2"></i>BOMs
-        </a>
-      
-        <a class="nav-link p-2 m-1" routerLink="/productionorders">
-            <i class="fas fa-industry me-2"></i>Production Orders
-        </a>
-
-        <a class="nav-link p-2 m-1" routerLink="/policy">
-            <i class="fas fa-sign-in-alt me-2"></i>Policy
-        </a>
-        -->
-        <ng-container *ngFor="let menuItem of menuItems">
-            <a class="nav-link p-2 m-1" [routerLink]="menuItem.link">
-                <i class="fas" [ngClass]="menuItem.iconClass">{{menuItem.name}}</i>
-            </a>
-        </ng-container>
-        <div class="dropdown ms-auto d-md-none d-sm-none d-lg-flex p-2 m-1 align-self-end" *ngIf="loggedIn">
-    <a class="nav-link dropdown-toggle d-flex align-items-center" id="dropdownProfileButton" data-bs-toggle="dropdown" aria-expanded="false">
-        <i class="fas fa-user me-2" *ngIf="!profilePictureSource"></i>
-        <img src="{{profilePictureSource}}" alt="User" class="rounded-circle" style="width: 35px; height: 35px; margin-right: 10px;" *ngIf="profilePictureSource">
-    </a>
-    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownProfileButton">
-        <li><a class="dropdown-item" (click)="openProfile();">Profile</a></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" (click)="logout();">Logout</a></li>
-    </ul>
-</div>
+        <div class="d-none d-lg-flex align-items-start">
+            <ng-container *ngFor="let menuItem of menuItems">
+                <a class="nav-link p-2 m-1" [routerLink]="menuItem.link">
+                    <i class="fas" [ngClass]="menuItem.iconClass">{{menuItem.name}}</i>
+                </a>
+            </ng-container>
+        </div>
+    </div>
+            <div class="dropdown d-none d-lg-flex align-items-center ms-auto" *ngIf="loggedIn">
+                <a class="nav-link dropdown-toggle d-flex align-items-center" id="dropdownProfileButton" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fas fa-user me-2" *ngIf="!profilePictureSource"></i>
+                    <img src="{{profilePictureSource}}" alt="User" class="rounded-circle" style="width: 35px; height: 35px; margin-right: 10px;" *ngIf="profilePictureSource">
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownProfileButton">
+                    <li><a class="dropdown-item" (click)="openProfile();">Profile</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" (click)="logout();">Logout</a></li>
+                </ul>
+            </div>
+            <button class="btn d-lg-none p-0 border-0 ms-auto" type="button" id="navbarSideCollapse" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+                <span class="navbar-toggler-icon"></span>
+            </button>
     </div>
         <!-- </li> -->
         <!-- </ul> -->
-    </div>
 
-        <button class="btn d-lg-none p-0 border-0" type="button" id="navbarSideCollapse" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </div>
+       
 
     <div class="offcanvas offcanvas-end bg-dark" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
         <div class="offcanvas-header">
@@ -68,46 +39,11 @@
         </div>
         <div class="offcanvas-body">
             <ul class="navbar-nav ml-auto container-fluid">
-                <li class="nav-item">
-                    <a class="nav-link p-2 m-1" routerLink="/menus">
-                        <i class="fas fa-bars me-2"></i>Menus
+                <ng-container *ngFor="let menuItem of menuItems">
+                    <a class="nav-link p-2 m-1 text-start" [routerLink]="menuItem.link">
+                        <i class="fas me-2" [ngClass]="menuItem.iconClass">{{menuItem.name}}</i>
                     </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link p-2 m-1" routerLink="/users">
-                        <i class="fa-solid fa-house me-2"></i>Users
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link p-2 m-1" routerLink="/roles">
-                        <i class="fas fa-sign-in-alt me-2"></i>Roles
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link p-2 m-1" routerLink="/products">
-                        <i class="fas fa-sign-in-alt me-2"></i>Products
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link p-2 m-1" routerLink="/containers">
-                        <i class="fas fa-sign-in-alt me-2"></i>Containers
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link p-2 m-1" routerLink="/boms">
-                        <i class="fas fa-sign-in-alt me-2"></i>BOMs
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link p-2 m-1" routerLink="/productionorders">
-                        <i class="fas fa-sign-in-alt me-2"></i>Production Orders
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link p-2 m-1" routerLink="/policy">
-                        <i class="fas fa-sign-in-alt me-2"></i>Policy
-                    </a>
-                </li>
+                </ng-container>
                 <li class="nav-item">
                     <div class="dropdown ms-auto" *ngIf="loggedIn">
                         <a class="nav-link dropdown-toggle d-flex align-items-center" id="dropdownProfileButton" data-bs-toggle="dropdown" aria-expanded="false">

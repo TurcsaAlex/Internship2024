@@ -19,6 +19,16 @@
             MenuItems = menuItems;
             Roles = roles;
         }
+
+        public AuthDTO(int code, string token, List<MenuItemDTO> menuItems, List<RoleDTO> roles, string imgFile)
+        {
+            Code = code;
+            Token = token;
+            MenuItems = menuItems;
+            Roles = roles;
+            ImgFile = imgFile;
+        }
+
         public AuthDTO(int code, string token, string imgFile)
         {
             Code = code;
