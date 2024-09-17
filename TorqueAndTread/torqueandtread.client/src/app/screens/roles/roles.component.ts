@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
 })
 export class RolesComponent 
   implements OnInit,AfterViewInit{
-    selectedColumns : string[] = ['name', 'active', 'createdOn','lastUpdatedOn', 'actions'];
+    selectedColumns : string[] = ['name', 'active', 'createdOn','lastUpdatedOn'];
     roles: Role [] = [];
     dataSource = new MatTableDataSource<Role>();
 

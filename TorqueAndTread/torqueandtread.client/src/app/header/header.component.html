@@ -50,6 +50,10 @@
                         <span class="ms-2">{{menuItem.name}}</span>
                     </a>
                 </ng-container>
+                <a class="nav-link justify-content-start" [routerLink]="'/policy'" style="margin-top: 4px;">
+                    <i class="fas fa-file-contract"></i>
+                    <span class="ms-2">Privacy Policy</span>
+                </a>
                 <li class="nav-item">
                     <div class="dropdown ms-auto" *ngIf="loggedIn">
                         <a class="nav-link dropdown-toggle d-flex align-items-center" id="dropdownProfileButton" data-bs-toggle="dropdown" aria-expanded="false" style="margin: 12px;">

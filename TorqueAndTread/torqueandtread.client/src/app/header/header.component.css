@@ -23,3 +23,9 @@
     .navbar .nav-link{
     margin-left: 20px;
 }}
+
+.nav-link{
+    display: flex;
+    align-items: center;
+    margin-left: 14px;
+}
