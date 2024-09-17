@@ -24,7 +24,8 @@
           </div>    
         </div>
         <div class="col">
-          <button type="button" class="btn btn-primary mb-3" (click)="openCameraModal()">Camera</button>
+          <button type="button" class="btn btn-primary mb-3" (click)="openCameraModal()">
+            <i class = "fas fa-camera me-2"></i>Camera</button>
           <div class="mb-3" *ngIf="user?.profilePictureData">
             <div>Profile Picture</div>
             <img src="{{user?.profilePictureData}}" alt="" class="img-fluid">
@@ -51,10 +52,12 @@
       
       <div class="row">
         <div class="col">
-          <button class="btn btn-secondary" (click)="back()">Back</button>
+          <button class="btn btn-secondary" (click)="back()">
+            <i class = "fas fa-arrow-left me-2"></i>Back</button>
         </div>
         <div class="col text-end">
-          <button type="submit" class="btn btn-success">Save</button>
+          <button type="submit" class="btn btn-success">
+            <i class = "fas fa-check me-2"></i>Save</button>
         </div>
       </div>
     </form>

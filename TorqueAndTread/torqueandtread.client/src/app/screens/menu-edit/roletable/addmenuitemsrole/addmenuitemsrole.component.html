@@ -23,7 +23,9 @@
   </div>
   
   <div class="modal-footer justify-content-between">
-    <button type="button" class="btn btn-secondary" (click)="activeModal.close('Close')">Close</button>
-    <button type="button" class="btn btn-success" (click)="activeModal.close(selectedRole)" [disabled]="!selectedRole">Save</button>
+    <button type="button" class="btn btn-secondary" (click)="activeModal.close('Close')">
+      <i class = "fas fa-arrow-left me-2"></i>Close</button>
+    <button type="button" class="btn btn-success" (click)="activeModal.close(selectedRole)" [disabled]="!selectedRole">
+      <i class = "fas fa-check me-2"></i>Save</button>
   </div>
 

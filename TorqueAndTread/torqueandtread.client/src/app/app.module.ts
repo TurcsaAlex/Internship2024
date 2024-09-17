@@ -53,7 +53,6 @@ import { RoletableComponent } from './screens/menu-edit/roletable/roletable.comp
 import { AddmenuitemsroleComponent } from './screens/menu-edit/roletable/addmenuitemsrole/addmenuitemsrole.component';
 
 
-
 @Injectable({
   providedIn:'root'
 })

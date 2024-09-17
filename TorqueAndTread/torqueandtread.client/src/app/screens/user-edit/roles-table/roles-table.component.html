@@ -12,7 +12,8 @@
   
       <div class="row mb-3">
         <div class="col text-end">
-          <button class="btn btn-primary" (click)="openAddModal(); $event.preventDefault()" >Add</button>
+          <button class="btn btn-primary" (click)="openAddModal(); $event.preventDefault()" >
+            <i class = "fas fa-plus me-2"></i>Add</button>
         </div>
       </div>
 
@@ -60,7 +61,8 @@
       <td mat-cell *matCellDef="let userRole">
         <div class="row">
           <div class="col">
-            <button class="btn btn-danger ml-lg-3" (click)="deleteRole(userRole.roleId); $event.preventDefault()">Delete</button>
+            <button class="btn btn-danger ml-lg-3" (click)="deleteRole(userRole.roleId); $event.preventDefault()">
+              <i class = "fas fa-times me-2"></i>Delete</button>
           </div>
         </div>
       </td>
