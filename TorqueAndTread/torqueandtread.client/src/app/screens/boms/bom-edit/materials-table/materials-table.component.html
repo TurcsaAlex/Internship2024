@@ -8,10 +8,11 @@
     </div>
 
 </div>
-@if(hasProducts)
-{
 
-    <table mat-table [dataSource]="dataSource" class="table table-hover">
+    @if(loaded){
+    @if(hasProducts)
+      {
+        <table mat-table [dataSource]="dataSource" class="table table-hover">
 
         <ng-container matColumnDef="productName">
         <th mat-header-cell *matHeaderCellDef class="table-head-text"> Product Name </th>
@@ -61,4 +62,17 @@
     <mat-paginator [pageSizeOptions]="[5, 10, 20]" ></mat-paginator>
 }@else {
     <h3>No material Products</h3>
+}
+}@else {
+    <div
+        class="d-flex justify-content-center align-items-center"
+    >
+        <div
+            class="spinner-border text-primary spinner-border-sm"
+            role="status"
+        >
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+    
 }

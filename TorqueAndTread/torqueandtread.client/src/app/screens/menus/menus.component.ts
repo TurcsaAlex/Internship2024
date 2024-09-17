@@ -20,6 +20,7 @@ implements OnInit,AfterViewInit{
   selectedColumns : string[] = ['name', 'orderNo', 'iconClass', 'link', 'createdOn','lastUpdatedOn', 'actions'];
     isEditing: boolean = false;
     dataSource = new MatTableDataSource<MenuItem>();
+    loaded=false;
     selectedMenuItem?: MenuItem;
     
     @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -89,6 +90,7 @@ implements OnInit,AfterViewInit{
         this.dataSource.data = menuItems;
         console.log("ce are menuitems: ", menuItems);
         this.dataSource.paginator = this.paginator;
+        this.loaded=true;
       },
       error: (err) => {
         console.error('Failed to fetch menu items', err);

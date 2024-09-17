@@ -30,7 +30,10 @@
         <button class="btn btn-primary" routerLink="/add-container">Add</button>
       </div>
     </div>
-  <table mat-table [dataSource]="dataSource" class="table table-hover">
+    @if(loaded){
+    @if(dataSource.data.length != 0)
+      {
+        <table mat-table [dataSource]="dataSource" class="table table-hover">
 
     <ng-container matColumnDef="containerName">
       <th mat-header-cell *matHeaderCellDef class="table-head-text"> Container Name </th>
@@ -78,6 +81,21 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]" ></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" ></mat-paginator>}
+  @else{
+    <h3>No Data</h3>
+  }}@else {
+    <div
+      class="d-flex justify-content-center align-items-center"
+    >
+      <div
+        class="spinner-border text-primary spinner-border-sm"
+        role="status"
+      >
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+    
+  }
 </div>
   

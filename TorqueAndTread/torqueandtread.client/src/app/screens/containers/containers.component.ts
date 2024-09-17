@@ -16,6 +16,7 @@ export class ContainersComponent implements OnInit{
   displayedColumns: string[] = [ 'containerName', 'containerCode','productCode', 'quantity','UOM' ,'actions' ];
   dataSource = new MatTableDataSource<Container>();
   selectedContainer?:Container;
+  loaded=false;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
@@ -37,6 +38,7 @@ export class ContainersComponent implements OnInit{
       next:(r)=>{
         this.dataSource.data=r;
         this.dataSource.paginator=this.paginator;
+        this.loaded=true;
       }
     })
     

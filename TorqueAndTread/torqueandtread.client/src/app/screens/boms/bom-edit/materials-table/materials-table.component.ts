@@ -17,6 +17,7 @@ export class MaterialsTableComponent implements OnChanges{
   
   @Input() bom!:BOM;
   hasProducts=false;
+  loaded=false;
   displayedColumns: string[] = [ 'productName', 'productCode','productType','quantity', 'createdOn', 'lastUpdatedOn',"actions"];
   dataSource = new MatTableDataSource<Product>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -36,6 +37,7 @@ export class MaterialsTableComponent implements OnChanges{
           this.hasProducts=true;
         this.dataSource.data=r;
         this.dataSource.paginator=this.paginator;
+        this.loaded=true;
       }
     });
   }

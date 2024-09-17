@@ -19,6 +19,7 @@ export class UsersComponent implements OnInit {
   displayedColumns: string[] = ['username', 'name', 'email', 'active', 'createdOn', 'lastUpdatedOn' ,'actions' ];
   dataSource = new MatTableDataSource<User>();
   selectedUser?:User;
+  loaded=false;
   
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -72,6 +73,7 @@ export class UsersComponent implements OnInit {
       next: (r) => {
         this.dataSource.data = r;
         this.dataSource.paginator = this.paginator;
+        this.loaded=true;
       }
     });
   }

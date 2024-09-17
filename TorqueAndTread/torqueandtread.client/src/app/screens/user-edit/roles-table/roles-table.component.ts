@@ -17,6 +17,7 @@ export class RolesTableComponent implements OnChanges {
   
   displayedColumns: string[] = ['name', 'active', 'createdOn', 'lastUpdatedOn' ,'actions' ];
   dataSource = new MatTableDataSource<UserRole>();
+  loaded=false;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 

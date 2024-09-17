@@ -6,7 +6,7 @@
   </div>
    
       <div class="col-xl-4 col-md-6 mb-4">
-  <app-chart [chart]="{type: 'card', title: 'Supervisor Logins', data: supervisors, icon: 'calendar-times-o'}"></app-chart>
+  <app-chart [chart]="{type: 'card', title: 'Supervisor Logins', data: supervisors, icon: 'user-tie'}"></app-chart>
   </div>
    
       <div class="col-xl-4 col-md-6 mb-4">
@@ -31,7 +31,17 @@
         legend: true,  options: {rotation: 180, circumference: 360},
         
     }"></app-chart>
-</div>
+  </div>
+  <!-- <div class="col-xl-4 col-md-6 mb-4">
+    <app-chart [chart]="{
+        type:'line',
+        title:'Users',
+        labels: roleNames,
+        data:[{data:roleNumbers}],
+        legend: true,  options: {responsive:true},
+        
+    }"></app-chart>
+  </div> -->
   
 
 </div>
@@ -39,7 +49,10 @@
     <button type="button" class="btn btn-primary col-xl-2 col-md-2 mb-4" (click)="export()">
       <i class = "fas fa-file-download me-2"></i>Create Report</button>
 </div>
-  <table mat-table [dataSource]="dataSource" class="table table-hover">
+  @if(loaded){
+    @if(dataSource.data.length != 0)
+      {
+        <table mat-table [dataSource]="dataSource" class="table table-hover">
 
     <ng-container matColumnDef="username">
       <th mat-header-cell *matHeaderCellDef class="table-head-text"> Username </th>
@@ -65,5 +78,19 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
-  <mat-paginator [pageSizeOptions]="[30, 50, 100]" ></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[30, 50, 100]" ></mat-paginator>}@else{
+    <h3>No data</h3>
+  }}@else {
+    <div
+      class="d-flex justify-content-center align-items-center"
+    >
+      <div
+        class="spinner-border text-primary spinner-border-sm"
+        role="status"
+      >
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+    
+  }
   </div>

@@ -18,6 +18,7 @@ export class AdminDashboardComponent implements OnInit {
   data:any;
   loginAttempts:LoginAttempt[]=[];
   dataSource=new MatTableDataSource<LoginAttempt>();
+  loaded=false;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
 
@@ -72,6 +73,7 @@ export class AdminDashboardComponent implements OnInit {
     this.dataSource.data=incomingData.loginAttempts;
     this.loginAttempts=incomingData.loginAttempts;
     this.dataSource.paginator=this.paginator;
+    this.loaded=true;
   }
   export(){
     const today = new Date();

@@ -16,6 +16,7 @@ export class BomsComponent implements OnInit{
   displayedColumns: string[] = [ 'bomName', 'bomCode','materialCode','actions' ];
   dataSource = new MatTableDataSource<BOM>();
   selectedBOM?:BOM;
+  loaded=false;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
@@ -37,6 +38,7 @@ export class BomsComponent implements OnInit{
       next:(r)=>{
         this.dataSource.data=r;
         this.dataSource.paginator=this.paginator;
+        this.loaded=true;
       }
     })
     

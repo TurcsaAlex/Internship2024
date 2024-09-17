@@ -16,6 +16,7 @@ export class ProductsComponent implements OnInit{
   displayedColumns: string[] = [ 'productName', 'productCode','productType', 'createdOn', 'lastUpdatedOn' ,'actions' ];
   dataSource = new MatTableDataSource<Product>();
   selectedProduct?:Product;
+  loaded=false;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
@@ -33,6 +34,7 @@ export class ProductsComponent implements OnInit{
       next:(r)=>{
         this.dataSource.data=r;
         this.dataSource.paginator=this.paginator;
+        this.loaded=true;
       }
     })
   }

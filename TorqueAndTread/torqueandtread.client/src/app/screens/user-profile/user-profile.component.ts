@@ -47,6 +47,7 @@ export class UserProfileComponent implements OnInit{
       (result)=>{
         if(result!="Close"){
           this.user!.profilePictureData=result;
+
         }else{
           this.newPicture=false;
         }
@@ -61,7 +62,7 @@ export class UserProfileComponent implements OnInit{
       updatedUser.name=this.name;
       console.log('User saved', updatedUser);
       if(this.newPicture)
-        this.userService.updateUserWithPicture(updatedUser).subscribe({next:()=>this.activeModal.close("ok")});
+        this.userService.updateUserWithPicture(updatedUser).subscribe({next:()=>this.activeModal.close(this.user!.profilePictureData)});
       else
         this.userService.updateUser(updatedUser).subscribe({next:()=>this.activeModal.close("ok")});
   }

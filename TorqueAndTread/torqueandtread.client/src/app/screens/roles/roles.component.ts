@@ -15,9 +15,10 @@ import { CommonModule } from '@angular/common';
 })
 export class RolesComponent 
   implements OnInit,AfterViewInit{
-    selectedColumns : string[] = ['name', 'active', 'createdOn','lastUpdatedOn', 'actions'];
+    selectedColumns : string[] = ['name', 'active', 'createdOn','lastUpdatedOn'];
     roles: Role [] = [];
     dataSource = new MatTableDataSource<Role>();
+    loaded=false;
 
       @ViewChild(MatPaginator) paginator!: MatPaginator;
       constructor(private roleService: RoleService) {}
@@ -34,6 +35,7 @@ export class RolesComponent
           next:(roleItem) => {
             this.dataSource.data = roleItem;
             this.dataSource.paginator = this.paginator;
+            this.loaded=true;
           }, error : (err) => {
             console.log('Failed to load roles',err);
           }

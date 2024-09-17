@@ -75,7 +75,17 @@ export class HeaderComponent implements OnInit {
 
   openProfile() {
     this.isNavbarShown = false;
-    this.modalService.open(UserProfileComponent);
+    const modalRef=this.modalService.open(UserProfileComponent);
+    modalRef.result.then(
+      (result)=>{
+        if(result!="Close"){
+          this.profilePictureSource=result;
+        }else{
+          
+        }
+        console.log(result);
+      }
+    );
   }
 
   pictureEventReciever(event:Event){

@@ -68,8 +68,9 @@ namespace TorqueAndTread.Server.Controllers
                     unsuccessfull++;
                 if (item.User != null)
                 {
-                    var roles = item.User.UserRoles.Where(ur=>ur.Active).Select(r=>r.Role.Name);
-                    foreach (var role in roles) {
+                    var roles = item.User.UserRoles.Where(ur => ur.Active).Select(r => r.Role.Name);
+                    foreach (var role in roles)
+                    {
                         if (userWithRoles.ContainsKey(role))
                         {
                             userWithRoles[role]++;
@@ -89,14 +90,24 @@ namespace TorqueAndTread.Server.Controllers
                         LoginAttemptNr = 1,
                         //LoginAttemptResult = item.LoginAttemptResult,
                         LoginTime = item.CreatedOn.Date,
+                        LoginAttemptSuccessfull = item.LoginAttemptResult == LoginAttemptResultEnum.SUCCESSFULL ? 1 : 0,
+                        LoginAttemptUnsuccessfull = item.LoginAttemptResult == LoginAttemptResultEnum.UNSUCCESSFULL ? 1 : 0,
+
                     });
                 }
                 else
                 {
                     loginsByDayLoginMap[item.CreatedOn.Date].LoginAttemptNr++;
+                    if (item.LoginAttemptResult == LoginAttemptResultEnum.SUCCESSFULL)
+                    {
+                        loginsByDayLoginMap[item.CreatedOn.Date].LoginAttemptSuccessfull++;
+                    }
+                    else
+                    {
+                        loginsByDayLoginMap[item.CreatedOn.Date].LoginAttemptUnsuccessfull++;
+                    }
                 }
             }
-
             return Ok(new {
                 successfull,
                 unsuccessfull,

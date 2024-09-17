@@ -17,6 +17,7 @@ export class RoletableComponent implements AfterViewInit, OnChanges{
 
   displayedColumns: string[] = ['name', 'active', 'createdOn', 'lastUpdatedOn', 'actions'];
   dataSource = new MatTableDataSource<Role>();
+  loaded=false;
   role : Role[] = [];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -47,6 +48,7 @@ export class RoletableComponent implements AfterViewInit, OnChanges{
           this.dataSource._updateChangeSubscription();
           this.dataSource.paginator = this.paginator;
           console.log('data source data:', this.dataSource.data);
+          this.loaded=true;
         },
         error: (err) => {
           console.error('Failed to load roles', err);
