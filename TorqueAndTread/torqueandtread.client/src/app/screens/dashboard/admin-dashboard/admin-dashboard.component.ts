@@ -22,6 +22,22 @@ export class AdminDashboardComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
 
+  public lineChartColors: any = [
+    {
+      borderColor: 'blue',
+      backgroundColor: 'rgba(0,123,255,0.3)',
+    },
+    {
+      borderColor: 'green',
+      backgroundColor: 'rgba(40,167,69,0.3)',
+    }
+  ];
+  public lineChartData: { data: number[], label: string }[] = [
+    { data: [], label: 'Successfull' },
+    { data: [], label: 'Unsuccessfull' }
+  ];
+  public lineChartLabels: any[] = [];
+  
   get roleNames() {
     return Object.keys(this.numberForRoles).map(n=>{
       return [n];
@@ -63,6 +79,11 @@ export class AdminDashboardComponent implements OnInit {
         console.log(r);this.populateData(r);
         this.data=r;
         this.numberForRoles=r.userWithRoles;
+        console.log( this.data.loginGraph.map((item:any) => item.loginAttemptSuccessfull));
+        this.lineChartData[0].data = this.data.loginGraph.map((item:any) => item.loginAttemptSuccessfull);
+        this.lineChartData[1].data = this.data.loginGraph.map((item:any) => item.loginAttemptUnsuccessfull);
+        this.lineChartLabels = this.data.loginGraph.map((item:any ) => new Date(item.loginTime).toLocaleDateString());
+      
       }
     });
   }

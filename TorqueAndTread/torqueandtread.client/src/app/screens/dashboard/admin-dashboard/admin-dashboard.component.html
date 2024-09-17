@@ -16,7 +16,7 @@
   <div class="row">
   <div class="col-xl-4 col-md-6 mb-4">
   <app-chart [chart]="{type: 'doughnut',
-                   title: 'Login Attempts',
+                   title: 'Login Attempts from today',
                    labels: [['Successfull'], ['Unsuccessfull']],
                    data: [{data: [successfullAttempts, unsuccessfullAttempts], backgroundColor: ['#007bff','#dc3545']}],
                    legend: true,  options: {rotation: 180, circumference: 360
@@ -32,16 +32,16 @@
         
     }"></app-chart>
   </div>
-  <!-- <div class="col-xl-4 col-md-6 mb-4">
+  <div class="col-xl-4 col-md-6 mb-4">
     <app-chart [chart]="{
         type:'line',
-        title:'Users',
-        labels: roleNames,
-        data:[{data:roleNumbers}],
+        title:'Login attempts over the last 30 days',
+        labels: lineChartLabels,
+        data:lineChartData,
         legend: true,  options: {responsive:true},
         
     }"></app-chart>
-  </div> -->
+  </div>
   
 
 </div>
