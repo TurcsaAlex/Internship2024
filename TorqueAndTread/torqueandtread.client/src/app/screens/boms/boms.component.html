@@ -33,7 +33,8 @@
     </div>
   @if(loaded){
     @if(dataSource.data.length != 0)
-    {<table mat-table [dataSource]="dataSource" class="table table-hover">
+    {
+      <table mat-table [dataSource]="dataSource" class="table table-hover">
 
       <ng-container matColumnDef="bomName">
         <th mat-header-cell *matHeaderCellDef class="table-head-text"> BOM Name </th>
@@ -69,7 +70,8 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]" ></mat-paginator>}
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" ></mat-paginator>
+  }
     @else {
       <h3>No Data</h3>
     }

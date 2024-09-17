@@ -38,6 +38,7 @@ export class RolesTableComponent implements OnChanges {
           next:(ur)=>{
             this.dataSource.data=ur;
             this.dataSource.paginator=this.paginator;
+            this.loaded=true;
           },
         }
       );

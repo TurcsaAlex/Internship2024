@@ -48,7 +48,6 @@ export class HeaderComponent implements OnInit {
       this.profilePictureSource=profilePictureData;
       this.cdRef.detectChanges();
       this.profilePictureSource = localStorage.getItem('currentUserPfp');
-      console.log(this.profilePictureSource);
     });
     
   }
@@ -81,7 +80,7 @@ export class HeaderComponent implements OnInit {
         if(result!="Close"){
           this.profilePictureSource=result;
         }else{
-          
+
         }
         console.log(result);
       }
