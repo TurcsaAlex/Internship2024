@@ -1,10 +1,15 @@
+<ng-template #errorToast let-data>
+	{{data}}
+</ng-template>
+
+
 <div class="container mt-5">
     <div class="row justify-content-center">
       <div class="col-lg-5">
         <div class="card">
           <div class="card-body text-start">
             <h3 class="text-start justify-content-start">Login</h3>
-            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit(errorToast)">
               <div class="form-group mb-3">
                 <label for="username" class="form-label">Username</label>
                 <input
